@@ -7,7 +7,8 @@ before_install:
   - echo "Before install"
 install:
   - echo "Install"
-  - npm install jest
+  - npm install -g jest ts-jest
+  - npm install jest ts-jest
 script:
   - ./test/test.sh
   # TODO: Docker build and upload
