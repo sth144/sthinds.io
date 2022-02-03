@@ -8,7 +8,7 @@ before_install:
 install:
   - echo "Install"
   - npm install -g jest ts-jest typescript@latest
-  - npm install -D jest typescript@latest
+  - npm install -D jest ts-jest typescript@latest
 script:
   - ./test/test.sh
   # TODO: Docker build and upload
