@@ -1,6 +1,6 @@
 before_install:
-  echo "Before install"
+  - echo "Before install"
 install:
-  echo "Install"
+  - echo "Install"
 script:
-  echo "Script"
+  - ./test/test.sh
