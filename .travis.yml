@@ -7,7 +7,6 @@ before_install:
   - echo "Before install"
 install:
   - echo "Install"
-  - npm install --save bufferutil@3 ws@1
   - npm install -g jest
 script:
   - ./test/test.sh
