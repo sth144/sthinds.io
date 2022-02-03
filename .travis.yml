@@ -9,3 +9,4 @@ install:
   - npm install -g jest
 script:
   - ./test/test.sh
+  # TODO: Docker build and upload
