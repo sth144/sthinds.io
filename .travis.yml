@@ -7,7 +7,7 @@ before_install:
   - echo "Before install"
 install:
   - echo "Install"
-  - npm install -g jest ts-jest typescript@latest
+  - npm install -g jest ts-jest typescript@latest react-scripts
   - npm install -D jest ts-jest typescript@latest
 script:
   - ./test/test.sh
