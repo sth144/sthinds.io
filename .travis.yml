@@ -1,8 +1,10 @@
 
+language: node_js
 sudo: required
 before_install:
   - echo "Before install"
 install:
   - echo "Install"
+  - npm install -g jest
 script:
   - ./test/test.sh
