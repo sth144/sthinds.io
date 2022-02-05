@@ -13,6 +13,7 @@ install:
   - npm install
   - cd ../client
   - npm install
+  - npm install babel-jest@26.6.0
   - cd ..
 script:
   - ./test/test.sh
