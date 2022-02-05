@@ -7,18 +7,13 @@ before_install:
   - echo "Before install"
 install:
   - echo "Install"
-  - ls
-  - pwd
   - npm install -g jest ts-jest typescript@latest react-scripts babel-jest@26.6.0
   - cd server
   - npm install
   - cd ../client
-  - npm install -D jest ts-jest typescript@latest
   - npm install
+  - npm install -D jest ts-jest typescript@latest
   - cd ..
-  - ls 
-  - ls client/node_modules
-  - ls server/node_modules
 script:
   - ./test/test.sh
   # TODO: Docker build and upload
