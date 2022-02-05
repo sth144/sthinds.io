@@ -9,6 +9,10 @@ install:
   - echo "Install"
   - npm install -g jest ts-jest typescript@latest react-scripts
   - npm install -D jest ts-jest typescript@latest
+  - cd server
+  - npm install
+  - cd ../client
+  - npm install
 script:
   - ./test/test.sh
   # TODO: Docker build and upload
