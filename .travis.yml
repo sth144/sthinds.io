@@ -8,13 +8,13 @@ before_install:
 install:
   - echo "Install"
   - npm install -g jest ts-jest typescript@latest react-scripts babel-jest@26.6.0
-  - npm install -D jest ts-jest typescript@latest
   - cd server
   - npm install
   - cd ../client
+  - npm install -D jest ts-jest typescript@latest
   - npm install
   - cd ..
-  - ls node_modules
+  - ls 
   - ls client/node_modules
   - ls server/node_modules
 script:
