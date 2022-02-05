@@ -13,6 +13,7 @@ install:
   - npm install
   - cd ../client
   - npm install
+  - cd ..
 script:
   - ./test/test.sh
   # TODO: Docker build and upload
