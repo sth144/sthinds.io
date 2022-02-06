@@ -5,19 +5,46 @@ const gulpTypeScript = require("gulp-typescript");
 const tsconfigClient = gulpTypeScript.createProject("./client/tsconfig.json");
 const tsconfigServer = gulpTypeScript.createProject("./server/tsconfig.json");
 const gulpSourcemap = require("gulp-sourcemaps");
+const browserSync = require("browser-sync").create();
+const path = require("path");
+const spawn = require("child_process").spawn;
+
+/**
+ * browser manipulation
+ */
+gulp.task("browser-sync-init", (done) => {
+  browserSync.init({
+    proxy: "http://localhost:8080",
+    open: true
+  });
+  gulp.watch("client/build",
+    gulp.series(
+        "browser-sync-reload",
+    ));
+  gulp.watch("server/dist",
+    gulp.series(
+        "browser-sync-reload",
+    ));
+  done();
+});
+
+gulp.task("browser-sync-reload", (done) => {
+  setTimeout(() => {
+    browserSync.reload();
+    done();
+  }, 4000);
+});
 
 /** Client */
 
-gulp.task("dev:client", (done) => {
-  startWorker("react-scripts", [], {
+gulp.task("bundle-watch:client", (done) => {
+  startWorker("npm", ["run", "watch"], {
     cwd: path.join(process.cwd(), "client")
   }, done);
 });
 
-gulp.task("build:client", (done) => {
-
-	done();
-});
+gulp.task("dev:client", gulp.parallel("browser-sync-init", 
+                                      "bundle-watch:client"));
 
 /** Server */
 
@@ -25,11 +52,6 @@ gulp.task("dev:server", (done) => {
   startWorker("npm", ["run", "start:debug"], {
     cwd: path.join(process.cwd(), "server")
   }, done);
-});
-
-gulp.task("build:server", (done) => {
-
-	done();
 });
 
 /*******************************************************************************
