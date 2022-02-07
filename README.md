@@ -4,3 +4,10 @@
 
 - NestJS backend
 - React frontend
+
+# TODO:
+- migrate CSS => SASS
+- serviceWorker.ts
+- Redux
+- Redis
+- MongoDB

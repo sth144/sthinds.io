@@ -17,14 +17,7 @@ gulp.task("browser-sync-init", (done) => {
     proxy: "http://localhost:8080",
     open: true
   });
-  gulp.watch("client/build",
-    gulp.series(
-        "browser-sync-reload",
-    ));
-  gulp.watch("server/dist",
-    gulp.series(
-        "browser-sync-reload",
-    ));
+
   done();
 });
 
@@ -41,6 +34,25 @@ gulp.task("bundle-watch:client", (done) => {
   startWorker("npm", ["run", "watch"], {
     cwd: path.join(process.cwd(), "client")
   }, done);
+
+  gulp.watch("client/build",
+    gulp.series(
+        "browser-sync-reload",
+        "test:client",
+    ));
+});
+
+let clientTestLock = false;
+gulp.task("test:client", (done) => {
+  if (!clientTestLock) {
+    clientTestLock = true;
+    startWorker("./test/test.sh", ["test_client"], { }, () => {
+      done();
+      setTimeout(() => { clientTestLock = false; }, 6000);
+    });
+  } else {
+    done();
+  }
 });
 
 gulp.task("dev:client", gulp.parallel("browser-sync-init", 
@@ -48,10 +60,18 @@ gulp.task("dev:client", gulp.parallel("browser-sync-init",
 
 /** Server */
 
+gulp.task("test:server", (done) => {
+  startWorker("./test/test.sh", ["test_server"], { }, done);
+});
 gulp.task("dev:server", (done) => {
   startWorker("npm", ["run", "start:debug"], {
     cwd: path.join(process.cwd(), "server")
   }, done);
+  gulp.watch("server/dist",
+    gulp.series(
+        "browser-sync-reload",
+        "test:server",
+    ));
 });
 
 /*******************************************************************************
@@ -60,16 +80,16 @@ gulp.task("dev:server", (done) => {
 /** spawn a worker process and pipe stdout */
 const startWorker = (cmd, args, config, doneCallback) => {
   const worker = spawn(cmd, args, {
-      stdio: "inherit",
-      ...config
+    stdio: "inherit",
+    ...config
   });
   worker.on("data", (data) => {
-      console.log(data.toString())
+    console.log(data.toString())
   });
   worker.on("error", (data) => {
-      console.log(data.toString())
+    console.log(data.toString())
   });
   worker.on("exit", () => {
-      doneCallback()
+    doneCallback()
   });
 }
