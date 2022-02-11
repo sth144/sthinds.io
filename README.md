@@ -6,8 +6,8 @@
 - React frontend
 
 # TODO:
-- migrate CSS => SASS
-- serviceWorker.ts
 - Redux
 - Redis
 - MongoDB
+- Docker build, deploy locally
+- OAuth

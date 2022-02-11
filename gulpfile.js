@@ -8,24 +8,30 @@ const gulpSourcemap = require("gulp-sourcemaps");
 const browserSync = require("browser-sync").create();
 const path = require("path");
 const spawn = require("child_process").spawn;
+const dotenv = require('dotenv');
+dotenv.config({ path: path.join(process.cwd(), "server/.env") });
 
 /**
  * browser manipulation
  */
 gulp.task("browser-sync-init", (done) => {
   browserSync.init({
-    proxy: "http://localhost:8080",
+    proxy: `http://localhost:${process.env.PORT}`,
     open: true
   });
 
   done();
 });
 
+let reloadTimeout = null;
 gulp.task("browser-sync-reload", (done) => {
-  setTimeout(() => {
-    browserSync.reload();
-    done();
-  }, 4000);
+  if (reloadTimeout !== null) {
+    clearTimeout(reloadTimeout);
+  }
+  reloadTimeout = setTimeout(() => {
+                    browserSync.reload();
+                    done();
+                  }, 8000);
 });
 
 /** Client */
