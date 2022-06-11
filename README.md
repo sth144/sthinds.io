@@ -1,5 +1,7 @@
 # sthinds.io
 
+[![Build Status](https://app.travis-ci.com/sth144/sthinds.io.svg?branch=master)](https://app.travis-ci.com/sth144/sthinds.io)
+
 ## Personal website (portfolio, blog, etc.)
 
 - NestJS backend
