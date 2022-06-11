@@ -9,6 +9,7 @@ const browserSync = require("browser-sync").create();
 const path = require("path");
 const spawn = require("child_process").spawn;
 const dotenv = require('dotenv');
+const { existsSync } = require("fs");
 dotenv.config({ path: path.join(process.cwd(), "server/.env") });
 
 /**
@@ -27,24 +28,59 @@ let reloadTimeout = null;
 gulp.task("browser-sync-reload", (done) => {
   if (reloadTimeout !== null) {
     clearTimeout(reloadTimeout);
+    reloadTimeout = null;
   }
-  reloadTimeout = setTimeout(() => {
-                    browserSync.reload();
-                    done();
-                  }, 8000);
+  
+  const retryTimeoutMs = 8000;
+  const maxRetries = 4;
+  let retry = 0;
+
+  const checkForIndexHtmlReloadIfPresent = () => {
+    if (existsSync("client/build/index.html")) {
+      browserSync.reload();
+      done();
+    } else {
+      console.log(`No index.html found, retrying`);
+      if (retry++ < maxRetries) {
+        reloadTimeout = setTimeout(checkForIndexHtmlReloadIfPresent, retryTimeoutMs);
+      }
+    }
+  }
+
+  reloadTimeout = setTimeout(checkForIndexHtmlReloadIfPresent, retryTimeoutMs);
 });
 
 /** Client */
 
-gulp.task("bundle-watch:client", (done) => {
-  startWorker("npm", ["run", "watch"], {
-    cwd: path.join(process.cwd(), "client")
-  }, done);
+let clientBuildLock = false;
+gulp.task("build:client", (done) => {
+  if (!clientBuildLock) {
+    clientBuildLock = true;
+    startWorker("npm", ["run", "build"], {
+      cwd: path.join(process.cwd(), "client")
+    }, () => {
+      setTimeout(() => { clientBuildLock = false; }, 6000);
+      done();
+    });
+  } else {
+    console.log("Pending rebuild, skipping");
+    done();
+  }
+});
 
-  gulp.watch("client/build",
+gulp.task("bundle-watch:client", (done) => {
+  // TODO: don't rebuild whole client when SASS modified, just SASS files
+  gulp.watch(["client/src/**/*.scss",
+              "client/src/**/*.ts",
+              "client/src/**/*.tsx"], 
+    gulp.series("build:client"));
+
+  gulp.watch(["client/build/static/js", 
+              "client/build/index.html", 
+              "client/build/static/css"],
     gulp.series(
-        "browser-sync-reload",
-        "test:client",
+      "browser-sync-reload",
+      "test:client",
     ));
 });
 
@@ -53,10 +89,11 @@ gulp.task("test:client", (done) => {
   if (!clientTestLock) {
     clientTestLock = true;
     startWorker("./test/test.sh", ["test_client"], { }, () => {
-      done();
       setTimeout(() => { clientTestLock = false; }, 6000);
+      done();
     });
   } else {
+    console.log("Pending test, skipping");
     done();
   }
 });

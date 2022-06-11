@@ -29,7 +29,7 @@ test_server_unit() {
 
 test_server_integration() {
 	echo "Running Server Integration Tests"
-	# TODO:
+	# TODO: write server integration tests
 }
 
 test_server_e2e() {
@@ -65,12 +65,12 @@ test_client_unit() {
 
 test_client_integration() {
 	echo "Running Client Integration Tests"
-	# TODO:
+	# TODO: write client integration tests
 }
 
 test_client_e2e() {
 	echo "Running Client e2e Tests"
-	# TODO:
+	# TODO: write client e2e tests
 }
 
 if (( "$#" == 0 ));

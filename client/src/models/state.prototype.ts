@@ -5,6 +5,15 @@
  *      reloads, state will persist
  *  - properties will be mutated by user interaction
  */
-export const statePrototype = {
-
+export type StatePrototype = {
+  user: string,
 };
+
+/**
+ * default initializations for state prototype
+ */
+export const statePrototype: StatePrototype = {
+  user: ""
+};
+
+// TODO: make sure this gets cached in localStorage

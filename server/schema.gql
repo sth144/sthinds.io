@@ -1,0 +1,21 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type ArticleDTO {
+  _id: String
+  title: String!
+  subtitle: String!
+  author: String!
+  date: String!
+  text: String!
+}
+
+type Query {
+  author: String!
+  articles: [ArticleDTO!]!
+}
+
+type Mutation {
+  createArticle(author: String!, title: String!, subtitle: String!, date: String!, text: String!): ArticleDTO!
+}

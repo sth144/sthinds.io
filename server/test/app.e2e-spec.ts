@@ -1,9 +1,11 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
-import { serveStaticImport } from './../src/app.module';
+import { graphQLImport, serveStaticImport } from './../src/app.module';
 import { AppController } from './../src/app.controller';
 import { AppService } from './../src/app.service';
+import { ArticleModule } from '../src/models/article.module';
+import { TypeOrmMongoDBTestingModule } from './typeorm.mock';
 
 describe('AppController (e2e)', () => {
   let app: INestApplication;
@@ -15,7 +17,10 @@ describe('AppController (e2e)', () => {
     // TODO: implement and maintain a TestAppModule?
     const moduleFixture: TestingModule = await Test.createTestingModule({
       imports: [
-        serveStaticImport
+        serveStaticImport,
+        graphQLImport,
+        ...TypeOrmMongoDBTestingModule(),
+        ArticleModule
       ],
       controllers: [AppController],
       providers: [AppService],
@@ -26,9 +31,14 @@ describe('AppController (e2e)', () => {
   });
 
   it('/ (GET)', () => {
-    return request(app.getHttpServer())
+    const result = request(app.getHttpServer())
       .get('/')
       .expect(200)
       .expect('Hello World!');
+    return result;
+  });
+
+  afterAll(() => {
+    app.close();
   });
 });
