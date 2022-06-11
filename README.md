@@ -27,3 +27,6 @@
 - remarkable library
 - material-ui design
 - speed up client build (Webpack?)
+- make margins collapsible
+- create landing body
+  - make create article a special function

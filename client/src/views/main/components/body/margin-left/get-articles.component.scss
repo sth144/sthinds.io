@@ -1,0 +1,9 @@
+@import "../../../../../styles/colors.scss";
+
+.article-nav a {
+  text-decoration: none;
+  color: var(--scheme-charcoal);
+}
+.article-nav a:hover {
+  color: var(--scheme-dark-charcoal);
+}

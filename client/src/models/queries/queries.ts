@@ -5,6 +5,7 @@ export const LOAD_ARTICLES = gql`
 		articles {
 			author
 			title
+      subtitle
 		}
 	}
 `;

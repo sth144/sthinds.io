@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useQuery } from "@apollo/client"
 import { LOAD_ARTICLES } from "models/queries/queries";
+import "./get-articles.component.scss";
+
+// TODO: try react-redux useSelector and useDispatch to manage Redux store from functional component
 
 function GetArticles(): JSX.Element {
 	const { error, loading, data } = useQuery(LOAD_ARTICLES);
@@ -15,11 +18,26 @@ function GetArticles(): JSX.Element {
 		}
 	}, [data]);
 
+  function articleSelectedFactory(article: any) {
+    return function () {
+      console.log(article);
+      // TODO: redirect body component to article content
+    }
+  }
+
 	return (
-		<div>
-			{articles.map((article: Record<string, string>) => 
-				<span><h1> {article.title}</h1> <h2>{article.author}</h2></span>)}
-		</div>
+    <div>
+        <nav className="article-nav">
+    			{articles.map((article: Record<string, string>) => 
+            <span>
+              <a href="#" onClick={articleSelectedFactory(article)}>
+                <h1>{article.title}</h1> 
+                {/* <h3>{article.subtitle}</h3> */}
+                <h5>{article.author}</h5>
+              </a>
+            </span>)}
+        </nav>
+    </div>
 	);
 }
 
