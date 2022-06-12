@@ -3,7 +3,7 @@ import {
   BrowserRouter as Switch, Route, HashRouter
 } from "react-router-dom";
 import { Container, Col, Row } from "react-bootstrap";
-import CreateArticleForm from "./create-article.component";
+import CreateArticleForm from "./article/create-article.component";
 import MarginLeftComponent from "./margin-left/margin-left.component";
 import MarginRightComponent from "./margin-right/margin-right.component";
 

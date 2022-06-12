@@ -164,3 +164,7 @@ server/.vscode/*
 !server/.vscode/tasks.json
 !server/.vscode/launch.json
 !server/.vscode/extensions.json
+
+volumes/**/*
+!volumes/redis/.gitkeep
+!volumes/mongodb/.gitkeep
