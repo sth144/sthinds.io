@@ -1,12 +1,13 @@
 import { Component } from "react";
-import GetArticles from "./get-articles.component";
+import { Link } from "react-router-dom";
+import pencilIcon from "assets/pencil-icon.svg";
 
 class MarginLeftComponent extends Component {
-	render() {
+  render() {
 		return (
-			<div>
-				<GetArticles></GetArticles>
-			</div>
+			<Link to="/create">
+        <img src={pencilIcon} height={30}></img>
+			</Link>
 		);
 	}
 }

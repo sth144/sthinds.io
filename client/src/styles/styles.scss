@@ -1,0 +1,19 @@
+.whole-width {
+  width: 100%;
+}
+.half-width {
+  width: 50%;
+}
+.third-width {
+  width: 33.333%;
+}
+
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}

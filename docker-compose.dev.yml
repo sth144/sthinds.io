@@ -15,6 +15,7 @@ services:
       - MONGO_INITDB_DATABASE=test,prod,dev
     command: mongod
     privileged: true
+    restart: unless-stopped
   redis:
     image: "redis:alpine"
     ports:

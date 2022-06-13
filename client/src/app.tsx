@@ -1,32 +1,13 @@
 import React, { Component } from 'react';
 import './app.scss';
-
-import { 
-  ApolloClient, InMemoryCache, ApolloProvider, 
-  HttpLink, from 
-} from "@apollo/client";
-import { onError, ErrorResponse } from "@apollo/client/link/error" 
+import { ApolloProvider } from "@apollo/client";
 import HeaderComponent from "views/main/components/header/header.component";
 import BodyComponent from "views/main/components/body/body.component";
 import FooterComponent from "views/main/components/footer/footer.component";
-import { connect, MapDispatchToPropsNonObject, MapStateToPropsParam } from 'react-redux';
+import { connect } from 'react-redux';
 import { initialize } from "./models/actions/initialize.action";
-
-// TODO: separate this client instance to it's own file and inject
-const apollo = new ApolloClient({
-  cache: new InMemoryCache(),
-  link: from([
-    onError((errorResponse: ErrorResponse) => {
-      if (errorResponse.graphQLErrors) {
-        errorResponse.graphQLErrors
-          .forEach((error) => {
-            alert(`GraphQL error ${error.message}`);
-          });
-      }
-    }), 
-    new HttpLink({uri: "http://localhost:8000/graphql"})
-  ]) 
-});
+import GraphQLService from "./network/graphql.service";
+import { BrowserRouter as Router, Link, Route, Routes } from "react-router-dom";
 
 interface IAppComponentProps {
   dispatch: (action: unknown) => void
@@ -84,16 +65,15 @@ export default class App extends Component<IAppComponentProps, IAppComponentStat
 
   render() {
     return (
-      <ApolloProvider client={apollo}>
+      <Router>
+      <ApolloProvider client={GraphQLService}>
       <div className="App">
-        <HeaderComponent></HeaderComponent>
+        <HeaderComponent></HeaderComponent> 
         <BodyComponent></BodyComponent>
         <FooterComponent></FooterComponent>
       </div>
       </ApolloProvider>
+      </Router>
     );
   }
 }
-
-
-// TODO: call connect() to hydrate with Redux data

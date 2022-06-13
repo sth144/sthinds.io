@@ -1,10 +1,11 @@
 import { Component } from "react";
+import GetArticles from "./get-articles.component";
 
 class MarginRightComponent extends Component {
 	render() {
 		return (
 			<div>
-        TODO
+        <GetArticles></GetArticles>
 			</div>
 		);
 	}
