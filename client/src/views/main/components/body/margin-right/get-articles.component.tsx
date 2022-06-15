@@ -32,7 +32,7 @@ function GetArticles(): JSX.Element {
         <nav className="article-nav">
     			{articles.map((article: Record<string, string>) => 
             <span>
-              <a href="#" onClick={articleSelectedFactory(article)}>
+              <a href="/article/show" onClick={articleSelectedFactory(article)}>
                 <h1>{article.title}</h1> 
                 {/* <h3>{article.subtitle}</h3> */}
                 <h5>{article.author}</h5>
