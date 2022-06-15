@@ -1,6 +1,22 @@
 #!/bin/bash
 
 HAVE_FAILURE=false
+CLIENT_BASE_DIR=client
+SERVER_BASE_DIR=server
+
+while getopts "c:s:" arg; do
+  case $arg in
+    c)
+      CLIENT_BASE_DIR=${OPTARG} 
+      ;;
+    s)
+      SERVER_BASE_DIR=${OPTARG}
+      ;;
+  esac
+done
+
+shift $(($OPTIND - 1))
+REMAINING_ARGS_AFTER_OPTS="$@"
 
 test() {
 	test_server
@@ -18,7 +34,7 @@ test_server() {
 
 test_server_unit() {
 	echo "Running Server Unit Tests"
-	cd ./server
+	cd ./$SERVER_BASE_DIR
 	npm run test:unit
     if [ $? != 0 ];
     then 
@@ -34,7 +50,7 @@ test_server_integration() {
 
 test_server_e2e() {
 	echo "Running Server e2e Tests"
-	cd ./server 
+	cd ./$SERVER_BASE_DIR 
 	npm run test:e2e
     if [ $? != 0 ];
     then 
@@ -54,7 +70,7 @@ test_client() {
 
 test_client_unit() {
 	echo "Running Client Unit Tests"
-	cd ./client
+	cd ./$CLIENT_BASE_DIR
 	react-scripts test --watchAll=false
     if [ $? != 0 ];
     then 
@@ -76,10 +92,9 @@ test_client_e2e() {
 if (( "$#" == 0 ));
 then
 	test
+else
+  $REMAINING_ARGS_AFTER_OPTS
 fi
-
-$1 "${@:2}"
-
 
 if [ $HAVE_FAILURE = true ];
 then

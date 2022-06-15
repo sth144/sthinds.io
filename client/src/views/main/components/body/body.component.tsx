@@ -24,7 +24,8 @@ export default class BodyComponent extends Component {
 				  <Col>
             <Routes>
               <Route path="/" element={<WelcomeComponent/>}></Route>
-              <Route path="/create" element={<CreateArticleForm/>}></Route>
+              <Route path="/article/create" element={<CreateArticleForm/>}></Route>
+              <Route path="/article/show" element={<CreateArticleForm/>}></Route>
             </Routes>
           </Col>
 					<Col sm>

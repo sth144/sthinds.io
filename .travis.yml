@@ -1,19 +1,19 @@
-
-language: node_js
-node_js:
-  - "v12.22.3"
+dist: xenial
 sudo: required
+env:
+  global:
+    - DOCKER_REPO=sthinds/sthinds.io
+    - ARCHITECTURE_TARGETS=linux/arm/v7,linux/arm64,linux/amd64
 before_install:
-  - echo "Before install"
+  - curl -fsSL https://get.docker.com | sh
+  - echo '{"experimental":"enabled"}' | sudo tee /etc/docker/daemon.json
+  - mkdir -p $HOME/.docker
+  - echo '{"experimental":"enabled"}' | sudo tee $HOME/.docker/config.json
+  - sudo service docker start
+  - echo $DOCKER_HUB_PASSWORD | docker login -u $DOCKER_HUB_USERNAME --password-stdin
 install:
-  - echo "Install"
-  - npm install -g jest ts-jest typescript@latest react-scripts babel-jest@26.6.0
-  - cd server
-  - npm install
-  - cd ../client
-  - npm install
-  - npm install -D jest ts-jest typescript@latest
-  - cd ..
+  - docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
+  # TODO: what is this? necessary?
+  - docker buildx create --name xbuilder --use
 script:
-  - ./test/test.sh
-  # TODO: Docker build and upload
+  - docker buildx build --progress plain --platform=$ARCHITECTURE_TARGETS -t $DOCKER_REPO --push .

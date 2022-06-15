@@ -7,28 +7,36 @@
 - NestJS backend
 - React frontend
 
-# TODO:
-- fix tests
+# TODO: client
 - Redux
-  - unit test 
-- Redis
-  - unit test connection
-- MongoDB
-  - unit test connection
-- Docker build, deploy locally
-- OAuth 
+  - define state model
   - unit test
-- GraphQL client and server
-  - unit test connection
-- define data models and contracts
-  - unit test
+  - integrate login state
 - Bootstrap or material
-- debuggers
-- React component decorators
-- React tic tac toe tutorial https://reactjs.org/
 - remarkable library
 - material-ui design
 - speed up client build (Webpack?)
-- make margins collapsible
 - create landing body
 - article editor
+- make margins collapsible
+
+- React tic tac toe tutorial https://reactjs.org/
+
+# TODO: server 
+- Redis
+  - unit test connection
+- MongoDB unit test connection
+- OAuth 
+  - unit test
+
+# TODO: CI/CD
+- Docker build, deploy locally
+
+# TODO: general
+- fix tests
+- GraphQL client and server
+  - query to fetch article contents
+  - unit test connection
+- define data models and contracts
+  - unit test
+- debuggers

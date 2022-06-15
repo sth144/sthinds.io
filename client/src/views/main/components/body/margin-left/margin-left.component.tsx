@@ -5,7 +5,7 @@ import pencilIcon from "assets/pencil-icon.svg";
 class MarginLeftComponent extends Component {
   render() {
 		return (
-			<Link to="/create">
+			<Link to="/article/create">
         <img src={pencilIcon} height={30}></img>
 			</Link>
 		);

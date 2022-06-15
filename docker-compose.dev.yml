@@ -4,7 +4,7 @@ services:
     image: mongo:latest
     container_name: mongodb
     volumes:
-      - /tmp/mongodb:/data/db
+      - /data/db:/data/db
     ports:
       - 0.0.0.0:27017:27017
     expose:
@@ -21,7 +21,8 @@ services:
     ports:
       - 6379:6379
     volumes:
-      - /tmp/redis/redis-data:/var/lib/redis
-      - /tmp/redis/redis.conf:/usr/local/etc/redis/redis.conf
+      - ./volumes/redis/redis-data:/var/lib/redis
+      - ./volumes/redis/redis.conf:/usr/local/etc/redis/redis.conf
     environment:
      - REDIS_REPLICATION_MODE=master
+    restart: unless-stopped

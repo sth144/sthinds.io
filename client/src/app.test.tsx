@@ -9,6 +9,6 @@ test('renders', () => {
     <Provider store={store}>
       <App />
     </Provider>);
-  const linkElement = screen.getByText(/sthinds.io/i);
+  const linkElement = screen.getByText(/Sean Hinds/i);
   expect(linkElement).toBeInTheDocument();
 });

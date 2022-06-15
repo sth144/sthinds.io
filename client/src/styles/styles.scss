@@ -1,3 +1,13 @@
+@import "./colors.scss";
+
+a {
+  text-decoration: none;
+  color: var(--scheme-charcoal);
+}
+a:hover {
+  color: var(--scheme-dark-charcoal);
+}
+
 .whole-width {
   width: 100%;
 }

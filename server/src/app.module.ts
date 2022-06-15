@@ -12,7 +12,8 @@ import { ArticleModule } from "./models/article.module"
 import { Article } from './models/article';
 
 export const serveStaticImport = ServeStaticModule.forRoot({
-  rootPath: join(__dirname, "../../client/build/"),
+  rootPath: (process.env.CLIENT_BUNDLE_DIR !== undefined) ? 
+    process.env.CLIENT_BUNDLE_DIIR : join(__dirname, "../../client/build/"),
   exclude: ["/graphql"]
 });
 

@@ -22,6 +22,8 @@ function GetArticles(): JSX.Element {
     return function () {
       console.log(article);
       // TODO: redirect body component to article content
+      //        - dispatch Redux action
+      //        - redirect in render (BodyComponent)
     }
   }
 

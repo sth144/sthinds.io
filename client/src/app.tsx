@@ -34,6 +34,9 @@ const mapDispatchToProps = (dispatch: unknown) => {
 */
 @connect(mapStateToProps, mapDispatchToProps)
 export default class App extends Component<IAppComponentProps, IAppComponentState> {
+  componentDidMount(){
+    document.title = "sthinds.io";
+  }
 
   public state: IAppComponentState = { };
 
@@ -45,13 +48,11 @@ export default class App extends Component<IAppComponentProps, IAppComponentStat
     this.loadStateFromLocalStorage();
   }
 
-
-
-    /**
-     * load cached state from browser localStorage
-     *  - this allows persistent state across page reloads
-     */
-   private loadStateFromLocalStorage(): void {
+  /**
+   * load cached state from browser localStorage
+   *  - this allows persistent state across page reloads
+   */
+  private loadStateFromLocalStorage(): void {
     const cachedState = localStorage.getItem('studySeatState');
     if (cachedState === null) {
         return undefined;
