@@ -8,12 +8,14 @@ FROM base as build
 # build client
 COPY ./client /srv
 WORKDIR /srv
+RUN npm install
 RUN npm run build
 
 # build server
 COPY ./server /usr/src/app
 WORKDIR /usr/src/app
 RUN echo "CLIENT_BUNDLE_DIR=/srv/build" >> .env
+RUN npm install
 RUN npm run build
 
 FROM build as test
