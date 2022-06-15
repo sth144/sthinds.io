@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 export default class DisplayArticleComponent extends Component {
   constructor(props: object) { super(props); }
 
-
   render() {
     /** TODO: render article (markdown) here */
     return (

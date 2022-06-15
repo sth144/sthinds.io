@@ -2,7 +2,7 @@
   "name": "sthinds.io",
   "version": "0.1.0",
   "private": true,
-  "homepage": ".",
+  "homepage": "http://localhost:3001",
   "dependencies": {
     "@apollo/client": "^3.5.8",
     "@emotion/react": "^11.7.1",
