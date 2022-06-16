@@ -5,7 +5,6 @@ env:
     - DOCKER_REPO=sthinds/sthinds.io
     - ARCHITECTURE_TARGETS=linux/arm/v7,linux/arm64,linux/amd64
 before_install:
-  - curl -fsSL https://get.docker.com | sh
   - echo '{"experimental":"enabled"}' | sudo tee /etc/docker/daemon.json
   - mkdir -p $HOME/.docker
   - echo '{"experimental":"enabled"}' | sudo tee $HOME/.docker/config.json
