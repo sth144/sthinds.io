@@ -18,9 +18,14 @@ RUN echo "CLIENT_BUNDLE_DIR=/srv/build" >> .env
 RUN npm install
 RUN npm run build
 
-FROM build as test
+FROM build as deploy
+# TODO: define environment variables here and pass them in
+CMD ["npm", "start"]
+
+FROM deploy as test
 RUN npm install -g jest ts-jest babel-jest@26.6.0
 COPY ./test /test
+# TODO: how to pass in environment to test command?
 RUN /test/test.sh -s /usr/src/app -c /srv test
 
 # TODO: test with mongodb & redis???
@@ -29,4 +34,4 @@ RUN ls /test
 RUN ls /srv
 RUN ls /usr/src/app
 
-# TODO: mount .env file for client and server in deployment (pipeline tests too)
+# TODO: pass environment variables for client and server in deployment (pipeline tests too)

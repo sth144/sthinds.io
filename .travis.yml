@@ -16,4 +16,15 @@ install:
   # TODO: what is this? necessary?
   - docker buildx create --name xbuilder --use
 script:
-  - docker buildx build --progress plain --platform=$ARCHITECTURE_TARGETS -t $DOCKER_REPO --push .
+  # TODO: pass in --env variables here
+  #       - build base/build image first (no env variables)
+  #       - build server (with env)
+  #       - build test (with env)
+  - docker buildx build --progress plain \
+                        --platform=$ARCHITECTURE_TARGETS \
+                        --tag $DOCKER_REPO \
+                        --target deploy \
+                        --push .
+  - docker buildx build --progress plain \
+                        --platform=$ARCHITECTURE_TARGETS \
+                        --target test
