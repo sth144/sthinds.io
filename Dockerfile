@@ -1,6 +1,6 @@
 FROM debian:bullseye-slim as base
-RUN apt-get update
-RUN apt-get install -y npm \
+RUN apt- update
+RUN apt- install -y npm \
                     nodejs 
 RUN npm install -g typescript@latest react-scripts
 
