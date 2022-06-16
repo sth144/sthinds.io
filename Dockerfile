@@ -19,7 +19,15 @@ RUN npm install
 RUN npm run build
 
 FROM build as deploy
-# TODO: define environment variables here and pass them in
+# TODO: define environment variables here and pass them inPORT=8000
+# NODE_ENV=prod
+# MONGODB_HOST=127.0.0.1
+# MONGODB_PORT=27017
+# MONGODB_USERNAME=admin
+# MONGODB_PASSWORD=______
+# REDIS_HOST=localhost
+# REDIS_PORT=6379
+
 CMD ["npm", "start"]
 
 FROM deploy as test
