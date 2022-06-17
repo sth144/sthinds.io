@@ -1,10 +1,10 @@
-FROM debian:bullseye-slim as base
+FROM debian:bullseye-slim AS base
 RUN apt update
 RUN apt install -y npm \
                     nodejs 
 RUN npm install -g typescript@latest react-scripts
 
-FROM base as build
+FROM base AS build
 # build client
 COPY ./client /srv
 WORKDIR /srv
@@ -18,7 +18,7 @@ RUN echo "CLIENT_BUNDLE_DIR=/srv/build" >> .env
 RUN npm install
 RUN npm run build
 
-FROM build as deploy
+FROM build AS deploy
 # TODO: define environment variables here and pass them in
 ENV PORT=8000
 ARG NODE_ENV=prod
@@ -44,10 +44,8 @@ FROM deploy as test
 RUN npm install -g create-react-app
 COPY ./test /test
 
-RUN echo ${MONGODB_PORT}
-
 # TODO: how to pass in environment to test command?
-RUN /test/test.sh -s /usr/src/app -c /srv test
+# RUN /test/test.sh -s /usr/src/app -c /srv test
 
 # TODO: test with mongodb & redis???
 
