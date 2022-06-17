@@ -10,7 +10,7 @@ before_install:
   - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
   - sudo add-apt-repository -y "deb [arch=amd64] https://download.docker.com/linux/ubuntu `lsb_release -cs` test"
   - sudo apt-get update
-  - sudo apt-get -y -o Dpkg::Options::="--force-confnew" install docker-ce
+  - sudo apt-get -y install docker-ce
   - mkdir -vp ~/.docker/cli-plugins/
   - echo '{"experimental":"enabled"}' | sudo tee /etc/docker/daemon.json
   - echo '{"experimental":"enabled"}' | sudo tee $HOME/.docker/config.json
