@@ -20,7 +20,7 @@ script:
   #       - build base/build image first (no env variables)
   #       - build server (with env)
   #       - build test (with env)
-  - docker build --tag $DOCKER_REPO \
-                        --target deploy \
-                        --push .
-  - docker build --target test .
+  - docker build .  --tag $DOCKER_REPO \
+                    --target deploy \
+                    --push
+  - docker build . --target test
