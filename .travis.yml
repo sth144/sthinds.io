@@ -23,4 +23,4 @@ script:
   - docker build .  --tag $DOCKER_REPO \
                     --target deploy
   - docker push --tag $DOCKER_REPO
-  - docker build . --target test
+  # - docker build . --target test
