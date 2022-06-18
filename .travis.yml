@@ -12,11 +12,19 @@ services:
   # for testing
   - mongodb
   - redis-server
+cache:
+  directories:
+    - docker
+
+# step definitions
+before_cache:
+  - docker save -o docker_images/images.tar $(docker images -a -q)
 before_install:
   - sudo apt-get update
   - echo '{"experimental":"enabled"}' | sudo tee /etc/docker/daemon.json
   - sudo service docker start
   - echo $DOCKER_HUB_PASSWORD | docker login -u $DOCKER_HUB_USERNAME --password-stdin
+  - docker load -i docker/images.tar || true
 # install:
 before_script:
   - mongo test --eval 'db.createUser({user:"test",pwd:"test",roles:["readWrite"]});'
