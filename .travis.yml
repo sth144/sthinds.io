@@ -9,17 +9,22 @@ env:
     - DOCKER_REPO=sthinds/sthinds.io
 services:
     - docker
+    # for testing
+    - mongodb
+    - redis-server
 before_install:
   - sudo apt-get update
   - echo '{"experimental":"enabled"}' | sudo tee /etc/docker/daemon.json
   - sudo service docker start
   - echo $DOCKER_HUB_PASSWORD | docker login -u $DOCKER_HUB_USERNAME --password-stdin
 # install:
+before_script:
+  - mongo mydb_test --eval 'db.createUser({user:"travis",pwd:"test",roles:["readWrite"]});'
 script:
   # TODO: pass in --env variables here
   #       - build base/build image first (no env variables)
   #       - build server (with env)
   #       - build test (with env)
   - docker build . --tag $DOCKER_REPO --target deploy
+  - docker build . --target test
   - docker push $DOCKER_REPO
-  # - docker build . --target test

@@ -45,7 +45,7 @@ RUN npm install -g create-react-app
 COPY ./test /test
 
 # TODO: how to pass in environment to test command?
-# RUN /test/test.sh -s /usr/src/app -c /srv test
+RUN /test/test.sh -s /usr/src/app -c /srv test
 
 # TODO: test with mongodb & redis???
 
