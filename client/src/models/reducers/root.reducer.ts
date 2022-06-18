@@ -23,8 +23,10 @@ export default function rootReducer(previousState: unknown,
    */
   switch (action.type) {
     case ARTICLE_SELECTED: {
-      // TODO: implement ARTICLE_SELECTED reducer
-      return;
+      const newState = Object.assign({ } , previousState);
+      return Object.assign(newState, {
+        article: action.payload
+      });
     }
 
     case INITIALIZE: {

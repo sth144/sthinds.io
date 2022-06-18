@@ -17,6 +17,13 @@ export class ArticleService {
 
   public async findAll(): Promise<Article[]> {
     const articlesFound = await this.articleRepository.find();
+
     return articlesFound;
+  }
+
+  public async findOne(_id: string): Promise<Article> {
+    const articleFound = await this.articleRepository.findOne(_id);
+
+    return articleFound;
   }
 }

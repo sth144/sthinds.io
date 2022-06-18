@@ -20,6 +20,11 @@ export class ArticleResolver {
     return await this.articleService.findAll()
   }
 
+  @Query(() => ArticleDTO)
+  public async article(@Args("_id") _id: string): Promise<Article> {
+    return await this.articleService.findOne(_id);
+  }
+
   @Mutation(() => ArticleDTO)
   public async createArticle(
     @Args("author") author: string,

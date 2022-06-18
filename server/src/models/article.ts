@@ -6,7 +6,7 @@ import { IArticle } from "sthinds.io-lib";
 
 @Entity({ name: "article" })
 export class Article implements IArticle {
-  @ObjectIdColumn({ generated: true }) public readonly _id: number;
+  @ObjectIdColumn({ generated: true }) public readonly _id: string;
   @Column(/**() => String*/) public title: string;
   @Column(/**() => String*/) public subtitle: string;
   @Column(/**() => String*/) public author: string;

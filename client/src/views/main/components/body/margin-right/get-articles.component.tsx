@@ -25,11 +25,7 @@ function GetArticles(): JSX.Element {
 
   function articleSelectedFactory(article: any) {
     return function () {
-      console.log(article);
       dispatch(articleSelected(article))
-      // TODO: redirect body component to article content
-      //        - dispatch Redux action
-      //        - redirect in render (BodyComponent)
     }
   }
 
