@@ -1,8 +1,9 @@
+# TODO: push base to Docker hub to speed up build
 FROM debian:bullseye-slim AS base
 RUN apt update
 RUN apt install -y npm \
                     nodejs 
-RUN npm install -g typescript@latest react-scripts
+RUN npm install -g typescript@latest react-scripts create-react-app
 
 FROM base AS build
 # build client
@@ -41,7 +42,6 @@ RUN echo ${MONGODB_PORT}
 CMD ["npm", "start"]
 
 FROM deploy as test
-RUN npm install -g create-react-app
 COPY ./test /test
 
 # TODO: how to pass in environment to test command?

@@ -26,5 +26,8 @@ script:
   #       - build server (with env)
   #       - build test (with env)
   - docker build . --tag $DOCKER_REPO --target deploy
-  - docker build . --target test
+
+  - pidof mongod
+
+  - docker build . --target test --network host
   - docker push $DOCKER_REPO
