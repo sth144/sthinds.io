@@ -1,4 +1,4 @@
-# TODO: define pods and deployment
+# TODO: define storage via PersistentVolumeClaims (replicate?)
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -14,9 +14,9 @@ spec:
         app: sthinds.io
     spec:
       containers:
-      - name: sthinds.io
-        image: sthinds/sthinds.io
-          imagePullPolicy: Always
+      - name: sthinds-io
+        image: sthinds/sthinds.io:latest
+        imagePullPolicy: Always
         resources:
           limits:
             memory: "128Mi"
@@ -25,7 +25,7 @@ spec:
         - containerPort: 8080
       - name: mongodb
         image: mongo:latest
-          imagePullPolicy: Always
+        imagePullPolicy: Always
         resources:
           limits:
             memory: "128Mi"
@@ -44,7 +44,7 @@ spec:
         # restart: unless-stopped
       - name: redis
         image: redis:alpine
-          imagePullPolicy: Always
+        imagePullPolicy: Always
         resources:
           limits:
             memory: "128Mi"
@@ -62,7 +62,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: sthinds.io
+  name: sthinds-io
 spec:
   type: NodePort
   selector:
@@ -71,7 +71,7 @@ spec:
     # TODO: is this right?
     - port: 8080
       targetPort: 80
-      name: sthinds.io
+      name: sthinds-io
   externalIPs:
     - 192.168.1.240
 ---
@@ -79,14 +79,14 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   namespace: default
-  name: sthinds.io-ingress
+  name: sthinds-io-ingress
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
     kubernetes.io/ingress.class: "nginx"
 spec:
   defaultBackend:
     service:
-      name: sthinds.io
+      name: sthinds-io
       port:
         # TODO: what port?
         number: 8080
@@ -98,6 +98,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: sthinds.io
+                name: sthinds-io
                 port: 
                   number: 8080

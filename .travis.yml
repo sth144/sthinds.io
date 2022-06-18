@@ -25,11 +25,8 @@ script:
   #       - build base/build image first (no env variables)
   #       - build server (with env)
   #       - build test (with env)
-  - docker build . --tag $DOCKER_REPO --target deploy
-
-  - pidof mongod
-  - netstat -tulp | grep 27017
+  - docker build . --tag $DOCKER_REPO:$TRAVIS_CPU_ARCH --target deploy
 
   - docker build . --target test --tag $DOCKER_REPO:test
   - docker run --network host $DOCKER_REPO:test
-  - docker push $DOCKER_REPO
+  - docker push $DOCKER_REPO:$TRAVIS_CPU_ARCH

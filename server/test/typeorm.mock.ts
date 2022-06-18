@@ -3,10 +3,6 @@ import { Article } from "../src/models/article";
 
 const dotenv = require("dotenv");
 
-console.log("TYPEORM MOCK");
-console.log(process.env.MONGODB_HOST);
-console.log(process.env.MONGODB_PORT);
-
 export const TypeOrmMongoDBTestingModule = () => [
   TypeOrmModule.forRoot({
     type: 'mongodb',

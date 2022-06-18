@@ -44,10 +44,6 @@ CMD ["npm", "start"]
 FROM deploy as test
 COPY ./test /test
 
-# TODO: how to pass in environment to test command?
 CMD ["/test/test.sh", "-s", "/usr/src/app", "-c", "/srv", "test"]
-
-
-# TODO: test with mongodb & redis???
 
 # TODO: pass environment variables for client and server in deployment (pipeline tests too)
