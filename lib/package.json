@@ -1,11 +1,36 @@
 {
   "name": "sthinds.io-lib",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "license": "ISC",
+  "description": "A TypeScript library of shared interfaces and classes used by client and server in Gen 2 Software Architecture",
+  "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "npm install && tsc -p .",
+    "eslint": "eslint \"src/**/*.ts\"",
+    "eslint-fix": "eslint \"src/**/*.ts\" --fix",
+    "test": "bash test/test.sh",
+    "clean": "rm -rf dist && rm -rf node_modules",
+    "prepare": "tsc"
   },
-  "author": "",
-  "license": "ISC"
+  "typings": "dist/index.d.ts",
+  "pre-commit": [
+    "eslint-fix",
+    "build",
+    "test"
+  ],
+  "dependencies": {
+    "reflect-metadata": "^0.1.13"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.2.2",
+    "@types/mocha": "^5.2.7",
+    "@types/node": "^11.15.2",
+    "@typescript-eslint/eslint-plugin": "^2.15.0",
+    "@typescript-eslint/eslint-plugin-tslint": "^2.15.0",
+    "@typescript-eslint/parser": "^2.15.0",
+    "chai": "^4.2.0",
+    "eslint": "^6.8.0",
+    "mocha": "^6.2.0",
+    "typescript": "^3.7.3"
+  }
 }

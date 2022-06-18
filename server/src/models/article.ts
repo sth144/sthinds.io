@@ -2,9 +2,10 @@
 
 import { Column, Entity, ObjectIdColumn } from "typeorm";
 import { Field, InputType, ObjectType } from "@nestjs/graphql";
+import { IArticle } from "sthinds.io-lib";
 
 @Entity({ name: "article" })
-export class Article {
+export class Article implements IArticle {
   @ObjectIdColumn({ generated: true }) public readonly _id: number;
   @Column(/**() => String*/) public title: string;
   @Column(/**() => String*/) public subtitle: string;
@@ -19,7 +20,7 @@ export class Article {
 // TODO: these should be defined in lib and shared by client and server
 
 @ObjectType()
-export class ArticleDTO {
+export class ArticleDTO implements IArticle {
   @Field({ nullable: true })
   readonly _id: string;
   @Field()
@@ -36,7 +37,7 @@ export class ArticleDTO {
 };
 
 @InputType()
-export class ArticleInput {
+export class ArticleInput implements IArticle {
   @Field()
   readonly title: string;
   @Field()

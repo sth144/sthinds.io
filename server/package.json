@@ -23,6 +23,7 @@
     "redisinsight": "export RIPORT=8002 && /usr/local/bin/redisinsight/redisinsight-linux64-1.11.1"
   },
   "dependencies": {
+    "sthinds.io-lib": "file:../lib",
     "@nestjs/apollo": "^10.0.2",
     "@nestjs/common": "^8.0.0",
     "@nestjs/core": "^8.0.0",
