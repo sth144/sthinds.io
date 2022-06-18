@@ -28,6 +28,8 @@ script:
   - docker build . --tag $DOCKER_REPO --target deploy
 
   - pidof mongod
+  - netstat -tulp | grep 27017
 
-  - docker build . --target test --network host
+  - docker build . --target test --tag $DOCKER_REPO:test
+  - docker run --network host $DOCKER_REPO:test
   - docker push $DOCKER_REPO
