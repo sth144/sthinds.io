@@ -7,8 +7,9 @@ import { AppService } from './../src/app.service';
 import { ArticleModule } from '../src/models/article.module';
 import { TypeOrmMongoDBTestingModule } from './typeorm.mock';
 
+let app: INestApplication;
+
 describe('AppController (e2e)', () => {
-  let app: INestApplication;
 
   beforeEach(async () => {
     // NOTE: the argument passed to createTestingModule should look almost
