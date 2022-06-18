@@ -33,6 +33,9 @@ script:
   #       - build base/build image first (no env variables)
   #       - build server (with env)
   #       - build test (with env)
+
+  # TODO: can we build base image for multiple architectures
+
   - docker build . --tag $DOCKER_REPO:$TRAVIS_CPU_ARCH --target deploy
 
   - docker build . --target test --tag $DOCKER_REPO:test

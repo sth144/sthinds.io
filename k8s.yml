@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: sthinds-io
-        image: sthinds/sthinds.io:latest
+        image: sthinds/sthinds.io:arm64
         imagePullPolicy: Always
         resources:
           limits:
