@@ -22,6 +22,7 @@ export default class BodyComponent extends Component {
 						<MarginLeftComponent></MarginLeftComponent>
 					</Col>
 				  <Col>
+            {/* TODO: make this column independently scrollable */}
             <Routes>
               <Route path="/" element={<WelcomeComponent/>}></Route>
               <Route path="/article/*" element={<ArticlePanelComponent/>}></Route>

@@ -10,6 +10,7 @@ function CreateArticleForm() {
 	const [date, setDate] = useState("");
 	const [text, setText] = useState("");
 
+  // TODO: move mutations and queries to an external injectable service
 	const [createArticle, { error }] = useMutation(CREATE_ARTICLE);
 
 	const addArticle = () => {
@@ -58,6 +59,8 @@ function CreateArticleForm() {
 							setText(e.target.value);
 						}}
 						type="text" 
+            as="textarea"
+            rows={3}
 						placeholder="Enter Text" />
 				</Form.Group>
 				<Button 

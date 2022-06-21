@@ -9,6 +9,7 @@ import "./get-articles.component.scss";
 // TODO: try react-redux useSelector and useDispatch to manage Redux store from functional component
 
 function GetArticles(): JSX.Element {
+  // TODO: move mutations and queries to an external injectable service
 	const { error, loading, data } = useQuery(LOAD_ARTICLES);
 
 	const [articles, setArticles] = useState([]);

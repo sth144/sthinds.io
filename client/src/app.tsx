@@ -25,7 +25,9 @@ const mapStateToProps = (state: IAppComponentState) => {
 }
 
 const mapDispatchToProps = (dispatch: unknown) => {
-  return { };
+  return {
+    dispatch
+  };
 }
 
 /**
@@ -53,7 +55,7 @@ export default class App extends Component<IAppComponentProps, IAppComponentStat
    *  - this allows persistent state across page reloads
    */
   private loadStateFromLocalStorage(): void {
-    const cachedState = localStorage.getItem('studySeatState');
+    const cachedState = localStorage.getItem('appState');
     if (cachedState === null) {
         return undefined;
     }

@@ -10,6 +10,7 @@ const path = require("path");
 const spawn = require("child_process").spawn;
 const dotenv = require('dotenv');
 const { existsSync } = require("fs");
+const { execSync, spawnSync } = require("child_process");
 dotenv.config({ path: path.join(process.cwd(), "server/.env") });
 
 /**
@@ -107,6 +108,19 @@ gulp.task("test:server", (done) => {
   startWorker("./test/test.sh", ["test_server"], { }, done);
 });
 gulp.task("dev:server", (done) => {
+  let dockerDevServicesRunning = false; 
+  try {
+    let pid = execSync("pidof mongod").toString();
+
+    if (pid.length > 0) {
+      dockerDevServicesRunning = true;
+    }
+  } catch { }
+
+  if (!dockerDevServicesRunning) {
+    execSync("docker-compose -f docker-compose.dev.yml up -d");
+  }
+
   startWorker("npm", ["run", "start:debug"], {
     cwd: path.join(process.cwd(), "server")
   }, done);

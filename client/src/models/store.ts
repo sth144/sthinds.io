@@ -8,7 +8,7 @@ export default store;
  * Store state in localStorage for persistance
  */
 store.subscribe(() => {
-    localStorage.setItem("appState", JSON.stringify(store.getState()));
+  localStorage.setItem("appState", JSON.stringify(store.getState()));
 });
 
 /**

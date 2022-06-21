@@ -10,6 +10,7 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { ArticleModule } from "./models/article.module"
 import { Article } from './models/article';
+import { AuthenticationModule } from "./authentication/authentication.module";
 
 export const serveStaticImport = ServeStaticModule.forRoot({
   rootPath: (process.env.CLIENT_BUNDLE_DIR !== undefined) ? 
@@ -55,8 +56,10 @@ export const graphQLImport = GraphQLModule.forRoot<ApolloDriverConfig>({
     }),
     // TODO: get an Apollo query working from client
     graphQLImport,
-    ArticleModule
+    ArticleModule,
+    AuthenticationModule
   ],
+  // TODO: break out OAuth into separate module
   controllers: [AppController],
   providers: [AppService],
 })

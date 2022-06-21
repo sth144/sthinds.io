@@ -2,6 +2,7 @@ import { useQuery } from '@apollo/client';
 import { LOAD_ARTICLE } from 'models/queries/queries';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import "./display-article.component.scss";
 
 interface IDisplayArticleComponentProps {
   dispatch: (action) => void,
@@ -53,11 +54,12 @@ function GetFullArticle({ articleID }: IDisplayArticleComponentProps) {
   // TODO: dispatch articleReceived action here to update state
 
   return (
-    <div>
+    // TODO: display here as markdown
+    <div className='article-display-div'>
       <h1>{article.title}</h1>
       <h2>{article.subtitle}</h2>
       <h3>{article.author}, {article.date}</h3>
-      <div>{article.text}</div>
+      <h6>{article.text}</h6>
     </div>
   );
 }

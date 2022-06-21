@@ -19,6 +19,7 @@
 - create landing body
 - article editor
 - make margins collapsible
+- add permanent links
 
 - React tic tac toe tutorial https://reactjs.org/
 
@@ -40,3 +41,4 @@
 - define data models and contracts
   - unit test
 - debuggers
+- add dynamic content

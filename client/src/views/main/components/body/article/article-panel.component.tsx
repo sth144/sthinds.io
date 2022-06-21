@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import CreateArticleForm from "./create-article.component";
-import DisplayArticleComponent from "./display-article.component";
+import CreateArticleForm from "./create/create-article.component";
+import DisplayArticleComponent from "./display/display-article.component";
 import { Route, Routes } from "react-router-dom";
 
 @connect(() => { }, () => { })
