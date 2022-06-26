@@ -2,6 +2,7 @@ import { useQuery } from '@apollo/client';
 import { LOAD_ARTICLE } from 'models/queries/queries';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import ReactMarkdown from 'react-markdown';
 import "./display-article.component.scss";
 
 interface IDisplayArticleComponentProps {
@@ -31,13 +32,14 @@ export default class DisplayArticleComponent extends Component<
   constructor(props: object) { super(props); }
 
   render() {
-    /** TODO: render article (markdown) here */
     return (
       <GetFullArticle articleID={this.props.articleID}></GetFullArticle>
     );
   }
 }
 
+/** functional component for retrieving article via GraphQL */
+// TODO: move this to an injectable service?
 function GetFullArticle({ articleID }: IDisplayArticleComponentProps) {
   const { error, loading, data } = 
     useQuery(LOAD_ARTICLE, { 
@@ -51,15 +53,14 @@ function GetFullArticle({ articleID }: IDisplayArticleComponentProps) {
   
   const article = data.article;
 
-  // TODO: dispatch articleReceived action here to update state
-
   return (
-    // TODO: display here as markdown
     <div className='article-display-div'>
-      <h1>{article.title}</h1>
-      <h2>{article.subtitle}</h2>
       <h3>{article.author}, {article.date}</h3>
-      <h6>{article.text}</h6>
+      <br></br>
+      <h1><strong>{article.title}</strong></h1>
+      <h2>{article.subtitle}</h2>
+      <br></br>
+      <ReactMarkdown children={article.text}></ReactMarkdown>
     </div>
   );
 }

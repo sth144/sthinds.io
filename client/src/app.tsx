@@ -45,7 +45,7 @@ export default class App extends Component<IAppComponentProps, IAppComponentStat
   constructor(public props: IAppComponentProps) {
     super(props);
     /**
-     * TODO: on instantiation, load cached state (stored in browser localStorage)
+     * on instantiation, load cached state (stored in browser localStorage)
      */
     this.loadStateFromLocalStorage();
   }

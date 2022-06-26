@@ -16,9 +16,6 @@ export class Article implements IArticle {
   constructor() { }
 };
 
-// TODO: these should be subclasses to avoid duplication
-// TODO: these should be defined in lib and shared by client and server
-
 @ObjectType()
 export class ArticleDTO implements IArticle {
   @Field({ nullable: true })

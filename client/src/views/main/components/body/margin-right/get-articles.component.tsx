@@ -38,7 +38,7 @@ function GetArticles(): JSX.Element {
               <Link to="/article/show" onClick={articleSelectedFactory(article)}>
                 <h1>{article.title}</h1> 
                 {/* <h3>{article.subtitle}</h3> */}
-                <h5>{article.author}</h5>
+                <h6>{article.author}</h6>
               </Link>
             </span>)}
         </nav>

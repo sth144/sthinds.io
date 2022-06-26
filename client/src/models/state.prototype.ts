@@ -33,5 +33,3 @@ export const statePrototype: StatePrototype = {
       token: null
   }
 };
-
-// TODO: make sure this gets cached in localStorage

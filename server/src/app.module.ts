@@ -54,12 +54,10 @@ export const graphQLImport = GraphQLModule.forRoot<ApolloDriverConfig>({
         port: parseInt(process.env.REDIS_PORT)
       }
     }),
-    // TODO: get an Apollo query working from client
     graphQLImport,
     ArticleModule,
     AuthenticationModule
   ],
-  // TODO: break out OAuth into separate module
   controllers: [AppController],
   providers: [AppService],
 })

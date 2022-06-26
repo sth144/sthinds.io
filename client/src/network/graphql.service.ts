@@ -5,7 +5,6 @@ import {
 } from "@apollo/client";
 import { onError, ErrorResponse } from "@apollo/client/link/error" 
 
-// TODO: separate this client instance to it's own file and inject
 const GraphQLService = new ApolloClient({
   cache: new InMemoryCache(),
   link: from([

@@ -13,10 +13,13 @@ class HeaderComponent extends Component {
         <div className="third-width">  
           <Link to="/" className="home-link">
             <h1>Sean Hinds</h1>
+            <h4>Blog and Portfolio</h4>
           </Link>
         </div>
         <div className="third-width">
-          <img src={personIcon} height={30}></img>
+          <a href="/api/google">
+            <img src={personIcon} height={30}></img>
+          </a>
         </div>
       </header>);
 	}
