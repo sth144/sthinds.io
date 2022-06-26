@@ -34,13 +34,14 @@ function GetArticles(): JSX.Element {
     <div>
         <nav className="article-nav">
     			{articles.map((article: Record<string, string>) => 
-            <span>
               <Link to="/article/show" onClick={articleSelectedFactory(article)}>
-                <h1>{article.title}</h1> 
-                {/* <h3>{article.subtitle}</h3> */}
-                <h6>{article.author}</h6>
-              </Link>
-            </span>)}
+                <div className="two-third-width text-right">
+                  <div>
+                    <h2>{article.title}</h2>  
+                  </div>
+                </div>
+                <div className="third-width"></div>
+              </Link>)}
         </nav>
     </div>
 	);

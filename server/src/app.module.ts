@@ -1,16 +1,13 @@
-import { CacheModule, CACHE_MANAGER, Inject, Module } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ServeStaticModule } from "@nestjs/serve-static";
 import { join } from "path";
-import { TypeOrmModule } from '@nestjs/typeorm';
-import type { RedisClientOptions } from "redis";
-import * as redisStore from "cache-manager-redis-store";
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { ArticleModule } from "./models/article.module"
-import { Article } from './models/article';
 import { AuthenticationModule } from "./authentication/authentication.module";
+import { StorageModule } from "./database/storage.module";
 
 export const serveStaticImport = ServeStaticModule.forRoot({
   rootPath: (process.env.CLIENT_BUNDLE_DIR !== undefined) ? 
@@ -31,29 +28,8 @@ export const graphQLImport = GraphQLModule.forRoot<ApolloDriverConfig>({
   imports: [
     serveStaticImport,
     // TODO: separate these out into storage module?
-    // TODO: get a TypeORM/MongoDB query working
-    TypeOrmModule.forRoot({
-      type: "mongodb",
-      host: process.env.MONGODB_HOST,
-      port: parseInt(process.env.MONGODB_PORT),
-      username: process.env.MONGODB_USERNAME,
-      password: process.env.MONGODB_PASSWORD,
-      authSource: "admin",
-      database: process.env.NODE_ENV === "dev" ? "dev" 
-                 : process.env.NODE_ENV === "test" ? "test" 
-                 : "prod",
-      entities: [Article],
-      synchronize: true,
-      loggerLevel: "info"
-    }),
-    // TODO: get a Redis query working
-    CacheModule.register<RedisClientOptions>({
-      store: redisStore,
-      socket: {
-        host: process.env.REDIS_HOST,
-        port: parseInt(process.env.REDIS_PORT)
-      }
-    }),
+    // TODO: connect to Redis cache via TypeORM (cache-manager-redis-store)
+    StorageModule,
     graphQLImport,
     ArticleModule,
     AuthenticationModule
@@ -61,11 +37,4 @@ export const graphQLImport = GraphQLModule.forRoot<ApolloDriverConfig>({
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {
-  constructor(@Inject(CACHE_MANAGER) cacheManager) {
-    const client = cacheManager.store.getClient();
-    client.on("error", (err) => {
-
-    });
-  }
-}
+export class AppModule { }

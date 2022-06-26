@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { CACHE_MANAGER, Inject, Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { MongoRepository } from "typeorm";
 import { Article } from "./article";
@@ -7,7 +7,9 @@ import { Article } from "./article";
 export class ArticleService {
   constructor(
     @InjectRepository(Article)
-    private readonly articleRepository: MongoRepository<Article>
+    private readonly articleRepository: MongoRepository<Article>,
+    @Inject(CACHE_MANAGER) 
+    private readonly cacheManager
   ) { }
 
   public async create(dto: object): Promise<Article> {
@@ -23,6 +25,8 @@ export class ArticleService {
 
   public async findOne(_id: string): Promise<Article> {
     const articleFound = await this.articleRepository.findOne(_id);
+
+    await this.cacheManager.set(_id, articleFound);
 
     return articleFound;
   }

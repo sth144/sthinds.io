@@ -17,7 +17,9 @@ a:hover {
 .third-width {
   width: 33.333%;
 }
-
+.two-third-width {
+  width: 66.666%;
+}
 
 .flex-row {
   display: flex;
@@ -26,4 +28,11 @@ a:hover {
 .flex-column {
   display: flex;
   flex-direction: column;
+}
+
+.text-left {
+  text-align: left;
+}
+.text-right {
+  text-align: right;
 }

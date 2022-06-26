@@ -13,14 +13,20 @@ interface IDisplayArticleComponentState {
   articleID: string
 }
 
+
+const mapStateToProps = (state, ownProps) => { 
+  return {
+    articleID: state.article._id
+  }
+};
+
+const mapPropsToDispatch = () => { };
+
 @connect(
-  (state, ownProps) => { 
-    return {
-      articleID: state.article._id
-    }
-  }, 
-  () => { }
+  mapStateToProps,
+  mapPropsToDispatch
 )
+
 export default class DisplayArticleComponent extends Component<
   IDisplayArticleComponentProps, 
   IDisplayArticleComponentState> {
@@ -55,7 +61,7 @@ function GetFullArticle({ articleID }: IDisplayArticleComponentProps) {
 
   return (
     <div className='article-display-div'>
-      <h3>{article.author}, {article.date}</h3>
+      <h4>{article.author}, {article.date}</h4>
       <br></br>
       <h1><strong>{article.title}</strong></h1>
       <h2>{article.subtitle}</h2>

@@ -11,6 +11,4 @@ export class AppController {
     return this.appService.getHello();
   }
 
-  // TODO: connect to MongoDB via TypeORM (@nestjs/typeorm)
-  // TODO: connect to Redis cache via TypeORM (cache-manager-redis-store)
 }

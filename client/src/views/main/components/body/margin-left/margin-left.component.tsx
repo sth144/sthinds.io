@@ -7,6 +7,7 @@ import { connect } from "react-redux";
 class MarginLeftComponent extends Component {
   render() {
     // TODO: display project links here (at bottom)
+    //        - include old Heroku apps!
 		return (
       <Link to="/article/create">
         {/* TODO: link to login if not logged in */}
