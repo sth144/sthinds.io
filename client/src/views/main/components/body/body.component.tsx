@@ -6,6 +6,7 @@ import MarginLeftComponent from "./margin-left/margin-left.component";
 import MarginRightComponent from "./margin-right/margin-right.component";
 import ArticlePanelComponent from "./article/article-panel.component";
 import { connect } from "react-redux";
+import "./body.component.scss";
 
 @connect(
   () => { return { }; }, 
@@ -13,10 +14,11 @@ import { connect } from "react-redux";
 )
 export default class BodyComponent extends Component {
 	render() {
+    // TODO: add permanent top margin
 		return (
 			<div className="App-body">
-			<Container fluid>
-				<Row>
+			<Container fluid className="content-container">
+				<Row className="whole-height">
           {/* TODO: make margins collapsible */}
 					<Col sm>
 						<MarginLeftComponent></MarginLeftComponent>

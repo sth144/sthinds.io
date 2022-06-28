@@ -11,7 +11,7 @@ import { StorageModule } from "./database/storage.module";
 
 export const serveStaticImport = ServeStaticModule.forRoot({
   rootPath: (process.env.CLIENT_BUNDLE_DIR !== undefined) ? 
-    process.env.CLIENT_BUNDLE_DIIR : join(__dirname, "../../client/build/"),
+    process.env.CLIENT_BUNDLE_DIR : join(process.cwd(), "../client/build/"),
   exclude: ["/graphql"]
 });
 
@@ -21,7 +21,6 @@ export const graphQLImport = GraphQLModule.forRoot<ApolloDriverConfig>({
   autoSchemaFile: "./schema.gql",
   installSubscriptionHandlers: true,
   playground: true
-  // TODO: redis???
 });
 
 @Module({

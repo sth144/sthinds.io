@@ -4,6 +4,18 @@ import { ArticleModule } from "../models/article.module"
 import { Article } from '../models/article';
 import { RedisCacheModule } from "./redis-cache.module";
 
+const connectionProps = 
+  process.env.hasOwnProperty("MONGODB_CONNECTION_STRING") ? {
+    /** for connection to MongoDB Atlas */
+    url: process.env.MONGODB_CONNECTION_STRING,
+    useNewUrlParser: true
+  } : {
+    host: process.env.MONGODB_HOST,
+    port: parseInt(process.env.MONGODB_PORT),
+    username: process.env.MONGODB_USERNAME,
+    password: process.env.MONGODB_PASSWORD,
+  };
+
 /**
  * Module for injecting TypeORM MongoDB connection and Redis cache
  */
@@ -11,10 +23,7 @@ import { RedisCacheModule } from "./redis-cache.module";
   imports: [
     TypeOrmModule.forRoot({
       type: "mongodb",
-      host: process.env.MONGODB_HOST,
-      port: parseInt(process.env.MONGODB_PORT),
-      username: process.env.MONGODB_USERNAME,
-      password: process.env.MONGODB_PASSWORD,
+      ...connectionProps,
       authSource: "admin",
       database: process.env.NODE_ENV === "dev" ? "dev" 
                  : process.env.NODE_ENV === "test" ? "test" 

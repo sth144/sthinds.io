@@ -6,11 +6,17 @@ RUN apt install -y npm \
 RUN npm install -g typescript@latest react-scripts create-react-app
 
 FROM base AS build
+COPY ./lib /usr/src/lib
+WORKDIR /usr/src/lib
+RUN npm install
+RUN tsc -p .
+
 # build client
-COPY ./client /srv
-WORKDIR /srv
+COPY ./client /usr/src/client
+WORKDIR /usr/src/client
 RUN npm install
 RUN npm run build
+RUN cp -r build /srv/
 
 # build server
 COPY ./server /usr/src/app
@@ -36,8 +42,6 @@ ARG REDIS_HOST=localhost
 ENV REDIS_HOST=${REDIS_HOST}
 ARG REDIS_PORT=6379
 ENV REDIS_PORT=${REDIS_PORT}
-
-RUN echo ${MONGODB_PORT}
 
 CMD ["npm", "start"]
 

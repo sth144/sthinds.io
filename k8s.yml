@@ -24,7 +24,7 @@ spec:
         ports:
         - containerPort: 8080
       - name: mongodb
-        image: mongo:latest
+        image: arm64v8/mongo:bionic
         imagePullPolicy: Always
         resources:
           limits:
