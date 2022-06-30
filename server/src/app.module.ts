@@ -5,7 +5,8 @@ import { ServeStaticModule } from "@nestjs/serve-static";
 import { join } from "path";
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
-import { ArticleModule } from "./models/article.module"
+import { ArticleModule } from "./models/article/article.module"
+import { UserModule } from "./models/user/user.module";
 import { AuthenticationModule } from "./authentication/authentication.module";
 import { StorageModule } from "./database/storage.module";
 
@@ -31,6 +32,7 @@ export const graphQLImport = GraphQLModule.forRoot<ApolloDriverConfig>({
     StorageModule,
     graphQLImport,
     ArticleModule,
+    UserModule,
     AuthenticationModule
   ],
   controllers: [AppController],

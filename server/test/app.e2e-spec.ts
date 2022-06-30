@@ -4,7 +4,7 @@ import * as request from 'supertest';
 import { graphQLImport, serveStaticImport } from './../src/app.module';
 import { AppController } from './../src/app.controller';
 import { AppService } from './../src/app.service';
-import { ArticleModule } from '../src/models/article.module';
+import { ArticleModule } from '../src/models/article/article.module';
 import { TypeOrmMongoDBTestingModule } from './typeorm.mock';
 
 let app: INestApplication;

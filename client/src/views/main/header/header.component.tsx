@@ -1,13 +1,17 @@
+import "reflect-metadata";
 import React, { Component } from "react";
 import "./header.component.scss";
-import personIcon from "assets/person.svg";
 import { Link } from "react-router-dom";
+import { LoginComponent } from "components/login/login.component";
 
 class HeaderComponent extends Component {
-	constructor(props: object) { super(props); }
-	
+
+	constructor(props: object) { 
+    super(props); 
+  }
+
 	render() {
-		return (
+    return (
 			<header className="App-header flex-row whole-width">
         <div className="third-width"></div>
         <div className="third-width">  
@@ -17,9 +21,8 @@ class HeaderComponent extends Component {
           </Link>
         </div>
         <div className="third-width">
-          <a href="/api/google">
-            <img src={personIcon} height={30}></img>
-          </a>
+          {/** TODO: move this to login component */}
+          <LoginComponent></LoginComponent>
         </div>
       </header>);
 	}

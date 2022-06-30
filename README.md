@@ -20,8 +20,7 @@
 - article editor
 - make margins collapsible
 - add permanent links
-
-- React tic tac toe tutorial https://reactjs.org/
+- Inversify IoC controller for dependency injection
 
 # TODO: server 
 - Redis
@@ -34,7 +33,7 @@
 - Docker build, deploy locally
 
 # TODO: general
-- fix tests
+- fix tests!!!
 - GraphQL client and server
   - query to fetch article contents
   - unit test connection

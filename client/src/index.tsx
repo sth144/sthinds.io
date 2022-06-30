@@ -1,18 +1,23 @@
+import "reflect-metadata";
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.scss';
 import App from './app';
 import reportWebVitals from './network/service-worker/reportWebVitals';
 import * as serviceWorker from "./network/service-worker/serviceWorker";
-import { Provider } from "react-redux";
+import { Provider as ReduxProvider } from "react-redux";
+import GraphQLService from "./network/graphql.service";
+import { ApolloProvider } from "@apollo/client";
 import store from "./models/store";
 
 ReactDOM.render(
-  <Provider store={store}>
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
-  </Provider>,
+  <React.StrictMode>
+  <ReduxProvider store={store}>
+  <ApolloProvider client={GraphQLService}>
+    <App />
+  </ApolloProvider>
+  </ReduxProvider>
+  </React.StrictMode>,
   document.getElementById('root')
 );
 

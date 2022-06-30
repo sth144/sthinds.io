@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import './app.scss';
-import { ApolloProvider } from "@apollo/client";
-import HeaderComponent from "views/main/components/header/header.component";
-import BodyComponent from "views/main/components/body/body.component";
-import FooterComponent from "views/main/components/footer/footer.component";
+import HeaderComponent from "views/main/header/header.component";
+import BodyComponent from "views/main/body/body.component";
+import FooterComponent from "views/main/footer/footer.component";
 import { connect } from 'react-redux';
 import { initialize } from "./models/actions/initialize.action";
-import GraphQLService from "./network/graphql.service";
-import { BrowserRouter as Router, Link, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 
 interface IAppComponentProps {
   dispatch: (action: unknown) => void
@@ -69,13 +67,11 @@ export default class App extends Component<IAppComponentProps, IAppComponentStat
   render() {
     return (
       <Router>
-      <ApolloProvider client={GraphQLService}>
       <div className="App">
         <HeaderComponent></HeaderComponent> 
         <BodyComponent></BodyComponent>
         <FooterComponent></FooterComponent>
       </div>
-      </ApolloProvider>
       </Router>
     );
   }

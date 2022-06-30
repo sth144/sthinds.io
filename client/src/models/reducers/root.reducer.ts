@@ -3,6 +3,8 @@ import { statePrototype } from "../state.prototype";
 import { Action } from "redux"
 import { ARTICLE_SELECTED } from "models/actions/article-selected.action";
 import { INITIALIZE } from "models/actions/initialize.action";
+import { LOGIN_INITIATED } from "models/actions/login-initiated.action";
+import { LOGIN_SUCCEEDED } from "models/actions/login-succeeded.action";
 
 // TODO: refactor this into composite reducers when it gets too unwieldly (use combineReducers())
 
@@ -26,6 +28,20 @@ export default function rootReducer(previousState: unknown,
       const newState = Object.assign({ } , previousState);
       return Object.assign(newState, {
         article: action.payload
+      });
+    }
+
+    case LOGIN_INITIATED: {
+      const newState = Object.assign({ } , previousState);
+      return Object.assign(newState, {
+        authentication: action.payload
+      });
+    }
+
+    case LOGIN_SUCCEEDED: {
+      const newState = Object.assign({ } , previousState);
+      return Object.assign(newState, {
+        authentication: action.payload
       });
     }
 

@@ -11,12 +11,23 @@ type ArticleDTO {
   text: String!
 }
 
+type UserDTO {
+  _id: String
+  email: String!
+  firstName: String!
+  lastName: String!
+  accessToken: String!
+}
+
 type Query {
   author: String!
   articles: [ArticleDTO!]!
   article(_id: String!): ArticleDTO!
+  users: [UserDTO!]!
+  user(_id: String!): UserDTO!
 }
 
 type Mutation {
   createArticle(author: String!, title: String!, subtitle: String!, date: String!, text: String!): ArticleDTO!
+  createUser(email: String!, firstName: String!, lastName: String!, accessToken: String!): UserDTO!
 }

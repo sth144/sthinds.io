@@ -1,7 +1,9 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ArticleModule } from "../models/article.module"
-import { Article } from '../models/article';
+import { ArticleModule } from "models/article/article.module";
+import { Article } from 'models/article/article';
+import { UserModule } from "models/user/user.module";
+import { User } from "models/user/user";
 import { RedisCacheModule } from "./redis-cache.module";
 
 const connectionProps = 
@@ -28,12 +30,13 @@ const connectionProps =
       database: process.env.NODE_ENV === "dev" ? "dev" 
                  : process.env.NODE_ENV === "test" ? "test" 
                  : "prod",
-      entities: [Article],
+      entities: [Article, User],
       synchronize: true,
       loggerLevel: "info"
     }),
     RedisCacheModule,
     ArticleModule,
+    UserModule
   ],
   controllers: [],
   providers: [],
