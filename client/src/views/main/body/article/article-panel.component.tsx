@@ -11,7 +11,7 @@ export default class ArticlePanelComponent extends Component {
   }
 
   render() {
-    /** TODO: render article (markdown) here */
+    /** TODO: auth guard for CreateArticleForm */
     return (
       <div>
         <Routes>

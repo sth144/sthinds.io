@@ -1,5 +1,5 @@
 
-import { statePrototype } from "../state.prototype";
+import { StatePrototype, statePrototype } from "../state.prototype";
 import { Action } from "redux"
 import { ARTICLE_SELECTED } from "models/actions/article-selected.action";
 import { INITIALIZE } from "models/actions/initialize.action";
@@ -25,7 +25,7 @@ export default function rootReducer(previousState: unknown,
    */
   switch (action.type) {
     case ARTICLE_SELECTED: {
-      const newState = Object.assign({ } , previousState);
+      const newState: Partial<StatePrototype> = Object.assign({ } , previousState);
       return Object.assign(newState, {
         article: action.payload
       });
@@ -33,9 +33,7 @@ export default function rootReducer(previousState: unknown,
 
     case LOGIN_INITIATED: {
       const newState = Object.assign({ } , previousState);
-      return Object.assign(newState, {
-        authentication: action.payload
-      });
+      return Object.assign(newState.authentication, action.payload);
     }
 
     case LOGIN_SUCCEEDED: {

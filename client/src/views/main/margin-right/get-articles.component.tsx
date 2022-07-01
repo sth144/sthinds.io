@@ -38,6 +38,7 @@ function GetArticles(): JSX.Element {
                 <div className="two-third-width text-right">
                   <div>
                     <h2>{article.title}</h2>  
+                    <h5>{article.subtitle}</h5>  
                   </div>
                 </div>
                 <div className="third-width"></div>

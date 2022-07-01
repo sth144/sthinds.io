@@ -5,6 +5,10 @@ import {
 } from "@apollo/client";
 import { onError, ErrorResponse } from "@apollo/client/link/error" 
 
+const serverHost = window.location.hostname;
+const serverPortStr = serverHost.includes("localhost") 
+                    ? ":8000" : "";
+
 const GraphQLService = new ApolloClient({
   cache: new InMemoryCache(),
   link: from([
@@ -16,7 +20,7 @@ const GraphQLService = new ApolloClient({
           });
       }
     }), 
-    new HttpLink({uri: "http://localhost:8000/graphql"})
+    new HttpLink({uri: `http://${serverHost}${serverPortStr}/graphql`})
   ]) 
 });
 

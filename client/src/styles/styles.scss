@@ -34,9 +34,23 @@ a:hover {
   flex-direction: column;
 }
 
+.justify-center {
+  justify-content: center;
+}
+.justify-around {
+  justify-content: space-around;
+}
+.align-center {
+  align-content: center;
+}
+
 .text-left {
   text-align: left;
 }
 .text-right {
   text-align: right;
+}
+
+.position-fixed {
+  position: fixed;
 }

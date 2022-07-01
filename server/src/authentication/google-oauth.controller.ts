@@ -17,8 +17,6 @@ export class GoogleOAuthController {
   @UseGuards(AuthGuard('google'))
   googleAuthRedirect(@Req() req, @Res() res) {
     const loginInfo = this.oauthService.googleOAuthLogin(req);
-    console.log("AUTH REDIRECT");
-    console.log(req)
 
     // TODO: create a JWT and redirect client with it
     //  - https://medium.com/@nielsmeima/auth-in-nest-js-and-angular-463525b6e071
@@ -26,8 +24,9 @@ export class GoogleOAuthController {
 
     const jwt: string = req.user.jwt;
     if (jwt)
-        res.redirect('http://localhost:3001/login/success/' + jwt);
+      res.redirect(
+        `/login/success/${req.user.email}/${req.user.firstName}/${req.user.lastName}/${jwt}`);
     else 
-        res.redirect('http://localhost:3001/login/failure');
+      res.redirect('/login/failure');
   }
 }

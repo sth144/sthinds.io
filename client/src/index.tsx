@@ -1,6 +1,7 @@
 import "reflect-metadata";
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter as Router } from "react-router-dom";
 import './index.scss';
 import App from './app';
 import reportWebVitals from './network/service-worker/reportWebVitals';
@@ -14,7 +15,9 @@ ReactDOM.render(
   <React.StrictMode>
   <ReduxProvider store={store}>
   <ApolloProvider client={GraphQLService}>
+  <Router>
     <App />
+  </Router>
   </ApolloProvider>
   </ReduxProvider>
   </React.StrictMode>,

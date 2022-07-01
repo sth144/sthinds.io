@@ -38,12 +38,15 @@ export class GoogleOAuthStrategy extends PassportStrategy(Strategy, "google") {
     // done(null, user);
 
     try {
-        console.log(profile);
+        console.log(profile.emails[0].value);
 
         const jwt: string = 'placeholderJWT'
         const user = 
         {
-            jwt
+          jwt,
+          email: profile.emails[0].value,
+          firstName: profile.name.givenName,
+          lastName: profile.name.familyName
         }
 
         done(null, user);

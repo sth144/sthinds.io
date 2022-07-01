@@ -1,11 +1,20 @@
 import personIcon from "assets/person.svg";
-import { connect } from "react-redux";
+import { loginSucceeded } from "models/actions/login-succeeded.action";
+import { StatePrototype } from "models/state.prototype";
+import React, { Component, useEffect } from "react";
+import { connect, useDispatch } from "react-redux";
+import { Route, Routes, useNavigate, useParams } from "react-router-dom";
+import { IAuthenticationState } from "sthinds.io-lib";
+import { Dropdown } from "react-bootstrap";
+import "./login.component.scss"; 
 
 /**
  * Map Redux state values to component props
  */
- const mapStateToProps = (state) => {
-  return { };
+const mapStateToProps = (state: StatePrototype) => {
+  return {
+    authenticationState: state.authentication
+  };
 }
 
 const mapDispatchToProps = (dispatch: unknown) => {
@@ -14,16 +23,77 @@ const mapDispatchToProps = (dispatch: unknown) => {
   };
 }
 
-@connect(mapStateToProps, mapPropsToDispatch)
-export class LoginComponent {
-  
+interface ILoginComponentProps {
+  authenticationState: IAuthenticationState,
+  dispatch: (action: unknown) => void
+}
+
+@connect(mapStateToProps, mapDispatchToProps)
+export default class LoginComponent extends Component<ILoginComponentProps> {
+
+  // TODO: display 
+  //        - icon when logged in
+  //          - launch drop down with logout option
+  //        - "Sign In" when not logged in
+
+  // TODO: dispatch loginInitiated action, login failed action
   render() {
     return (
       <div>
-        <a href="/api/google">
-          <img src={personIcon} height={30}></img>
-        </a>
+        <Routes>
+          <Route path="/login/success/:email/:firstName/:lastName/:token" element={<HandleSuccessRedirect/>}></Route>
+        </Routes>
+        {this.props.authenticationState.isLoggedIn 
+          ? <LoggedIn email={this.props.authenticationState.email}
+                      firstName={this.props.authenticationState.firstName}
+                      lastName={this.props.authenticationState.lastName}/> 
+          : <NotLoggedIn/>}
       </div>
     ); 
   }
 };
+
+function NotLoggedIn() {
+  return (
+    <a href="/api/google">
+      <div>Sign In</div>
+    </a>
+  );
+}
+
+function LoggedIn(props: Partial<IAuthenticationState>) {
+  return (
+    <div>
+      <Dropdown>
+        <Dropdown.Toggle className="profile-dropdown">
+          <img src={personIcon} height={30}></img>
+          <div>{props.firstName} {props.lastName}</div>
+        </Dropdown.Toggle>
+        <Dropdown.Menu>
+          <Dropdown.Item href="#/action-1">Log Out</Dropdown.Item>
+        </Dropdown.Menu>
+      </Dropdown>
+    </div>
+  );
+}
+
+// TODO: move this to root router, dispatch actions for login initiated + login succeeded
+function HandleSuccessRedirect() {
+  const { token, email, firstName, lastName } = useParams();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  // Similar to componentDidMount and componentDidUpdate:
+  useEffect(() => {
+    dispatch(loginSucceeded({
+      token,
+      email,
+      firstName,
+      lastName,
+      isLoggedIn: true
+    }))
+    
+    setTimeout(() => { navigate("/") }, 3000);
+  });
+
+  return (<div>Redirect</div>)
+}

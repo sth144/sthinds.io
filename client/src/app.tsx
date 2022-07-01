@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import './app.scss';
+import { Container, Col, Row } from "react-bootstrap";
 import HeaderComponent from "views/main/header/header.component";
 import BodyComponent from "views/main/body/body.component";
 import FooterComponent from "views/main/footer/footer.component";
+import MarginLeftComponent from "views/main/margin-left/margin-left.component";
+import MarginRightComponent from "views/main/margin-right/margin-right.component";
 import { connect } from 'react-redux';
 import { initialize } from "./models/actions/initialize.action";
-import { BrowserRouter as Router } from "react-router-dom";
 
 interface IAppComponentProps {
   dispatch: (action: unknown) => void
@@ -66,13 +68,22 @@ export default class App extends Component<IAppComponentProps, IAppComponentStat
 
   render() {
     return (
-      <Router>
-      <div className="App">
-        <HeaderComponent></HeaderComponent> 
-        <BodyComponent></BodyComponent>
-        <FooterComponent></FooterComponent>
-      </div>
-      </Router>
+			<Container fluid className="App">
+      	<Row className="whole-height">
+        {/* TODO: make margins collapsible */}
+				<Col md={2}>
+					<MarginLeftComponent></MarginLeftComponent>
+				</Col>
+        <Col md={7}>
+          <HeaderComponent></HeaderComponent> 
+          <BodyComponent></BodyComponent>
+          <FooterComponent></FooterComponent>
+        </Col>
+				<Col md={3}>
+          <MarginRightComponent></MarginRightComponent>
+				</Col>
+				</Row>
+			</Container>
     );
   }
 }

@@ -1,0 +1,24 @@
+
+.profile-dropdown {
+  background-color: var(--scheme-teal);
+  color: var(--scheme-charcoal)
+}
+
+.profile-dropdown:hover,
+.btn-check:active+.btn-primary, 
+.btn-check:checked+.btn-primary, 
+.btn-primary.active, 
+.btn-primary:active, 
+.show>.btn-primary.dropdown-toggle,
+.btn-check:focus {
+  background-color: var(--scheme-teal);
+  border-color: var(--scheme-dark-charcoal) !important;
+  box-shadow: var(--scheme-dark-charcoal);
+  color: var(--scheme-dark-charcoal);
+}
+
+.btn-primary:focus {
+  background-color: var(--scheme-teal) !important;
+  border-color: var(--scheme-dark-charcoal) !important;
+  box-shadow: var(--scheme-dark-charcoal);
+}
