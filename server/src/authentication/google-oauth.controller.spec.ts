@@ -1,1 +1,5 @@
-// TODO: test
+describe("GoogleOAuthController", () => {
+  it("TODO", () => {
+    // TODO:
+  });
+});

@@ -7,6 +7,7 @@ import { Route, Routes, useNavigate, useParams } from "react-router-dom";
 import { IAuthenticationState } from "sthinds.io-lib";
 import { Dropdown } from "react-bootstrap";
 import "./login.component.scss"; 
+import { loggedOut } from "models/actions/logged-out.action";
 
 /**
  * Map Redux state values to component props
@@ -30,11 +31,6 @@ interface ILoginComponentProps {
 
 @connect(mapStateToProps, mapDispatchToProps)
 export default class LoginComponent extends Component<ILoginComponentProps> {
-
-  // TODO: display 
-  //        - icon when logged in
-  //          - launch drop down with logout option
-  //        - "Sign In" when not logged in
 
   // TODO: dispatch loginInitiated action, login failed action
   render() {
@@ -62,22 +58,29 @@ function NotLoggedIn() {
 }
 
 function LoggedIn(props: Partial<IAuthenticationState>) {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const logout = () => {
+    dispatch(loggedOut());
+
+    setTimeout(() => { navigate("/"); }, 1000);
+  }
+
   return (
     <div>
       <Dropdown>
         <Dropdown.Toggle className="profile-dropdown">
           <img src={personIcon} height={30}></img>
-          <div>{props.firstName} {props.lastName}</div>
         </Dropdown.Toggle>
         <Dropdown.Menu>
-          <Dropdown.Item href="#/action-1">Log Out</Dropdown.Item>
+          <Dropdown.Item onClick={logout}>Log Out</Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
     </div>
   );
 }
 
-// TODO: move this to root router, dispatch actions for login initiated + login succeeded
 function HandleSuccessRedirect() {
   const { token, email, firstName, lastName } = useParams();
   const dispatch = useDispatch();
@@ -92,8 +95,9 @@ function HandleSuccessRedirect() {
       isLoggedIn: true
     }))
     
-    setTimeout(() => { navigate("/") }, 3000);
+    // TODO: navigate to top of history stack instead of "/"
+    setTimeout(() => { navigate("/"); window.location.reload(); }, 1000);
   });
 
-  return (<div>Redirect</div>)
+  return (<div>...</div>)
 }

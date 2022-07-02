@@ -26,7 +26,6 @@ const mapPropsToDispatch = () => { };
   mapStateToProps,
   mapPropsToDispatch
 )
-
 export default class DisplayArticleComponent extends Component<
   IDisplayArticleComponentProps, 
   IDisplayArticleComponentState> {

@@ -36,7 +36,6 @@ const connectionProps =
     }),
     RedisCacheModule,
     ArticleModule,
-    UserModule
   ],
   controllers: [],
   providers: [],

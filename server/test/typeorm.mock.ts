@@ -1,5 +1,6 @@
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Article } from "../src/models/article";
+import { Article } from "../src/models/article/article";
+import { User } from "../src/models/user/user";
 
 const dotenv = require("dotenv");
 
@@ -12,7 +13,7 @@ export const TypeOrmMongoDBTestingModule = () => [
     password: "test",
     // authSource: "admin",
     database: "test",
-    entities: [Article],
+    entities: [Article, User],
     synchronize: true,
     loggerLevel: "info"
   })

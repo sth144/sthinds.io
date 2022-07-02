@@ -1,10 +1,10 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
-import { graphQLImport, serveStaticImport } from './../src/app.module';
-import { AppController } from './../src/app.controller';
-import { AppService } from './../src/app.service';
-import { ArticleModule } from '../src/models/article/article.module';
+import { graphQLImport, serveStaticImport } from "app.module";
+import { AppController } from "app.controller";
+import { AppService } from "app.service";
+import { ArticleModule } from "models/article/article.module";
 import { TypeOrmMongoDBTestingModule } from './typeorm.mock';
 
 let app: INestApplication;

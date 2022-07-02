@@ -1,7 +1,8 @@
 import { CACHE_MANAGER, Inject, Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { MongoRepository } from "typeorm";
-import { User } from "./user";
+import { User, UserDTO, UserInput } from "./user";
+import { OAuthProvider, IGoogleAuthProfile } from "sthinds.io-lib";
 
 @Injectable()
 export class UserService {
@@ -17,6 +18,22 @@ export class UserService {
     return userCreated;
   }
 
+  public async registerOAuthUser(profile: IGoogleAuthProfile, 
+                                 provider: OAuthProvider): Promise<User> {
+
+    const dto: UserInput = {
+      email: profile.emails[0].value,
+      firstName: profile.name.givenName,
+      lastName: profile.name.familyName,
+      // TODO: store access token?
+      accessToken: null
+    };
+
+    const userCreated: User = await this.userRepository.save(dto);
+
+    return  userCreated;
+  }
+
   public async findAll(): Promise<User[]> {
     const usersFound = await this.userRepository.find();
 
@@ -27,6 +44,17 @@ export class UserService {
     const userFound = await this.userRepository.findOne(_id);
 
     await this.cacheManager.set(_id, userFound);
+
+    return userFound;
+  }
+
+  public async findOneByThirdPartyId(id: string, provider: OAuthProvider): Promise<User> {
+    const userFound = await this.userRepository.findOne({
+      where: {
+        thirdPartyId: id,
+        thirdPartyIdProvider: provider
+      }
+    });
 
     return userFound;
   }

@@ -6,6 +6,7 @@
       "dom.iterable",
       "esnext"
     ],
+    "rootDir": ".",
     "baseUrl": "./src",
     "incremental": true,
     "allowJs": true,
