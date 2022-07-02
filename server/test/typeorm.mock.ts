@@ -15,6 +15,6 @@ export const TypeOrmMongoDBTestingModule = () => [
     database: "test",
     entities: [Article, User],
     synchronize: true,
-    loggerLevel: "info"
+    loggerLevel: "error"
   })
 ];

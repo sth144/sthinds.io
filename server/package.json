@@ -92,10 +92,11 @@
     "transform": {
       "^.+\\.(t|j)s$": "ts-jest"
     },
+    "collectCoverage": true,
     "collectCoverageFrom": [
       "**/*.(t)s"
     ],
-    "coverageDirectory": "../coverage",
+    "coverageDirectory": "../test/reports/coverage/server_unit",
     "testEnvironment": "node"
   }
 }
