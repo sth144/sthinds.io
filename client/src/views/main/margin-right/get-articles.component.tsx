@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useQuery } from "@apollo/client"
-import { LOAD_ARTICLES } from "models/queries/queries";
+import { LOAD_ARTICLES } from "models/queries/article.queries";
 import { articleSelected } from "models/actions/article-selected.action";
 import { Link } from "react-router-dom";
 import "./get-articles.component.scss";
@@ -32,18 +32,18 @@ function GetArticles(): JSX.Element {
 
 	return (
     <div>
-        <nav className="article-nav">
-    			{articles.map((article: Record<string, string>) => 
-              <Link to="/article/show" onClick={articleSelectedFactory(article)}>
-                <div className="two-third-width text-right">
-                  <div>
-                    <h2>{article.title}</h2>  
-                    <h5>{article.subtitle}</h5>  
-                  </div>
+      <nav className="article-nav">
+  			{articles.map((article: Record<string, string>) => 
+            <Link to="/article/show" onClick={articleSelectedFactory(article)}>
+              <div className="two-third-width text-right">
+                <div>
+                  <h2>{article.title}</h2>  
+                  <h5>{article.subtitle}</h5>  
                 </div>
-                <div className="third-width"></div>
-              </Link>)}
-        </nav>
+              </div>
+              <div className="third-width"></div>
+            </Link>)}
+      </nav>
     </div>
 	);
 }

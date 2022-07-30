@@ -9,7 +9,7 @@ export class Article implements IArticle {
   @ObjectIdColumn({ generated: true }) public readonly _id: string;
   @Column(/**() => String*/) public title: string;
   @Column(/**() => String*/) public subtitle: string;
-  @Column(/**() => String*/) public author: string;
+  @Column(/**() => String*/) public authorID: string;
   @Column(/**() => String*/) public date: string;
   @Column(/**() => String*/) public text: string;
 
@@ -26,7 +26,7 @@ export class ArticleDTO implements IArticle {
   readonly subtitle: string;
   // TODO: this shouldn't be nullable
   @Field()
-  readonly author: string;
+  readonly authorID: string;
   @Field()
   readonly date: string;
   @Field()
@@ -40,7 +40,7 @@ export class ArticleInput implements IArticle {
   @Field()
   readonly subtitle: string;
   @Field()
-  readonly author: string;
+  readonly authorID: string;
   @Field()
   readonly date: string;
   @Field()

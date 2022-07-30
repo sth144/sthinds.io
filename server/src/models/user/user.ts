@@ -1,6 +1,6 @@
 import { Column, Entity, ObjectIdColumn } from "typeorm";
 import { Field, InputType, ObjectType }  from "@nestjs/graphql";
-import { IUser } from "sthinds.io-lib";
+import { IUser, OAuthProvider } from "sthinds.io-lib";
 
 @Entity({ name: "user" })
 export class User implements IUser {
@@ -9,6 +9,8 @@ export class User implements IUser {
   @Column() public firstName: string;
   @Column() public lastName: string;
   @Column() public accessToken: string;
+  @Column() public thirdPartyID: string;
+  @Column() public thirdPartyIDProvider: OAuthProvider;
 }
 
 @ObjectType()
@@ -22,7 +24,11 @@ export class UserDTO implements IUser {
   @Field()
   readonly lastName: string;
   @Field()
-  readonly accessToken: string; 
+  readonly accessToken: string;
+  @Field()
+  readonly thirdPartyID: string;
+  @Field()
+  readonly thirdPartyIDProvider: OAuthProvider;
 }
 
 @InputType()
@@ -34,5 +40,9 @@ export class UserInput implements IUser {
   @Field()
   readonly lastName: string;
   @Field()
-  readonly accessToken: string; 
+  readonly accessToken: string;
+  @Field()
+  readonly thirdPartyID: string;
+  @Field()
+  readonly thirdPartyIDProvider: OAuthProvider;
 }

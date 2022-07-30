@@ -2,14 +2,14 @@ import { gql } from "@apollo/client";
 
 export const CREATE_ARTICLE = gql`
 	mutation createArticle(
-		$author: String!,
+		$authorID: String!,
 		$title: String!,
 		$subtitle: String!,
 		$date: String!,
 		$text: String!
 	) {
 		createArticle(
-			author: $author, 
+			authorID: $authorID, 
 			title: $title,
 			subtitle: $subtitle, 
 			date: $date,

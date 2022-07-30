@@ -16,7 +16,7 @@ export default class BodyComponent extends Component {
     // TODO: add permanent top margin
 		return (
 			<Container fluid className="App-body content-container">
-				<Row className="whole-height whole-width align-center">
+				<Row className="whole-height-desktop whole-width align-center">
 				  <Col md={12}>
             {/* TODO: make this column independently scrollable */}
             <Routes>

@@ -21,8 +21,17 @@ a:hover {
   width: 66.666%;
 }
 
+@media (min-width: 1224px) { 
+  .whole-height-desktop {
+    height: 100%;
+  }
+}
+
 .whole-height {
   height: 100%;
+}
+.half-height {
+  height: 50%;
 }
 
 .flex-row {
@@ -51,6 +60,11 @@ a:hover {
   text-align: right;
 }
 
+@media (min-width: 1224px) {
+  .position-fixed-desktop {
+    position: fixed;
+  }
+}
 .position-fixed {
   position: fixed;
 }

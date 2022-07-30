@@ -8,6 +8,10 @@ import { IAuthenticationState } from "sthinds.io-lib";
 import { Dropdown } from "react-bootstrap";
 import "./login.component.scss"; 
 import { loggedOut } from "models/actions/logged-out.action";
+import { useQuery } from "@apollo/client";
+import { GET_USER_BY_EMAIL } from "models/queries/user.queries";
+import { loginUIDRetrieved } from "models/actions/login-uid-retrieved.action";
+import store from "models/store";
 
 /**
  * Map Redux state values to component props
@@ -83,21 +87,52 @@ function LoggedIn(props: Partial<IAuthenticationState>) {
 
 function HandleSuccessRedirect() {
   const { token, email, firstName, lastName } = useParams();
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   // Similar to componentDidMount and componentDidUpdate:
   useEffect(() => {
     dispatch(loginSucceeded({
+      _id: null,
       token,
       email,
       firstName,
       lastName,
       isLoggedIn: true
-    }))
+    }));
     
     // TODO: navigate to top of history stack instead of "/"
-    setTimeout(() => { navigate("/"); window.location.reload(); }, 1000);
+    const checkUIDPoll = setInterval(() => {
+      const UID = store.getState().authentication._id;
+      if (UID && typeof UID === "string" && UID.length > 0) {
+        clearInterval(checkUIDPoll);
+        if (navigationTimeout) {
+          clearTimeout(navigationTimeout);
+        }
+        navigate("/"); 
+        window.location.reload(); 
+      }
+    }, 200);
+    const navigationTimeout = setTimeout(() => {
+      /** give up */
+      clearInterval(checkUIDPoll);
+      navigate("/"); 
+      window.location.reload(); 
+    }, 5000);
   });
+
+  const { data, error, loading } = useQuery(GET_USER_BY_EMAIL, {
+    variables: {
+      email
+    },
+    pollInterval: 500
+  });
+  if (loading) return null;
+  if (error) return `Error! ${error}`;
+  const user = (data && "getUserByEmail" in data) ? data.getUserByEmail : {};
+
+  dispatch(loginUIDRetrieved(user._id));
 
   return (<div>...</div>)
 }

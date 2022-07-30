@@ -12,7 +12,6 @@
   - define state model
   - unit test
   - integrate login state
-- Bootstrap or material
 - remarkable library
 - material-ui design
 - speed up client build (Webpack?)
@@ -21,6 +20,7 @@
 - make margins collapsible
 - add permanent links
 - Inversify IoC controller for dependency injection
+- make mobile formatting better
 
 # TODO: server 
 - Redis

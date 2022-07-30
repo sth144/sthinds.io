@@ -13,6 +13,7 @@ export class GoogleOAuthService {
     try {
         // TODO: You can add some registration logic here, 
         // to register the user using their thirdPartyId (in this case their googleId)
+        //  - store token in database
         let user: IUser = await this.userService.findOneByThirdPartyId(profile.id, provider);
         
         if (!user)
@@ -27,10 +28,8 @@ export class GoogleOAuthService {
 
         const jwt: string = sign(payload, process.env.JWT_SECRET_KEY, { expiresIn: 3600 });
         return jwt;
-    }
-    catch (err)
-    {
-        throw new InternalServerErrorException('getGoogleOAuthLoginJWT', err.message);
+    } catch (err) {
+      throw new InternalServerErrorException('getGoogleOAuthLoginJWT', err.message);
     }
   }
 } 

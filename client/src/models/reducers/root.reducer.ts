@@ -5,6 +5,7 @@ import { ARTICLE_SELECTED } from "models/actions/article-selected.action";
 import { INITIALIZE } from "models/actions/initialize.action";
 import { LOGIN_INITIATED } from "models/actions/login-initiated.action";
 import { LOGIN_SUCCEEDED } from "models/actions/login-succeeded.action";
+import { LOGIN_UID_RETRIEVED } from "models/actions/login-uid-retrieved.action";
 import { LOGGED_OUT } from "models/actions/logged-out.action";
 
 // TODO: refactor this into composite reducers when it gets too unwieldly (use combineReducers())
@@ -41,6 +42,18 @@ export default function rootReducer(previousState: unknown,
       const newState = Object.assign({ } , previousState);
       return Object.assign(newState, {
         authentication: action.payload
+      });
+    }
+
+    case LOGIN_UID_RETRIEVED: {
+      const newState = Object.assign({ }, previousState);
+      const newStateAuthentication = newState.authentication;
+      Object.assign(newStateAuthentication, {
+        _id: action.payload
+      });
+
+      return Object.assign(newState, {
+        authentication: newStateAuthentication
       });
     }
 

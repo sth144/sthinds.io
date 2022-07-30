@@ -26,7 +26,9 @@ export class UserService {
       firstName: profile.name.givenName,
       lastName: profile.name.familyName,
       // TODO: store access token?
-      accessToken: null
+      accessToken: null,
+      thirdPartyID: profile.id,
+      thirdPartyIDProvider: OAuthProvider.Google
     };
 
     const userCreated: User = await this.userRepository.save(dto);
@@ -53,6 +55,16 @@ export class UserService {
       where: {
         thirdPartyId: id,
         thirdPartyIdProvider: provider
+      }
+    });
+
+    return userFound;
+  }
+
+  public async findOneByEmail(email: string): Promise<User> {
+    const userFound = await this.userRepository.findOne({
+      where: {
+        email
       }
     });
 

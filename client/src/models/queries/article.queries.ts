@@ -4,7 +4,7 @@ export const LOAD_ARTICLES = gql`
 	query {
 		articles {
       _id
-			author
+			authorID
 			title
       subtitle
 		}
@@ -15,7 +15,7 @@ export const LOAD_ARTICLE = gql`
   query($articleID: String!) {
     article(_id: $articleID) {
       _id
-      author
+      authorID
       title
       subtitle
       text

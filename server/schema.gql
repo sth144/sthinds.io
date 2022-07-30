@@ -6,7 +6,7 @@ type ArticleDTO {
   _id: String
   title: String!
   subtitle: String!
-  author: String!
+  authorID: String!
   date: String!
   text: String!
 }
@@ -17,6 +17,8 @@ type UserDTO {
   firstName: String!
   lastName: String!
   accessToken: String!
+  thirdPartyID: String!
+  thirdPartyIDProvider: String!
 }
 
 type Query {
@@ -25,9 +27,10 @@ type Query {
   article(_id: String!): ArticleDTO!
   users: [UserDTO!]!
   user(_id: String!): UserDTO!
+  getUserByEmail(email: String!): UserDTO!
 }
 
 type Mutation {
-  createArticle(author: String!, title: String!, subtitle: String!, date: String!, text: String!): ArticleDTO!
-  createUser(email: String!, firstName: String!, lastName: String!, accessToken: String!): UserDTO!
+  createArticle(authorID: String!, title: String!, subtitle: String!, date: String!, text: String!): ArticleDTO!
+  createUser(email: String!, firstName: String!, lastName: String!, accessToken: String!, thirdPartyID: String!, thirdPartyIDProvider: String!): UserDTO!
 }

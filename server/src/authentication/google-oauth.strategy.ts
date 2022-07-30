@@ -31,19 +31,18 @@ export class GoogleOAuthStrategy extends PassportStrategy(Strategy, "google") {
 
     try {
 
-        const jwt: string = await this.oauthService.getGoogleOAuthLoginJWT(profile);
-        const user = 
-        {
-          jwt,
-          email: profile.emails[0].value,
-          firstName: profile.name.givenName,
-          lastName: profile.name.familyName
-        }
+      const jwt: string = await this.oauthService.getGoogleOAuthLoginJWT(profile);
+      const user = {
+        jwt,
+        email: profile.emails[0].value,
+        firstName: profile.name.givenName,
+        lastName: profile.name.familyName
+      }
 
-        done(null, user);
+      done(null, user);
     } catch(err) {
-        // console.log(err)
-        done(err, false);
+      // console.log(err)
+      done(err, false);
     }
   }
 }

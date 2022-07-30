@@ -8,13 +8,10 @@ import MarginLeftComponent from "views/main/margin-left/margin-left.component";
 import MarginRightComponent from "views/main/margin-right/margin-right.component";
 import { connect } from 'react-redux';
 import { initialize } from "./models/actions/initialize.action";
+import MediaQuery from "react-responsive";
 
 interface IAppComponentProps {
   dispatch: (action: unknown) => void
-}
-
-interface IAppComponentState {
-  
 }
 
 /**
@@ -39,8 +36,6 @@ export default class App extends Component<IAppComponentProps, IAppComponentStat
   componentDidMount(){
     document.title = "sthinds.io";
   }
-
-  public state: IAppComponentState = { };
 
   constructor(public props: IAppComponentProps) {
     super(props);
@@ -68,22 +63,60 @@ export default class App extends Component<IAppComponentProps, IAppComponentStat
 
   render() {
     return (
-			<Container fluid className="App">
-      	<Row className="whole-height">
-        {/* TODO: make margins collapsible */}
-				<Col md={2}>
-					<MarginLeftComponent></MarginLeftComponent>
-				</Col>
-        <Col md={7}>
-          <HeaderComponent></HeaderComponent> 
-          <BodyComponent></BodyComponent>
-          <FooterComponent></FooterComponent>
-        </Col>
-				<Col md={3}>
-          <MarginRightComponent></MarginRightComponent>
-				</Col>
-				</Row>
-			</Container>
+      <div>
+        <MediaQuery minDeviceWidth={1224}>
+          <DesktopClient/>
+        </MediaQuery>
+        <MediaQuery maxDeviceWidth={1224}>
+          <MobileClient/>
+        </MediaQuery>
+      </div>
     );
   }
+}
+
+function MobileClient(): JSX.Element {
+  return (
+    <Container fluid className="App">
+    <Row>
+    {/* TODO: make margins collapsible */}
+    <Col>
+      <MarginLeftComponent></MarginLeftComponent>
+    </Col>
+    </Row>
+    <Row>
+    <Col>
+      <HeaderComponent></HeaderComponent> 
+      <BodyComponent></BodyComponent>
+      <FooterComponent></FooterComponent>
+    </Col>
+    </Row>
+    <Row>
+    <Col>
+      <MarginRightComponent></MarginRightComponent>
+    </Col>
+    </Row>
+    </Container>
+  );
+}
+
+function DesktopClient(): JSX.Element {
+  return (      
+    <Container fluid className="App">
+    <Row className="whole-height-desktop">
+    {/* TODO: make margins collapsible */}
+    <Col md={2} className="whole-height-desktop">
+      <MarginLeftComponent></MarginLeftComponent>
+    </Col>
+    <Col md={7}>
+      <HeaderComponent></HeaderComponent> 
+      <BodyComponent></BodyComponent>
+      <FooterComponent></FooterComponent>
+    </Col>
+    <Col md={3}>
+      <MarginRightComponent></MarginRightComponent>
+    </Col>
+    </Row>
+    </Container>
+  );
 }

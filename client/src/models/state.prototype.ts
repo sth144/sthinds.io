@@ -20,7 +20,7 @@ export const statePrototype: StatePrototype = {
   article: {
     title: "",
     subtitle: "",
-    author: "",
+    authorID: "",
     date: "",
     text: ""
   },
@@ -28,9 +28,13 @@ export const statePrototype: StatePrototype = {
    * login / authentication
    */
   authentication: {
+    _id: null,
     loginInitiated: false,
     isLoggedIn: false,
     email: null,
+    userID: null,
+    firstName: null,
+    lastName: null,
     token: null
   }
 };

@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { CREATE_ARTICLE } from "models/mutations/mutations";
 import { useMutation } from "@apollo/client";
 import { Button, Form } from "react-bootstrap";
+import store from "models/store";
 
 function CreateArticleForm() {
-	const [author, setAuthor] = useState("");
 	const [title, setTitle] = useState("");
 	const [subtitle, setSubtitle] = useState("");
 	const [date, setDate] = useState("");
@@ -14,10 +14,11 @@ function CreateArticleForm() {
 	const [createArticle, { error }] = useMutation(CREATE_ARTICLE);
 
 	const addArticle = () => {
+    const authorID = store.getState().authentication._id;
+    
 		createArticle({
 			variables: {
-				// TODO: get from Redux state
-				author: "Sean Hinds",
+				authorID: authorID,
 				title: title,
 				subtitle: subtitle,
 				date: new Date().toDateString(),

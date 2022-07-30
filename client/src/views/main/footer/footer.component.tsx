@@ -15,6 +15,19 @@ class FooterComponent extends Component {
         <br></br>
           Kubernetes cluster I created from three Raspberry Pis. 					
         </p>
+        <p>
+          sthinds144@gmail.com
+        </p>
+        <p>
+          <a href="https://github.com/sth144">
+            GitHub
+          </a>
+        </p>
+        <p>
+          <a href="https://www.linkedin.com/in/sean-hinds-67259ab2/">
+            Linkedin
+          </a>
+        </p>
 			</footer>
 		);
 	}

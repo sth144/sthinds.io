@@ -27,7 +27,7 @@ export class ArticleResolver {
 
   @Mutation(() => ArticleDTO)
   public async createArticle(
-    @Args("author") author: string,
+    @Args("authorID") authorID: string,
     @Args("title") title: string,
     @Args("subtitle") subtitle: string,
     // TODO: enforce coherent date type
@@ -35,7 +35,7 @@ export class ArticleResolver {
     @Args("text") text: string,
   ): Promise<Article> {
     const input: ArticleInput = {
-      author,
+      authorID,
       title,
       subtitle,
       date,
