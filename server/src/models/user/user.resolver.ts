@@ -13,7 +13,7 @@ export class UserResolver {
   public async users(): Promise<User[]> {
     const result = await this.userService.findAll();
     
-    return await this.userService.findAll()
+    return result;
   }
 
   @Query(() => UserDTO)
@@ -46,5 +46,27 @@ export class UserResolver {
     };
     
     return this.userService.create(input);
+  }
+
+  // TODO: call mutations for updating and deleting user
+  @Mutation(() => UserDTO)
+  public async patchUser(
+    @Args("_id") _id: string,
+    @Args("patch") patch: UserInput
+  ): Promise<User> {
+    return await this.userService.patchUser(_id, patch);
+  }
+
+  @Mutation(() => Boolean)
+  public async deleteUser(
+    @Args("articleID") articleID: string
+  ): Promise<boolean> {
+    let result = true;
+    try {
+      await this.userService.deleteUser(articleID);
+    } catch (e) {
+      result = false;
+    }
+    return result;
   }
 }

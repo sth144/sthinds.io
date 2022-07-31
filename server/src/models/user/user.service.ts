@@ -1,6 +1,6 @@
 import { CACHE_MANAGER, Inject, Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-import { MongoRepository } from "typeorm";
+import { DeleteResult, MongoRepository } from "typeorm";
 import { User, UserDTO, UserInput } from "./user";
 import { OAuthProvider, IGoogleAuthProfile } from "sthinds.io-lib";
 
@@ -20,7 +20,6 @@ export class UserService {
 
   public async registerOAuthUser(profile: IGoogleAuthProfile, 
                                  provider: OAuthProvider): Promise<User> {
-
     const dto: UserInput = {
       email: profile.emails[0].value,
       firstName: profile.name.givenName,
@@ -69,5 +68,17 @@ export class UserService {
     });
 
     return userFound;
+  }
+
+  // TODO: implement patch user feature
+  public async patchUser(_id: string, update: Partial<User>): Promise<User> {
+    await this.userRepository.update(_id, update);
+
+    return await this.findOne(_id);
+  }
+
+  // TODO: implement delete user feature
+  public async deleteUser(_id: string): Promise<DeleteResult> {
+    return await this.userRepository.delete(_id);
   }
 }

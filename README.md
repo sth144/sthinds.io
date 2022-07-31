@@ -41,3 +41,5 @@
   - unit test
 - debuggers
 - add dynamic content
+- article comment and like feature
+- CRUD operations for user

@@ -43,4 +43,27 @@ export class ArticleResolver {
     }
     return this.articleService.create(input);
   }
+
+  // TODO: call mutations for updating and deleting article
+  @Mutation(() => ArticleDTO)
+  public async patchArticle(
+    @Args("_id") articleID: string,
+    @Args("patch") patch: ArticleInput
+  ): Promise<Article> {
+    console.log("PATCH ARTCILE" + articleID)
+    return await this.articleService.updateArticle(articleID, patch);
+  }
+
+  @Mutation(() => Boolean)
+  public async deleteArticle(
+    @Args("_id") articleID: string
+  ): Promise<boolean> {
+    let result = true;
+    try {
+      await this.articleService.deleteArticle(articleID);
+    } catch (e) {
+      result = false;
+    }
+    return result;
+  }
 }

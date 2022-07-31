@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./footer.component.scss"
 import logo from 'assets/logo.svg';
+import emailIcon from "assets/email-icon.svg";
 
 class FooterComponent extends Component {
 	render() {
@@ -16,18 +17,20 @@ class FooterComponent extends Component {
           Kubernetes cluster I created from three Raspberry Pis. 					
         </p>
         <p>
-          sthinds144@gmail.com
+          <img src={emailIcon} alt="email"/>  sthinds144@gmail.com
         </p>
-        <p>
-          <a href="https://github.com/sth144">
-            GitHub
-          </a>
-        </p>
-        <p>
-          <a href="https://www.linkedin.com/in/sean-hinds-67259ab2/">
-            Linkedin
-          </a>
-        </p>
+        <div className="flex-row third-width justify-around">
+          <div>
+            <a href="https://github.com/sth144">
+              GitHub
+            </a> 
+          </div>
+          <div> 
+            <a href="https://www.linkedin.com/in/sean-hinds-67259ab2/">
+              Linkedin
+            </a>
+          </div>
+        </div>
 			</footer>
 		);
 	}

@@ -18,4 +18,20 @@ export const CREATE_ARTICLE = gql`
 			_id
 		}
 	}
-`; 
+`;
+
+export const PATCH_ARTICLE = gql`
+  mutation patchArticle(
+		$_id: String!,
+    $patch: ArticleInput!
+  ) {
+    patchArticle(
+      _id: $_id,
+      patch: $patch
+    ) {
+      _id
+    }
+  }
+`;
+
+// TODO: delete article

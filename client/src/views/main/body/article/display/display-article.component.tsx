@@ -6,7 +6,7 @@ import ReactMarkdown from 'react-markdown';
 import "./display-article.component.scss";
 import { IAuthenticationState } from 'sthinds.io-lib';
 import { Link } from "react-router-dom";
-import { GET_AUTHOR_INFO } from "models/queries/author.queries";
+import ArticleAuthorDateBanner from "./article-author-date-banner.component";
 
 interface IDisplayArticleComponentProps {
   dispatch: (action) => void,
@@ -66,7 +66,7 @@ function GetFullArticle({ articleID }: IDisplayArticleComponentProps) {
 
   return (
     <div className='article-display-div'>
-      <DisplayArticleAuthorAndDate authorID={article.authorID} articleDate={article.date}/>
+      <ArticleAuthorDateBanner authorID={article.authorID} articleDate={article.date}/>
       <br></br>
       <h1><strong>{article.title}</strong></h1>
       <h2>{article.subtitle}</h2>
@@ -81,21 +81,7 @@ function GetFullArticle({ articleID }: IDisplayArticleComponentProps) {
           <Link className="delete-link" to="/article/delete">Delete Article</Link>
         </div>
       </div>
+      {/* TODO: add comment and like feature */}
     </div>
   );
-}
-
-function DisplayArticleAuthorAndDate({ authorID, articleDate }): JSX.Element | string | null {
-  const authorQueryResult = useQuery(GET_AUTHOR_INFO, {
-      variables: {
-        authorID: authorID
-      }
-    });
-  if (authorQueryResult.loading) return null;
-  if (authorQueryResult.error) return `Error! ${authorQueryResult.error}`;
-
-  const author = authorQueryResult.data.user;
-  return (
-    <h4>{author.firstName} {author.lastName}, {articleDate}</h4>
-  )
 }

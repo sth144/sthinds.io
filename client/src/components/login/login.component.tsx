@@ -71,6 +71,10 @@ function LoggedIn(props: Partial<IAuthenticationState>) {
     setTimeout(() => { navigate("/"); }, 1000);
   }
 
+  const goToProfileView = () => {
+    // TODO: navigate to view where user can edit name and delete user
+  }
+
   return (
     <div>
       <Dropdown>
@@ -78,6 +82,7 @@ function LoggedIn(props: Partial<IAuthenticationState>) {
           <img src={personIcon} height={30}></img>
         </Dropdown.Toggle>
         <Dropdown.Menu>
+          <Dropdown.Item onClick={goToProfileView}>Profile</Dropdown.Item>
           <Dropdown.Item onClick={logout}>Log Out</Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>

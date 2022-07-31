@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { CREATE_ARTICLE } from "models/mutations/mutations";
+import { CREATE_ARTICLE } from "models/mutations/article.mutations";
 import { useMutation } from "@apollo/client";
 import { Button, Form } from "react-bootstrap";
 import store from "models/store";
@@ -7,7 +7,6 @@ import store from "models/store";
 function CreateArticleForm() {
 	const [title, setTitle] = useState("");
 	const [subtitle, setSubtitle] = useState("");
-	const [date, setDate] = useState("");
 	const [text, setText] = useState("");
 
   // TODO: move mutations and queries to an external injectable service
