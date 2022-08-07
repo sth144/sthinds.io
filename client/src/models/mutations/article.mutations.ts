@@ -34,4 +34,14 @@ export const PATCH_ARTICLE = gql`
   }
 `;
 
-// TODO: delete article
+export const DELETE_ARTICLE = gql`
+  mutation deleteArticle(
+		$_id: String!
+  ) {
+    deleteArticle(
+      _id: $_id
+    ) {
+      _id
+    }
+  }
+`;

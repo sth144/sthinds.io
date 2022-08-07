@@ -44,8 +44,10 @@ export class UserService {
   public async findOne(_id: string): Promise<User> {
     const userFound = await this.userRepository.findOne(_id);
 
-    await this.cacheManager.set(_id, userFound);
-
+    if (userFound) {
+      await this.cacheManager.set(_id, userFound);
+    }
+    
     return userFound;
   }
 
@@ -77,7 +79,6 @@ export class UserService {
     return await this.findOne(_id);
   }
 
-  // TODO: implement delete user feature
   public async deleteUser(_id: string): Promise<DeleteResult> {
     return await this.userRepository.delete(_id);
   }

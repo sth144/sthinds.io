@@ -72,7 +72,7 @@ function LoggedIn(props: Partial<IAuthenticationState>) {
   }
 
   const goToProfileView = () => {
-    // TODO: navigate to view where user can edit name and delete user
+    navigate("/profile");
   }
 
   return (

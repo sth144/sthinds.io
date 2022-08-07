@@ -68,7 +68,7 @@ export default class EditArticleComponent extends Component<
         }
       }
     }).then(result => {
-      
+      window.location.reload(true);
     }).catch(err => {
       console.error(err);
     });

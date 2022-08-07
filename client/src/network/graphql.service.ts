@@ -16,7 +16,7 @@ const GraphQLService = new ApolloClient({
       if (errorResponse.graphQLErrors) {
         errorResponse.graphQLErrors
           .forEach((error) => {
-            alert(`GraphQL error ${error.message}`);
+            console.error(`GraphQL error ${error.message}`);
           });
       }
     }), 

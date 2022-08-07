@@ -18,7 +18,8 @@ export class UserResolver {
 
   @Query(() => UserDTO)
   public async user(@Args("_id") _id: string): Promise<User> {
-    return await this.userService.findOne(_id);
+    const result = await this.userService.findOne(_id);
+    return result;
   }
 
   @Query(() => UserDTO)
@@ -57,13 +58,13 @@ export class UserResolver {
     return await this.userService.patchUser(_id, patch);
   }
 
-  @Mutation(() => Boolean)
+  @Mutation(() => UserDTO /**Boolean*/)
   public async deleteUser(
-    @Args("articleID") articleID: string
+    @Args("_id") _id: string
   ): Promise<boolean> {
     let result = true;
     try {
-      await this.userService.deleteUser(articleID);
+      await this.userService.deleteUser(_id);
     } catch (e) {
       result = false;
     }

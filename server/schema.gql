@@ -33,10 +33,10 @@ type Query {
 type Mutation {
   createArticle(authorID: String!, title: String!, subtitle: String!, date: String!, text: String!): ArticleDTO!
   patchArticle(_id: String!, patch: ArticleInput!): ArticleDTO!
-  deleteArticle(_id: String!): Boolean!
+  deleteArticle(_id: String!): ArticleDTO!
   createUser(email: String!, firstName: String!, lastName: String!, accessToken: String!, thirdPartyID: String!, thirdPartyIDProvider: String!): UserDTO!
   patchUser(_id: String!, patch: UserInput!): UserDTO!
-  deleteUser(articleID: String!): Boolean!
+  deleteUser(_id: String!): UserDTO!
 }
 
 input ArticleInput {

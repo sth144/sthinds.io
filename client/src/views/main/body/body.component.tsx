@@ -3,6 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import { Container, Col, Row } from "react-bootstrap";
 import WelcomeComponent from "./welcome/welcome.component";
 import ArticlePanelComponent from "./article/article-panel.component";
+import DisplayProfileComponent from "./profile/display-profile.component";
 import { connect } from "react-redux";
 import "./body.component.scss";
 
@@ -22,6 +23,7 @@ export default class BodyComponent extends Component {
             <Routes>
               <Route path="/" element={<WelcomeComponent/>}></Route>
               <Route path="/article/*" element={<ArticlePanelComponent/>}></Route>
+              <Route path="/profile/*" element={<DisplayProfileComponent/>}></Route>
             </Routes>
           </Col>
 				</Row>

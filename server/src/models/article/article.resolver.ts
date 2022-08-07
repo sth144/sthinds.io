@@ -50,11 +50,10 @@ export class ArticleResolver {
     @Args("_id") articleID: string,
     @Args("patch") patch: ArticleInput
   ): Promise<Article> {
-    console.log("PATCH ARTCILE" + articleID)
     return await this.articleService.updateArticle(articleID, patch);
   }
 
-  @Mutation(() => Boolean)
+  @Mutation(() => ArticleDTO)
   public async deleteArticle(
     @Args("_id") articleID: string
   ): Promise<boolean> {
