@@ -35,11 +35,10 @@
 # TODO: general
 - fix tests!!!
 - GraphQL client and server
-  - query to fetch article contents
   - unit test connection
 - define data models and contracts
   - unit test
 - debuggers
 - add dynamic content
-- article comment and like feature
-- CRUD operations for user
+    - article comment and like feature
+    - authorization

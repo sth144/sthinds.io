@@ -5,6 +5,7 @@ import {
 } from "@apollo/client";
 import { onError, ErrorResponse } from "@apollo/client/link/error" 
 
+const serverProtocol = window.location.protocol;
 const serverHost = window.location.hostname;
 const serverPortStr = serverHost.includes("localhost") 
                     ? ":8000" : "";
@@ -16,11 +17,11 @@ const GraphQLService = new ApolloClient({
       if (errorResponse.graphQLErrors) {
         errorResponse.graphQLErrors
           .forEach((error) => {
-            console.error(`GraphQL error ${error.message}`);
+            alert(`GraphQL error ${error.message}`);
           });
       }
     }), 
-    new HttpLink({uri: `http://${serverHost}${serverPortStr}/graphql`})
+    new HttpLink({uri: `${serverProtocol}//${serverHost}${serverPortStr}/graphql`})
   ]) 
 });
 
