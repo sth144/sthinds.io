@@ -26,7 +26,9 @@ export class ArticleService {
   public async findOne(_id: string): Promise<Article> {
     const articleFound = await this.articleRepository.findOne(_id);
 
-    await this.cacheManager.set(_id, articleFound);
+    if (articleFound) {
+      await this.cacheManager.set(_id, JSON.stringify(articleFound));
+    }
 
     return articleFound;
   }

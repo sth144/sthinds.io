@@ -16,13 +16,13 @@ export class ArticleResolver {
   @Query(() => [ArticleDTO])
   public async articles(): Promise<Article[]> {
     const result = await this.articleService.findAll();
-    
     return await this.articleService.findAll()
   }
 
   @Query(() => ArticleDTO)
   public async article(@Args("_id") _id: string): Promise<Article> {
-    return await this.articleService.findOne(_id);
+    const result = await this.articleService.findOne(_id);
+    return result;
   }
 
   @Mutation(() => ArticleDTO)
@@ -41,6 +41,7 @@ export class ArticleResolver {
       date,
       text
     }
+
     return this.articleService.create(input);
   }
 

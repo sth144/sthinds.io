@@ -11,10 +11,14 @@ export class GoogleOAuthService {
   public async getGoogleOAuthLoginJWT(profile: IGoogleAuthProfile, 
                                       provider: OAuthProvider = OAuthProvider.Google) {
     try {
-        let user: IUser = await this.userService.findOneByThirdPartyId(profile.id, provider);
+        let user: IUser = await this.userService.findOneByThirdPartyId(profile.id, provider)
+        if (!user) {
+          user = await this.userService.findOneByEmail(profile.emails[0].value);
+        }                
         
-        if (!user)
+        if (!user) {
           user = await this.userService.registerOAuthUser(profile, provider);
+        }
         
         const thirdPartyId = profile.id;
 

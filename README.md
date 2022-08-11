@@ -28,6 +28,7 @@
 - MongoDB unit test connection
 - OAuth 
   - unit test
+  - make unique by third party ID
 
 # TODO: CI/CD
 - Docker build, deploy locally

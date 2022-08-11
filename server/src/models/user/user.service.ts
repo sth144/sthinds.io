@@ -46,7 +46,7 @@ export class UserService {
     const userFound = await this.userRepository.findOne(_id);
 
     if (userFound) {
-      await this.cacheManager.set(_id, userFound);
+      await this.cacheManager.set(_id, JSON.stringify(userFound));
     }
     
     return userFound;
