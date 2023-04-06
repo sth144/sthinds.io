@@ -37,8 +37,8 @@ function GetArticles(): JSX.Element {
             <Link to="/article/show" onClick={articleSelectedFactory(article)}>
               <div className="two-third-width text-right">
                 <div>
-                  <h2>{article.title}</h2>  
-                  <h5>{article.subtitle}</h5>  
+                  <h3>{article.title}</h3>  
+                  <h6>{article.subtitle}</h6>  
                 </div>
               </div>
               <div className="third-width"></div>

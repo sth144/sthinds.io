@@ -8,38 +8,26 @@
 - React frontend
 
 # TODO: client
-- Redux
-  - define state model
-  - unit test
-  - integrate login state
-- remarkable library
-- material-ui design
-- speed up client build (Webpack?)
+- Redux unit test
 - create landing body
-- article editor
 - make margins collapsible
-- add permanent links
-- Inversify IoC controller for dependency injection
 - make mobile formatting better
 
 # TODO: server 
-- Redis
-  - unit test connection
+- Redis connection unit test
 - MongoDB unit test connection
 - OAuth 
   - unit test
-  - make unique by third party ID
 
 # TODO: CI/CD
-- Docker build, deploy locally
+- deploy locally on k8s
 
 # TODO: general
 - fix tests!!!
-- GraphQL client and server
-  - unit test connection
+- GraphQL client and server connection unit test 
 - define data models and contracts
   - unit test
 - debuggers
 - add dynamic content
     - article comment and like feature
-    - authorization
+    - authorization for article CRUD

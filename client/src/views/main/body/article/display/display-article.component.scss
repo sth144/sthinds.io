@@ -1,8 +1,15 @@
 .article-display-div {
   text-align: left;
   word-wrap: break-word;
+  font-size: 0.8em;
+}
+
+.code-block {
+  background-color: var(--scheme-mid-gray);
+  color: var(--scheme-dark-charcoal);
 }
 
 .delete-link {
   color: var(--scheme-red)
 }
+
