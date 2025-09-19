@@ -18,6 +18,7 @@ jobs:
         run: |
           echo $GITLAB_API_TOKEN
           echo $BRANCH_NAME
+          echo $GITLAB_API_URL
           curl \
             -X POST \
             --form "token=$GITLAB_API_TOKEN" \
