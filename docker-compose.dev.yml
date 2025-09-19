@@ -4,14 +4,14 @@ services:
     image: mongo:latest
     container_name: mongodb
     volumes:
-      - /data/db:/data/db
+      - ./volumes/db:/data/db
     ports:
       - 0.0.0.0:27017:27017
     expose:
       - 27017
     environment:
       - MONGO_INITDB_ROOT_USERNAME=admin
-      - MONGO_INITDB_ROOT_PASSWORD=$MONGODB_PASSWORD
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGODB_PASSWORD}
       - MONGO_INITDB_DATABASE=test,prod,dev
     command: mongod
     privileged: true

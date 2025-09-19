@@ -79,7 +79,7 @@ function LoggedIn(props: Partial<IAuthenticationState>) {
     <div>
       <Dropdown>
         <Dropdown.Toggle className="profile-dropdown">
-          <img src={personIcon} height={30}></img>
+          <img src={personIcon} height={30} alt="profile"></img>
         </Dropdown.Toggle>
         <Dropdown.Menu>
           <Dropdown.Item onClick={goToProfileView}>Profile</Dropdown.Item>
