@@ -5,13 +5,13 @@ RUN apt install -y npm \
   nodejs
 RUN npm install -g typescript@latest react-scripts create-react-app --legacy-peer-deps
 
-FROM sthinds/sthinds.io:base AS build
+FROM base AS build
 COPY ./lib /usr/src/lib
 WORKDIR /usr/src/lib
 RUN npm install
 RUN tsc -p .
 
-FROM sthinds/sthinds.io:build AS build_client
+FROM build AS build_client
 # build client
 COPY ./client /usr/src/client
 WORKDIR /usr/src/client
@@ -19,7 +19,7 @@ RUN npm install
 RUN npm run build
 RUN cp -r build /srv/
 
-FROM sthinds/sthinds.io:build AS build_server
+FROM build AS build_server
 # build server
 COPY ./server /usr/src/app
 WORKDIR /usr/src/app
@@ -27,7 +27,7 @@ RUN echo "CLIENT_BUNDLE_DIR=/srv/build" >>.env
 RUN npm install
 RUN npm run build
 
-FROM sthinds/sthinds.io:build AS deploy
+FROM build AS deploy
 WORKDIR /usr/src/app
 COPY --from=build_client /srv /srv
 COPY --from=build_server /usr/src/app /usr/src/app
