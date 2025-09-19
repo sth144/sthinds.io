@@ -17,6 +17,7 @@ jobs:
           BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
         run: |
           echo $GITLAB_API_TOKEN
+          echo $BRANCH_NAME
           curl \
             -X POST \
             --form "token=$GITLAB_API_TOKEN" \
