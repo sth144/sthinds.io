@@ -13,8 +13,8 @@ export class Article implements IArticle {
   @Column(/**() => String*/) public date: string;
   @Column(/**() => String*/) public text: string;
 
-  constructor() { }
-};
+  constructor() {}
+}
 
 @ObjectType()
 export class ArticleDTO implements IArticle {
@@ -31,7 +31,7 @@ export class ArticleDTO implements IArticle {
   readonly date: string;
   @Field()
   readonly text: string;
-};
+}
 
 @InputType()
 export class ArticleInput implements IArticle {

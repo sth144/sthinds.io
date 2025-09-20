@@ -1,9 +1,9 @@
-import { PassportStrategy } from '@nestjs/passport';
-import { Strategy, VerifyCallback } from 'passport-google-oauth20';
-import { Injectable } from '@nestjs/common';
-import { config } from 'dotenv';
-import { GoogleOAuthService } from 'authentication/google-oauth.service';
-import { IGoogleAuthProfile } from 'sthinds.io-lib';
+import { PassportStrategy } from "@nestjs/passport";
+import { Strategy, VerifyCallback } from "passport-google-oauth20";
+import { Injectable } from "@nestjs/common";
+import { config } from "dotenv";
+import { GoogleOAuthService } from "authentication/google-oauth.service";
+import { IGoogleAuthProfile } from "sthinds.io-lib";
 
 config();
 
@@ -11,7 +11,7 @@ config();
  * used for authentication directly from Nest.JS (not React client)
  */
 @Injectable()
-export class GoogleOAuthStrategy extends PassportStrategy(Strategy, 'google') {
+export class GoogleOAuthStrategy extends PassportStrategy(Strategy, "google") {
   constructor(private readonly oauthService: GoogleOAuthService) {
     super({
       // TODO: add these to dev .env and build/test and prod environments
@@ -19,7 +19,7 @@ export class GoogleOAuthStrategy extends PassportStrategy(Strategy, 'google') {
       clientSecret: process.env.GOOGLE_OAUTH_CLIENT_SECRET,
       callbackURL: process.env.GOOGLE_OAUTH_CALLBACK_URL,
       passReqToCallback: true,
-      scope: ['email', 'profile'],
+      scope: ["email", "profile"],
     });
   }
 

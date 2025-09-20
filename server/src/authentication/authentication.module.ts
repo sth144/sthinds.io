@@ -1,18 +1,14 @@
-import { Module } from '@nestjs/common';
+import { Module } from "@nestjs/common";
 import { GoogleOAuthStrategy } from "./google-oauth.strategy";
-import { GoogleOAuthController } from "./google-oauth.controller"
-import { GoogleOAuthService } from "./google-oauth.service"
+import { GoogleOAuthController } from "./google-oauth.controller";
+import { GoogleOAuthService } from "./google-oauth.service";
 import { JwtStrategy } from "./jwt.strategy";
-import { UserModule } from 'models/user/user.module';
-import { UserService } from 'models/user/user.service';
+import { UserModule } from "models/user/user.module";
+import { UserService } from "models/user/user.service";
 
 @Module({
   imports: [UserModule],
   controllers: [GoogleOAuthController],
-  providers: [
-    GoogleOAuthService, 
-    GoogleOAuthStrategy, 
-    JwtStrategy
-  ]
+  providers: [GoogleOAuthService, GoogleOAuthStrategy, JwtStrategy],
 })
-export class AuthenticationModule { }
+export class AuthenticationModule {}

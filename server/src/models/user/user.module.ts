@@ -15,6 +15,6 @@ const userModuleImports = [
 @Module({
   imports: userModuleImports,
   providers: [UserResolver, UserService],
-  exports: [UserResolver, UserService, ...userModuleImports]
+  exports: [UserResolver, UserService, ...userModuleImports],
 })
-export class UserModule { }
+export class UserModule {}

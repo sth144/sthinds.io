@@ -9,17 +9,19 @@ export class UserService {
   constructor(
     @InjectRepository(User)
     private readonly userRepository: MongoRepository<User>,
-    @Inject(CACHE_MANAGER) 
-    private readonly cacheManager
-  ) { }
+    @Inject(CACHE_MANAGER)
+    private readonly cacheManager,
+  ) {}
 
   public async create(dto: object): Promise<User> {
     const userCreated: User = await this.userRepository.save(dto);
     return userCreated;
   }
 
-  public async registerOAuthUser(profile: IGoogleAuthProfile, 
-                                 provider: OAuthProvider): Promise<User> {
+  public async registerOAuthUser(
+    profile: IGoogleAuthProfile,
+    provider: OAuthProvider,
+  ): Promise<User> {
     const dto: UserInput = {
       email: profile.emails[0].value,
       firstName: profile.name.givenName,
@@ -27,12 +29,12 @@ export class UserService {
       // TODO: store access token?
       accessToken: null,
       thirdPartyID: profile.id,
-      thirdPartyIDProvider: OAuthProvider.Google
+      thirdPartyIDProvider: OAuthProvider.Google,
     };
 
     const userCreated: User = await this.userRepository.save(dto);
 
-    return  userCreated;
+    return userCreated;
   }
 
   public async findAll(): Promise<User[]> {
@@ -42,22 +44,24 @@ export class UserService {
   }
 
   public async findOne(_id: string): Promise<User> {
-
     const userFound = await this.userRepository.findOne(_id);
 
     if (userFound) {
       await this.cacheManager.set(_id, JSON.stringify(userFound));
     }
-    
+
     return userFound;
   }
 
-  public async findOneByThirdPartyId(id: string, provider: OAuthProvider): Promise<User> {
+  public async findOneByThirdPartyId(
+    id: string,
+    provider: OAuthProvider,
+  ): Promise<User> {
     const userFound = await this.userRepository.findOne({
       where: {
         thirdPartyId: id,
-        thirdPartyIdProvider: provider
-      }
+        thirdPartyIdProvider: provider,
+      },
     });
 
     return userFound;
@@ -66,8 +70,8 @@ export class UserService {
   public async findOneByEmail(email: string): Promise<User> {
     const userFound = await this.userRepository.findOne({
       where: {
-        email
-      }
+        email,
+      },
     });
 
     return userFound;

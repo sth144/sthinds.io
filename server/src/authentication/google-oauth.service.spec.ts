@@ -22,17 +22,17 @@ describe("GoogleOAuthService", () => {
           useValue: {
             save: jest.fn(),
             find: jest.fn(),
-            findOne: jest.fn()
-          }
+            findOne: jest.fn(),
+          },
         },
-        { 
+        {
           provide: UserService,
           useValue: {
             findOneByThirdPartyId: jest.fn(),
-            registerOAuthUser: jest.fn()
-          }
-        }
-      ]
+            registerOAuthUser: jest.fn(),
+          },
+        },
+      ],
     }).compile();
 
     service = module.get<GoogleOAuthService>(GoogleOAuthService);
@@ -45,5 +45,5 @@ describe("GoogleOAuthService", () => {
 
   it("should have User repository injected", () => {
     expect(userRepo).toBeDefined();
-  })
+  });
 });

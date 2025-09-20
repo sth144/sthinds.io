@@ -8,9 +8,9 @@ export class ArticleService {
   constructor(
     @InjectRepository(Article)
     private readonly articleRepository: MongoRepository<Article>,
-    @Inject(CACHE_MANAGER) 
-    private readonly cacheManager
-  ) { }
+    @Inject(CACHE_MANAGER)
+    private readonly cacheManager,
+  ) {}
 
   public async create(dto: object): Promise<Article> {
     const articleCreated: Article = await this.articleRepository.save(dto);
@@ -33,7 +33,10 @@ export class ArticleService {
     return articleFound;
   }
 
-  public async updateArticle(_id: string, update: Partial<Article>): Promise<Article> {
+  public async updateArticle(
+    _id: string,
+    update: Partial<Article>,
+  ): Promise<Article> {
     await this.articleRepository.update(_id, update);
 
     return await this.findOne(_id);

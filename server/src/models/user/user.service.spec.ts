@@ -21,10 +21,10 @@ describe("UserService", () => {
           useValue: {
             save: jest.fn(),
             find: jest.fn(),
-            findOne: jest.fn()
-          }
-        }
-      ]
+            findOne: jest.fn(),
+          },
+        },
+      ],
     }).compile();
 
     service = module.get<UserService>(UserService);
@@ -37,5 +37,5 @@ describe("UserService", () => {
 
   it("should have User repository injected", () => {
     expect(userRepo).toBeDefined();
-  })
+  });
 });

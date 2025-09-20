@@ -1,27 +1,27 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { AuthenticationModule } from './authentication.module';
-import { GoogleOAuthService } from './google-oauth.service';
-import { IGoogleAuthProfile, OAuthProvider } from 'sthinds.io-lib';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { User } from 'models/user/user';
-import { CacheModule } from '@nestjs/common';
-import { UserModule } from 'models/user/user.module';
+import { Test, TestingModule } from "@nestjs/testing";
+import { AuthenticationModule } from "./authentication.module";
+import { GoogleOAuthService } from "./google-oauth.service";
+import { IGoogleAuthProfile, OAuthProvider } from "sthinds.io-lib";
+import { TypeOrmModule } from "@nestjs/typeorm";
+import { User } from "models/user/user";
+import { CacheModule } from "@nestjs/common";
+import { UserModule } from "models/user/user.module";
 
-const dotenv = require('dotenv');
+const dotenv = require("dotenv");
 
 const TypeOrmMongoDBTestingModule = () => [
   TypeOrmModule.forRootAsync({
     useFactory: () => ({
-      type: 'mongodb',
+      type: "mongodb",
       host: process.env.MONGODB_HOST,
       port: parseInt(process.env.MONGODB_PORT),
       username: process.env.MONGODB_USERNAME,
       password: process.env.MONGODB_PASSWORD,
-      authSource: 'admin',
-      database: 'test',
+      authSource: "admin",
+      database: "test",
       entities: [User],
       synchronize: true,
-      loggerLevel: 'error',
+      loggerLevel: "error",
       /** generate a random connection name */
       name: Math.random().toString().substring(2, 10),
     }),
@@ -31,7 +31,7 @@ const TypeOrmMongoDBTestingModule = () => [
 
 let testModule: TestingModule;
 
-describe('AuthenticationModule', () => {
+describe("AuthenticationModule", () => {
   beforeEach(async () => {
     testModule = await Test.createTestingModule({
       imports: [
@@ -42,8 +42,8 @@ describe('AuthenticationModule', () => {
     }).compile();
   });
 
-  describe('GoogleOAuthService', () => {
-    it('should return a valid JWT when passed a valid profile input', async () => {
+  describe("GoogleOAuthService", () => {
+    it("should return a valid JWT when passed a valid profile input", async () => {
       // TODO: get this test working
       // try {
       //   const oAuthService =
@@ -69,6 +69,6 @@ describe('AuthenticationModule', () => {
       //   console.error(err);
       // }
     });
-    it.todo('should throw an error when passed an invalid profile input');
+    it.todo("should throw an error when passed an invalid profile input");
   });
 });

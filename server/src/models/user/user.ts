@@ -1,10 +1,10 @@
 import { Column, Entity, ObjectIdColumn } from "typeorm";
-import { Field, InputType, ObjectType }  from "@nestjs/graphql";
+import { Field, InputType, ObjectType } from "@nestjs/graphql";
 import { IUser, OAuthProvider } from "sthinds.io-lib";
 
 @Entity({ name: "user" })
 export class User implements IUser {
-  @ObjectIdColumn({generated: true}) public readonly _id: string;
+  @ObjectIdColumn({ generated: true }) public readonly _id: string;
   @Column() public email: string;
   @Column() public firstName: string;
   @Column() public lastName: string;

@@ -1,9 +1,9 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
-import { PassportStrategy } from '@nestjs/passport';
-import { ExtractJwt, Strategy } from 'passport-jwt';
+import { Injectable, UnauthorizedException } from "@nestjs/common";
+import { PassportStrategy } from "@nestjs/passport";
+import { ExtractJwt, Strategy } from "passport-jwt";
 
 @Injectable()
-export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
+export class JwtStrategy extends PassportStrategy(Strategy, "jwt") {
   constructor() {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
@@ -13,13 +13,13 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
 
   public async validate(payload, done: Function) {
     try {
-      if (process.env.NODE_ENV === 'development') {
+      if (process.env.NODE_ENV === "development") {
         // Return a mock user in development mode
         const mockUser = {
-          _id: 'mockUserId',
-          email: 'test@example.com',
-          firstName: 'Test',
-          lastName: 'User',
+          _id: "mockUserId",
+          email: "test@example.com",
+          firstName: "Test",
+          lastName: "User",
           isLoggedIn: true,
         };
         return done(null, mockUser);
@@ -33,7 +33,7 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
 
       done(null, payload);
     } catch (err) {
-      throw new UnauthorizedException('unauthorized', err.message);
+      throw new UnauthorizedException("unauthorized", err.message);
     }
   }
 }

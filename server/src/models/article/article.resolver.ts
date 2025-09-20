@@ -1,5 +1,3 @@
-
-
 import { Args, Mutation, Query, Resolver } from "@nestjs/graphql";
 import { Article, ArticleDTO, ArticleInput } from "./article";
 import { ArticleService } from "./article.service";
@@ -10,13 +8,13 @@ export class ArticleResolver {
 
   @Query(() => String)
   async author() {
-  	return "Hello World";
+    return "Hello World";
   }
 
   @Query(() => [ArticleDTO])
   public async articles(): Promise<Article[]> {
     const result = await this.articleService.findAll();
-    return await this.articleService.findAll()
+    return await this.articleService.findAll();
   }
 
   @Query(() => ArticleDTO)
@@ -39,8 +37,8 @@ export class ArticleResolver {
       title,
       subtitle,
       date,
-      text
-    }
+      text,
+    };
 
     return this.articleService.create(input);
   }
@@ -49,15 +47,13 @@ export class ArticleResolver {
   @Mutation(() => ArticleDTO)
   public async patchArticle(
     @Args("_id") articleID: string,
-    @Args("patch") patch: ArticleInput
+    @Args("patch") patch: ArticleInput,
   ): Promise<Article> {
     return await this.articleService.updateArticle(articleID, patch);
   }
 
   @Mutation(() => ArticleDTO)
-  public async deleteArticle(
-    @Args("_id") articleID: string
-  ): Promise<boolean> {
+  public async deleteArticle(@Args("_id") articleID: string): Promise<boolean> {
     let result = true;
     try {
       await this.articleService.deleteArticle(articleID);

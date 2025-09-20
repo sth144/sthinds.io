@@ -1,5 +1,3 @@
-
-
 import { Args, Mutation, Query, Resolver } from "@nestjs/graphql";
 import { OAuthProvider } from "sthinds.io-lib";
 import { User, UserDTO, UserInput } from "./user";
@@ -12,7 +10,7 @@ export class UserResolver {
   @Query(() => [UserDTO])
   public async users(): Promise<User[]> {
     const result = await this.userService.findAll();
-    
+
     return result;
   }
 
@@ -43,9 +41,9 @@ export class UserResolver {
       lastName,
       accessToken,
       thirdPartyID,
-      thirdPartyIDProvider
+      thirdPartyIDProvider,
     };
-    
+
     return this.userService.create(input);
   }
 
@@ -53,15 +51,13 @@ export class UserResolver {
   @Mutation(() => UserDTO)
   public async patchUser(
     @Args("_id") _id: string,
-    @Args("patch") patch: UserInput
+    @Args("patch") patch: UserInput,
   ): Promise<User> {
     return await this.userService.patchUser(_id, patch);
   }
 
   @Mutation(() => UserDTO /**Boolean*/)
-  public async deleteUser(
-    @Args("_id") _id: string
-  ): Promise<boolean> {
+  public async deleteUser(@Args("_id") _id: string): Promise<boolean> {
     let result = true;
     try {
       await this.userService.deleteUser(_id);
