@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import linkedinIcon from "assets/linkedin-svgrepo-com.svg";
 import "./footer.component.scss";
 import logo from "assets/logo.svg";
+import raspberryPi from "assets/raspberry-pi-svgrepo-com.svg";
 import emailIcon from "assets/email-icon.svg";
 
 class FooterComponent extends Component {
@@ -19,7 +20,7 @@ class FooterComponent extends Component {
             on a<br></br>
             Kubernetes cluster I created from three Raspberry Pis.
           </p>
-          <img src={logo} className="App-logo" alt="logo" />
+          <img src={raspberryPi} className="App-icon" alt="raspberry pi" />
         </div>
         <p>
           <img src={emailIcon} alt="email" /> sthinds144@gmail.com
