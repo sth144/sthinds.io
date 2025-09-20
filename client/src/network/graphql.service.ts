@@ -11,8 +11,20 @@ const httpLink = new HttpLink({
 });
 
 const authLink = setContext((_: unknown, { headers }: any) => {
-  const token = JSON.parse(localStorage.getItem("appState") as string)
-    .authentication.token;
+  let appState: { authentication: { token: string } } | string =
+    localStorage.getItem("appState") as string;
+  let token = null;
+  if (appState) {
+    try {
+      appState = JSON.parse(appState) as unknown as {
+        authentication: { token: string };
+      };
+      token = appState?.authentication?.token;
+    } catch (error) {
+      console.error("Error parsing appState:", error);
+    }
+  }
+
   return {
     headers: {
       ...headers,
@@ -20,7 +32,7 @@ const authLink = setContext((_: unknown, { headers }: any) => {
     },
   };
 });
-console.log("Auth Link:", authLink);
+
 const GraphQLService = new ApolloClient({
   cache: new InMemoryCache(),
   link: from([

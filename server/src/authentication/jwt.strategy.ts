@@ -4,7 +4,10 @@ import { ExtractJwt, Strategy } from "passport-jwt";
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy, "jwt") {
-  constructor() {
+  constructor(
+    private readonly userResolver: UserResolver,
+    private readonly userService: UserService, // Inject UserService
+  ) {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       secretOrKey: process.env.JWT_SECRET_KEY,
@@ -14,15 +17,20 @@ export class JwtStrategy extends PassportStrategy(Strategy, "jwt") {
   public async validate(payload, done: Function) {
     try {
       if (process.env.NODE_ENV === "development") {
-        // Return a mock user in development mode
-        const mockUser = {
-          _id: "mockUserId",
-          email: "test@example.com",
-          firstName: "Test",
-          lastName: "User",
-          isLoggedIn: true,
-        };
-        return done(null, mockUser);
+        const user = await this.userService.findOneByEmail(payload.email);
+        if (!user) {
+          // Create a mock user if it doesn't exist
+          const newUser = await this.userResolver.createUser(
+            payload.email,
+            "FirstName", // Replace with actual first name
+            "LastName", // Replace with actual last name
+            "accessToken", // Replace with actual access token
+            "thirdPartyID", // Replace with actual third party ID
+            OAuthProvider.GOOGLE, // Replace with actual provider
+          );
+          return done(null, newUser);
+        }
+        return done(null, user);
       }
 
       // TODO: You could add a function to the authService to verify the claims of the token:

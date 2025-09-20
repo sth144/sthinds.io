@@ -14,7 +14,7 @@ export class ArticleResolver {
   @Query(() => [ArticleDTO])
   public async articles(): Promise<Article[]> {
     const result = await this.articleService.findAll();
-    return await this.articleService.findAll();
+    return result;
   }
 
   @Query(() => ArticleDTO)

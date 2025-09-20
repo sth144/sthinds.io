@@ -39,7 +39,7 @@ export default class LoginComponent extends Component<ILoginComponentProps> {
   // TODO: dispatch loginInitiated action, login failed action
   localLogin = () => {
     const mockUser = {
-      _id: "mockUserId",
+      _id: "6503e1a0b9f1c2d3e4f56789",
       token: "mockToken",
       email: "test@example.com",
       firstName: "Test",
