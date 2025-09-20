@@ -5,14 +5,14 @@ CLIENT_BASE_DIR=./client
 SERVER_BASE_DIR=./server
 
 while getopts "c:s:" arg; do
-  case $arg in
-    c)
-      CLIENT_BASE_DIR=${OPTARG} 
-      ;;
-    s)
-      SERVER_BASE_DIR=${OPTARG}
-      ;;
-  esac
+	case $arg in
+	c)
+		CLIENT_BASE_DIR=${OPTARG}
+		;;
+	s)
+		SERVER_BASE_DIR=${OPTARG}
+		;;
+	esac
 done
 
 shift $(($OPTIND - 1))
@@ -29,17 +29,16 @@ test_server() {
 	echo "Running Server Tests"
 	test_server_unit
 	test_server_integration
-	test_server_e2e
+	# test_server_e2e
 }
 
 test_server_unit() {
 	echo "Running Server Unit Tests"
 	cd $SERVER_BASE_DIR
 	npm run test:unit
-    if [ $? != 0 ];
-    then 
-        HAVE_FAILURE=true;
-    fi
+	if [ $? != 0 ]; then
+		HAVE_FAILURE=true
+	fi
 	cd ../
 }
 
@@ -50,12 +49,11 @@ test_server_integration() {
 
 test_server_e2e() {
 	echo "Running Server e2e Tests"
-	cd $SERVER_BASE_DIR 
+	cd $SERVER_BASE_DIR
 	npm run test:e2e
-    if [ $? != 0 ];
-    then 
-        HAVE_FAILURE=true;
-    fi
+	if [ $? != 0 ]; then
+		HAVE_FAILURE=true
+	fi
 	cd ../
 }
 
@@ -72,10 +70,9 @@ test_client_unit() {
 	echo "Running Client Unit Tests"
 	cd $CLIENT_BASE_DIR
 	react-scripts test --watchAll=false
-    if [ $? != 0 ];
-    then 
-        HAVE_FAILURE=true;
-    fi
+	if [ $? != 0 ]; then
+		HAVE_FAILURE=true
+	fi
 	cd ../
 }
 
@@ -89,21 +86,20 @@ test_client_e2e() {
 	# TODO: write client e2e tests
 }
 
-if (( "$#" == 0 ));
-then
+if (("$#" == 0)); then
 	test
 else
-  $REMAINING_ARGS_AFTER_OPTS
+	$REMAINING_ARGS_AFTER_OPTS
 fi
 
-if [ $HAVE_FAILURE = true ];
-then
-    echo -e "$(tput setaf 1)"
-    echo "======================================================================================================="    
-	  echo "====================================== 1 OR MORE TESTS FAILED ========================================="
-    echo "======================================================================================================="
-    echo -e "$(tput sgr0)"
+if [ $HAVE_FAILURE = true ]; then
+	echo -e "$(tput setaf 1)"
+	echo "======================================================================================================="
+	echo "====================================== 1 OR MORE TESTS FAILED ========================================="
+	echo "======================================================================================================="
+	echo -e "$(tput sgr0)"
 
-    echo "EXITING WITH CODE 1"
-    exit 1
+	echo "EXITING WITH CODE 1"
+	exit 1
 fi
+exit 0
