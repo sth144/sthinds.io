@@ -6,13 +6,17 @@ import BodyComponent from "views/main/body/body.component";
 import FooterComponent from "views/main/footer/footer.component";
 import MarginLeftComponent from "views/main/margin-left/margin-left.component";
 import MarginRightComponent from "views/main/margin-right/margin-right.component";
-import { connect } from "react-redux";
+import { typedConnect } from "models/store";
 import { initialize } from "./models/actions/initialize.action";
 import MediaQuery from "react-responsive";
+import { IAuthenticationState } from "sthinds.io-lib";
 
 interface IAppComponentProps {
-  dispatch?: (action: unknown) => void;
+  dispatch: (action: unknown) => void;
+  authentication?: IAuthenticationState;
 }
+
+interface IAppComponentState {}
 
 /**
  * Map Redux state values to component props
@@ -31,7 +35,7 @@ const mapDispatchToProps = (dispatch: unknown) => {
  * connect() allows components to connect to the global redux datastore
  *  - can map properties from store state to component props
  */
-@connect(mapStateToProps, mapDispatchToProps)
+@typedConnect(mapStateToProps, mapDispatchToProps)
 export default class App extends Component<
   IAppComponentProps,
   IAppComponentState
@@ -68,23 +72,34 @@ export default class App extends Component<
     return (
       <div>
         <MediaQuery minDeviceWidth={1224}>
-          <DesktopClient />
+          <DesktopClient dispatch={this.props.dispatch} />
         </MediaQuery>
         <MediaQuery maxDeviceWidth={1224}>
-          <MobileClient />
+          <MobileClient
+            authentication={this.props.authentication}
+            dispatch={this.props.dispatch}
+          />
         </MediaQuery>
       </div>
     );
   }
 }
 
-function MobileClient(): JSX.Element {
+interface IClientProps {
+  dispatch: (action: unknown) => void;
+  authentication?: any; // Adjust type as necessary
+}
+
+function MobileClient(props: IClientProps): JSX.Element {
   return (
     <Container fluid className="App">
       <Row>
         {/* TODO: make margins collapsible */}
         <Col>
-          <MarginLeftComponent></MarginLeftComponent>
+          <MarginLeftComponent
+            authentication={props.authentication}
+            dispatch={props.dispatch}
+          ></MarginLeftComponent>
         </Col>
       </Row>
       <Row>
@@ -103,13 +118,16 @@ function MobileClient(): JSX.Element {
   );
 }
 
-function DesktopClient(): JSX.Element {
+function DesktopClient(props: IClientProps): JSX.Element {
   return (
     <Container fluid className="App">
       <Row className="whole-height-desktop">
         {/* TODO: make margins collapsible */}
         <Col md={2} className="whole-height-desktop">
-          <MarginLeftComponent></MarginLeftComponent>
+          <MarginLeftComponent
+            authentication={props.authentication}
+            dispatch={props.dispatch}
+          />
         </Col>
         <Col md={7}>
           <HeaderComponent></HeaderComponent>

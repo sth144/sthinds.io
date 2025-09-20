@@ -4,10 +4,6 @@ import "./header.component.scss";
 import { Link } from "react-router-dom";
 
 class HeaderComponent extends Component {
-  constructor(props: object) {
-    super(props);
-  }
-
   render() {
     return (
       <header className="App-header flex-row align-center whole-width">

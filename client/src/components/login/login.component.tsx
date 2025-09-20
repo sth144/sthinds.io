@@ -3,7 +3,7 @@ import loginIcon from "assets/login-svgrepo-com.svg";
 import { loginSucceeded } from "models/actions/login-succeeded.action";
 import { StatePrototype } from "models/state.prototype";
 import React, { Component, useEffect } from "react";
-import { connect, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Route, Routes, useNavigate, useParams } from "react-router-dom";
 import { IAuthenticationState } from "sthinds.io-lib";
 import { Dropdown } from "react-bootstrap";
@@ -12,7 +12,7 @@ import { loggedOut } from "models/actions/logged-out.action";
 import { useQuery } from "@apollo/client";
 import { GET_USER_BY_EMAIL } from "models/queries/user.queries";
 import { loginUIDRetrieved } from "models/actions/login-uid-retrieved.action";
-import store from "models/store";
+import store, { typedConnect } from "models/store";
 
 /**
  * Map Redux state values to component props
@@ -34,7 +34,7 @@ interface ILoginComponentProps {
   dispatch: (action: unknown) => void;
 }
 
-@connect(mapStateToProps, mapDispatchToProps)
+@typedConnect(mapStateToProps, mapDispatchToProps)
 export default class LoginComponent extends Component<ILoginComponentProps> {
   // TODO: dispatch loginInitiated action, login failed action
   render() {
@@ -43,7 +43,7 @@ export default class LoginComponent extends Component<ILoginComponentProps> {
         <Routes>
           <Route
             path="/login/success/:email/:firstName/:lastName/:token"
-            element={<HandleSuccessRedirect />}
+            element={(<HandleSuccessRedirect />) as JSX.Element}
           ></Route>
         </Routes>
         {this.props.authenticationState.isLoggedIn ? (
@@ -99,7 +99,7 @@ function LoggedIn(props: Partial<IAuthenticationState>) {
   );
 }
 
-function HandleSuccessRedirect() {
+function HandleSuccessRedirect(): JSX.Element {
   const { token, email, firstName, lastName } = useParams();
 
   const dispatch = useDispatch();
@@ -120,7 +120,8 @@ function HandleSuccessRedirect() {
 
     // TODO: navigate to top of history stack instead of "/"
     const checkUIDPoll = setInterval(() => {
-      const UID = store.getState().authentication._id;
+      const UID = (store.getState() as { authentication: IAuthenticationState })
+        .authentication._id;
       if (UID && typeof UID === "string" && UID.length > 0) {
         clearInterval(checkUIDPoll);
         if (navigationTimeout) {
@@ -144,8 +145,8 @@ function HandleSuccessRedirect() {
     },
     pollInterval: 500,
   });
-  if (loading) return null;
-  if (error) return `Error! ${error}`;
+  if (loading) return null as unknown as JSX.Element;
+  if (error) return `Error! ${error}` as unknown as JSX.Element;
   const user = data && "getUserByEmail" in data ? data.getUserByEmail : {};
 
   dispatch(loginUIDRetrieved(user._id));

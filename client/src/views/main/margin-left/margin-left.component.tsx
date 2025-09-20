@@ -1,27 +1,26 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import pencilIcon from "assets/pencil-icon.svg";
-import { connect } from "react-redux";
+import { typedConnect } from "models/store";
 import { Col, Row } from "react-bootstrap";
 import LoginComponent from "components/login/login.component";
 import "./margin-left.component.scss";
+import { IAuthenticationState } from "sthinds.io-lib";
 
 interface IMarginLeftComponentProps {
-  dispatch: (action) => void;
-  authentication: {
-    isLoggedIn: boolean;
-  };
+  dispatch: (action: unknown) => void;
+  authentication: IAuthenticationState;
 }
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state: { authentication: IAuthenticationState }) => {
   return {
     authentication: {
-      isLoggedIn: state.authentication.isLoggedIn,
+      isLoggedIn: state?.authentication.isLoggedIn,
     },
   };
 };
 const mapPropsToDispatch = () => {};
 
-@connect(mapStateToProps, mapPropsToDispatch)
+@typedConnect(mapStateToProps, mapPropsToDispatch)
 export default class MarginLeftComponent extends Component<IMarginLeftComponentProps> {
   // TODO: make link redirect path a state property dependent on authentication prop?
 
@@ -48,7 +47,10 @@ export default class MarginLeftComponent extends Component<IMarginLeftComponentP
         >
           <img src={pencilIcon} height={30} alt="pencil"></img>
         </Link>
-        <LoginComponent></LoginComponent>
+        <LoginComponent
+          authenticationState={this.props.authentication}
+          dispatch={this.props.dispatch}
+        ></LoginComponent>
       </Col>
     );
   }

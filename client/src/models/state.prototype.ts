@@ -1,4 +1,4 @@
-import { IAuthenticationState } from "sthinds.io-lib";
+import { IAuthenticationState, OAuthProvider } from "sthinds.io-lib";
 import { IArticle } from "sthinds.io-lib";
 
 /**
@@ -9,8 +9,12 @@ import { IArticle } from "sthinds.io-lib";
  *  - properties will be mutated by user interaction
  */
 export type StatePrototype = {
-  article: IArticle,
-  authentication: IAuthenticationState,
+  article: IArticle;
+  authentication: IAuthenticationState & {
+    loginInitiated: boolean;
+    userID: string | null;
+    token: string | null;
+  };
 };
 
 /**
@@ -22,19 +26,22 @@ export const statePrototype: StatePrototype = {
     subtitle: "",
     authorID: "",
     date: "",
-    text: ""
+    text: "",
   },
   /**
    * login / authentication
    */
   authentication: {
-    _id: null,
+    _id: "",
     loginInitiated: false,
     isLoggedIn: false,
     email: null,
     userID: null,
     firstName: null,
     lastName: null,
-    token: null
-  }
+    token: null,
+    accessToken: null,
+    thirdPartyID: null,
+    thirdPartyIDProvider: null as unknown as OAuthProvider,
+  },
 };

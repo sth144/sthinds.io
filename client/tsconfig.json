@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "ES2016",
     "lib": [
       "dom",
       "dom.iterable",
@@ -23,8 +23,11 @@
     "noEmit": true,
     "jsx": "react",
     "experimentalDecorators": true,
+    "skipLibCheck": true,
     "emitDecoratorMetadata": true,
-    "types": ["reflect-metadata"]
+    "types": [
+      "reflect-metadata"
+    ]
   },
   "include": [
     "src"

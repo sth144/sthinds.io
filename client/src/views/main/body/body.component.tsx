@@ -4,30 +4,39 @@ import { Container, Col, Row } from "react-bootstrap";
 import WelcomeComponent from "./welcome/welcome.component";
 import ArticlePanelComponent from "./article/article-panel.component";
 import DisplayProfileComponent from "./profile/display-profile.component";
-import { connect } from "react-redux";
+import { typedConnect } from "models/store";
 import "./body.component.scss";
 
-@connect(
-  () => { return { }; }, 
-  () => { return { }; }
+@typedConnect(
+  () => {
+    return {};
+  },
+  () => {
+    return {};
+  }
 )
 export default class BodyComponent extends Component {
-
-	render() {
+  render() {
     // TODO: add permanent top margin
-		return (
-			<Container fluid className="App-body content-container">
-				<Row className="whole-height-desktop whole-width align-center">
-				  <Col md={12}>
+    return (
+      <Container fluid className="App-body content-container">
+        <Row className="whole-height-desktop whole-width align-center">
+          <Col md={12}>
             {/* TODO: make this column independently scrollable */}
             <Routes>
-              <Route path="/" element={<WelcomeComponent/>}></Route>
-              <Route path="/article/*" element={<ArticlePanelComponent/>}></Route>
-              <Route path="/profile/*" element={<DisplayProfileComponent/>}></Route>
+              <Route path="/" element={<WelcomeComponent />}></Route>
+              <Route
+                path="/article/*"
+                element={<ArticlePanelComponent />}
+              ></Route>
+              <Route
+                path="/profile/*"
+                element={<DisplayProfileComponent />}
+              ></Route>
             </Routes>
           </Col>
-				</Row>
-			</Container>
-		)
-	}
+        </Row>
+      </Container>
+    );
+  }
 }

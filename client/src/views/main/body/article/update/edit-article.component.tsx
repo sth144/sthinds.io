@@ -1,34 +1,31 @@
-import { LOAD_ARTICLE } from 'models/queries/article.queries';
-import React, { Component } from 'react';
-import { Button, Form } from 'react-bootstrap';
-import { connect } from 'react-redux';
-import { IArticle } from 'sthinds.io-lib';
+import { LOAD_ARTICLE } from "models/queries/article.queries";
+import React, { Component } from "react";
+import { Button, Form } from "react-bootstrap";
+import { IArticle } from "sthinds.io-lib";
 import GraphQLService from "network/graphql.service";
-import { PATCH_ARTICLE } from 'models/mutations/article.mutations';
+import { PATCH_ARTICLE } from "models/mutations/article.mutations";
+import { typedConnect } from "models/store";
 
 interface IEditArticleComponentProps {
-  dispatch: (action) => void,
-  articleID: string
-};
-interface IEditArticleComponentState extends IArticle { }
+  dispatch?: (action: unknown) => void;
+  articleID?: string;
+}
+interface IEditArticleComponentState extends IArticle {}
 
-const mapStateToProps = (state, ownProps) => { 
+const mapStateToProps = (state: { article: IArticle }) => {
   return {
-    articleID: state.article._id
-  }
+    articleID: state.article._id,
+  };
 };
 
-const mapPropsToDispatch = () => { };
+const mapPropsToDispatch = () => {};
 
-@connect(
-  mapStateToProps,
-  mapPropsToDispatch
-)
+@typedConnect(mapStateToProps, mapPropsToDispatch)
 export default class EditArticleComponent extends Component<
-  IEditArticleComponentProps, 
-  IEditArticleComponentState> {
-
-  private state: IEditArticleComponentState = {
+  IEditArticleComponentProps,
+  IEditArticleComponentState
+> {
+  state: IEditArticleComponentState = {
     _id: "",
     title: "",
     subtitle: "",
@@ -40,21 +37,21 @@ export default class EditArticleComponent extends Component<
   componentDidMount() {
     this.setState({
       _id: this.props.articleID,
-      date:  new Date().toDateString()
+      date: new Date().toDateString(),
     });
 
     GraphQLService.query({
       query: LOAD_ARTICLE,
-      variables: { 
-        articleID: this.props.articleID
-      }
-    }).then(result => { 
-      this.setState(result.data.article)  
+      variables: {
+        articleID: this.props.articleID,
+      },
+    }).then((result) => {
+      this.setState(result.data.article);
     });
   }
 
   public updateArticle = () => {
-    // TODO: enforce rule that only same author who created article can edit 
+    // TODO: enforce rule that only same author who created article can edit
     GraphQLService.mutate({
       mutation: PATCH_ARTICLE,
       variables: {
@@ -64,15 +61,17 @@ export default class EditArticleComponent extends Component<
           subtitle: this.state.subtitle,
           authorID: this.state.authorID,
           date: this.state.date,
-          text: this.state.text
-        }
-      }
-    }).then(result => {
-      window.location.reload(true);
-    }).catch(err => {
-      console.error(err);
-    });
-  }
+          text: this.state.text,
+        },
+      },
+    })
+      .then((result) => {
+        window.location.reload();
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
 
   render() {
     return (
@@ -80,50 +79,50 @@ export default class EditArticleComponent extends Component<
         <Form>
           <Form.Group className="mb-3">
             <Form.Label>Title</Form.Label>
-            <Form.Control 
+            <Form.Control
               onChange={(e) => {
                 this.setState({
-                  title: e.target.value
+                  title: e.target.value,
                 });
               }}
-              type="text" 
+              type="text"
               placeholder="Enter Title"
-              value={this.state.title} />
+              value={this.state.title}
+            />
           </Form.Group>
           <Form.Group className="mb-3">
             <Form.Label>Subtitle</Form.Label>
-            <Form.Control 
+            <Form.Control
               onChange={(e) => {
                 this.setState({
-                  subtitle: e.target.value
+                  subtitle: e.target.value,
                 });
               }}
-              type="text" 
+              type="text"
               placeholder="Enter Subtitle"
-              value={this.state.subtitle} />
+              value={this.state.subtitle}
+            />
           </Form.Group>
           <Form.Group className="mb-3">
             <Form.Label>Text</Form.Label>
-            <Form.Control 
+            <Form.Control
               onChange={(e) => {
                 this.setState({
-                  text: e.target.value
+                  text: e.target.value,
                 });
               }}
-              type="text" 
+              type="text"
               as="textarea"
               rows={3}
               placeholder="Enter Text"
-              value={this.state.text} />
+              value={this.state.text}
+            />
           </Form.Group>
-          <Button
-            variant="primary" 
-            type="submit"
-            onClick={this.updateArticle}>
+          <Button variant="primary" type="submit" onClick={this.updateArticle}>
             Submit
           </Button>
         </Form>
       </div>
-    )
+    );
   }
 }
