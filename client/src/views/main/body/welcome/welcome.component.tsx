@@ -1,7 +1,7 @@
-import { typedConnect } from "models/store";
+import { TypedConnect } from "models/store";
 import React, { Component } from "react";
 
-@typedConnect(() => {}, () => {})
+@TypedConnect(() => {}, () => {})
 export default class WelcomeComponent extends Component {
   render() {
     return (

@@ -6,7 +6,7 @@ import "./display-article.component.scss";
 import { IAuthenticationState } from "sthinds.io-lib";
 import { Link } from "react-router-dom";
 import ArticleAuthorDateBanner from "./article-author-date-banner.component";
-import { typedConnect } from "models/store";
+import { TypedConnect } from "models/store";
 
 interface IDisplayArticleComponentProps {
   dispatch?: (action: any) => void;
@@ -26,7 +26,7 @@ const mapStateToProps = (state: any) => {
 
 const mapPropsToDispatch = () => {};
 
-@typedConnect(mapStateToProps, mapPropsToDispatch)
+@TypedConnect(mapStateToProps, mapPropsToDispatch)
 export default class DisplayArticleComponent extends Component<
   IDisplayArticleComponentProps,
   IDisplayArticleComponentState

@@ -4,10 +4,10 @@ import { Container, Col, Row } from "react-bootstrap";
 import WelcomeComponent from "./welcome/welcome.component";
 import ArticlePanelComponent from "./article/article-panel.component";
 import DisplayProfileComponent from "./profile/display-profile.component";
-import { typedConnect } from "models/store";
+import { TypedConnect } from "models/store";
 import "./body.component.scss";
 
-@typedConnect(
+@TypedConnect(
   () => {
     return {};
   },

@@ -17,7 +17,7 @@ store.subscribe(() => {
  */
 store.subscribe(() => console.table(store.getState()));
 
-export function typedConnect<StateProps = {}, DispatchProps = {}>(
+export function TypedConnect<StateProps = {}, DispatchProps = {}>(
   mapStateToProps?: (state: any) => StateProps,
   mapDispatchToProps?: any
 ) {

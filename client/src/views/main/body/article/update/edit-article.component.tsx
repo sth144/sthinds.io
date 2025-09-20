@@ -4,7 +4,7 @@ import { Button, Form } from "react-bootstrap";
 import { IArticle } from "sthinds.io-lib";
 import GraphQLService from "network/graphql.service";
 import { PATCH_ARTICLE } from "models/mutations/article.mutations";
-import { typedConnect } from "models/store";
+import { TypedConnect } from "models/store";
 
 interface IEditArticleComponentProps {
   dispatch?: (action: unknown) => void;
@@ -20,7 +20,7 @@ const mapStateToProps = (state: { article: IArticle }) => {
 
 const mapPropsToDispatch = () => {};
 
-@typedConnect(mapStateToProps, mapPropsToDispatch)
+@TypedConnect(mapStateToProps, mapPropsToDispatch)
 export default class EditArticleComponent extends Component<
   IEditArticleComponentProps,
   IEditArticleComponentState

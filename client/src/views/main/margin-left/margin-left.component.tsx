@@ -1,16 +1,19 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import pencilIcon from "assets/pencil-icon.svg";
-import { typedConnect } from "models/store";
+import { TypedConnect } from "models/store";
 import { Col, Row } from "react-bootstrap";
 import LoginComponent from "components/login/login.component";
 import "./margin-left.component.scss";
 import { IAuthenticationState } from "sthinds.io-lib";
+import { ApolloClient } from "@apollo/client";
 
 interface IMarginLeftComponentProps {
   dispatch: (action: unknown) => void;
   authentication: IAuthenticationState;
+  client?: ApolloClient; // Add client property
 }
+
 const mapStateToProps = (state: { authentication: IAuthenticationState }) => {
   return {
     authentication: {
@@ -18,9 +21,10 @@ const mapStateToProps = (state: { authentication: IAuthenticationState }) => {
     },
   };
 };
+
 const mapPropsToDispatch = () => {};
 
-@typedConnect(mapStateToProps, mapPropsToDispatch)
+@TypedConnect(mapStateToProps, mapPropsToDispatch)
 export default class MarginLeftComponent extends Component<IMarginLeftComponentProps> {
   // TODO: make link redirect path a state property dependent on authentication prop?
 
@@ -50,6 +54,7 @@ export default class MarginLeftComponent extends Component<IMarginLeftComponentP
         <LoginComponent
           authenticationState={this.props.authentication}
           dispatch={this.props.dispatch}
+          client={this.props.client} // Pass the client prop
         ></LoginComponent>
       </Col>
     );

@@ -20,9 +20,15 @@ export class UserResolver {
     return result;
   }
 
-  @Query(() => UserDTO)
-  public async getUserByEmail(@Args("email") email: string): Promise<User> {
-    return await this.userService.findOneByEmail(email);
+  @Query(() => UserDTO, { nullable: true })
+  public async getUserByEmail(
+    @Args("email") email: string,
+  ): Promise<User | null> {
+    let result = await this.userService.findOneByEmail(email);
+    if (!result) {
+      result = null;
+    }
+    return result;
   }
 
   // NOTE: this isn't currently used. Should be removed if it will never be used

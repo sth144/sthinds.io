@@ -1,6 +1,9 @@
 import { Injectable, UnauthorizedException } from "@nestjs/common";
 import { PassportStrategy } from "@nestjs/passport";
 import { ExtractJwt, Strategy } from "passport-jwt";
+import { UserResolver } from "../models/user/user.resolver"; // Correct import path
+import { UserService } from "../models/user/user.service"; // Correct import path
+import { OAuthProvider } from "sthinds.io-lib"; // Import OAuthProvider
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy, "jwt") {
@@ -26,18 +29,12 @@ export class JwtStrategy extends PassportStrategy(Strategy, "jwt") {
             "LastName", // Replace with actual last name
             "accessToken", // Replace with actual access token
             "thirdPartyID", // Replace with actual third party ID
-            OAuthProvider.GOOGLE, // Replace with actual provider
+            OAuthProvider.Google, // Replace with actual provider
           );
           return done(null, newUser);
         }
         return done(null, user);
       }
-
-      // TODO: You could add a function to the authService to verify the claims of the token:
-      // i.e. does the user still have the roles that are claimed by the token
-      //const validClaims = await this.authService.verifyTokenClaims(payload);
-      //if (!validClaims)
-      //    return done(new UnauthorizedException('invalid token claims'), false);
 
       done(null, payload);
     } catch (err) {

@@ -17,7 +17,7 @@ export class User implements IUser {
 export class UserDTO implements IUser {
   @Field({ nullable: true })
   readonly _id: string;
-  @Field()
+  @Field({ nullable: true })
   readonly email: string;
   @Field()
   readonly firstName: string;

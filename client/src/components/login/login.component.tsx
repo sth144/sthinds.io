@@ -12,7 +12,9 @@ import { loggedOut } from "models/actions/logged-out.action";
 import { useQuery } from "@apollo/client";
 import { GET_USER_BY_EMAIL } from "models/queries/user.queries";
 import { loginUIDRetrieved } from "models/actions/login-uid-retrieved.action";
-import store, { typedConnect } from "models/store";
+import store, { TypedConnect } from "models/store";
+import { CREATE_USER } from "models/mutations/user.mutations"; // Import the CREATE_USER mutation
+import GraphQLService from "network/graphql.service";
 
 /**
  * Map Redux state values to component props
@@ -32,21 +34,39 @@ const mapDispatchToProps = (dispatch: unknown) => {
 interface ILoginComponentProps {
   authenticationState: IAuthenticationState;
   dispatch: (action: unknown) => void;
+  client: any; // Add client property for Apollo Client
 }
 
-@typedConnect(mapStateToProps, mapDispatchToProps)
+@TypedConnect(mapStateToProps, mapDispatchToProps)
 export default class LoginComponent extends Component<ILoginComponentProps> {
   // TODO: dispatch loginInitiated action, login failed action
-  localLogin = () => {
-    const mockUser = {
-      _id: "6503e1a0b9f1c2d3e4f56789",
-      token: "mockToken",
-      email: "test@example.com",
-      firstName: "Test",
-      lastName: "User",
-      isLoggedIn: true,
-    };
-    this.props.dispatch(loginSucceeded(mockUser));
+  localLogin = async () => {
+    const email = "sthinds144@gmail.com";
+    const { data } = await GraphQLService.query({
+      query: GET_USER_BY_EMAIL,
+      variables: { email },
+    });
+
+    if (data.getUserByEmail) {
+      // User exists, dispatch login
+      const user = data.getUserByEmail;
+      this.props.dispatch(loginSucceeded(user));
+    } else {
+      // User does not exist, create user
+      const newUser = {
+        _id: "6503e1a0b9f1c2d3e4f56789", // Replace with actual ID generation logic
+        email,
+        firstName: "Sean", // Replace with actual first name input
+        lastName: "Hinds", // Replace with actual last name input
+      };
+
+      await this.props.client.mutate({
+        mutation: CREATE_USER,
+        variables: { input: newUser },
+      });
+
+      this.props.dispatch(loginSucceeded(newUser));
+    }
   };
 
   render() {
@@ -79,8 +99,17 @@ interface NotLoggedInProps {
 function NotLoggedIn({ localLogin }: NotLoggedInProps) {
   const isDevMode = process.env.NODE_ENV === "development"; // Check if in development mode
 
+  // TODO: implement
+  function prodLogin(event: any) {
+    event.preventDefault();
+    window.location.pathname = "/api/google";
+  }
+
+  // In production, clicking the login icon redirects to the Google OAuth endpoint
+  // In development, it triggers a local login for testing purposes only
+
   return (
-    <a onClick={isDevMode ? localLogin : undefined}>
+    <a onClick={isDevMode ? localLogin : prodLogin}>
       <img src={loginIcon} height={30} alt="login"></img>
     </a>
   );

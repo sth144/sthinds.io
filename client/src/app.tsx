@@ -6,13 +6,15 @@ import BodyComponent from "views/main/body/body.component";
 import FooterComponent from "views/main/footer/footer.component";
 import MarginLeftComponent from "views/main/margin-left/margin-left.component";
 import MarginRightComponent from "views/main/margin-right/margin-right.component";
-import { typedConnect } from "models/store";
+import { TypedConnect } from "models/store";
 import { initialize } from "./models/actions/initialize.action";
 import MediaQuery from "react-responsive";
 import { IAuthenticationState } from "sthinds.io-lib";
+import { ApolloClient } from "@apollo/client";
 
 interface IAppComponentProps {
   dispatch: (action: unknown) => void;
+  client?: ApolloClient;
   authentication?: IAuthenticationState;
 }
 
@@ -35,7 +37,7 @@ const mapDispatchToProps = (dispatch: unknown) => {
  * connect() allows components to connect to the global redux datastore
  *  - can map properties from store state to component props
  */
-@typedConnect(mapStateToProps, mapDispatchToProps)
+@TypedConnect(mapStateToProps, mapDispatchToProps)
 export default class App extends Component<
   IAppComponentProps,
   IAppComponentState
@@ -85,7 +87,7 @@ export default class App extends Component<
   }
 }
 
-interface IClientProps {
+interface IClientProps extends IAppComponentProps {
   dispatch: (action: unknown) => void;
   authentication?: any; // Adjust type as necessary
 }
@@ -99,6 +101,7 @@ function MobileClient(props: IClientProps): JSX.Element {
           <MarginLeftComponent
             authentication={props.authentication}
             dispatch={props.dispatch}
+            client={props.client}
           ></MarginLeftComponent>
         </Col>
       </Row>
@@ -127,6 +130,7 @@ function DesktopClient(props: IClientProps): JSX.Element {
           <MarginLeftComponent
             authentication={props.authentication}
             dispatch={props.dispatch}
+            client={props.client}
           />
         </Col>
         <Col md={7}>

@@ -1,4 +1,4 @@
-import { typedConnect } from "models/store";
+import { TypedConnect } from "models/store";
 import React from "react";
 import GraphQLService from "network/graphql.service";
 import { GET_AUTHOR_INFO } from "models/queries/author.queries";
@@ -29,7 +29,7 @@ const mapPropsToDispatch = (dispatch: unknown) => {
   };
 };
 
-@typedConnect(mapStateToProps, mapPropsToDispatch)
+@TypedConnect(mapStateToProps, mapPropsToDispatch)
 export default class DisplayProfileComponent extends React.Component<
   IDisplayProfileComponentProps,
   IDisplayArticleComponentState

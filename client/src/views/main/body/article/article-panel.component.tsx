@@ -4,9 +4,9 @@ import DisplayArticleComponent from "./display/display-article.component";
 import { Route, Routes } from "react-router-dom";
 import EditArticleComponent from "./update/edit-article.component";
 import DeleteArticleComponent from "./delete/delete-article.component";
-import { typedConnect } from "models/store";
+import { TypedConnect } from "models/store";
 
-@typedConnect(() => {}, () => {})
+@TypedConnect(() => {}, () => {})
 export default class ArticlePanelComponent extends Component {
   render() {
     /** TODO: auth guards for CreateArticleForm, edit, and delete components */
