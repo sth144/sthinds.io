@@ -19,6 +19,7 @@ class FooterComponent extends Component {
             on a<br></br>
             Kubernetes cluster I created from three Raspberry Pis.
           </p>
+          <img src={logo} className="App-logo" alt="logo" />
         </div>
         <p>
           <img src={emailIcon} alt="email" /> sthinds144@gmail.com

@@ -11,7 +11,7 @@ import { initialize } from "./models/actions/initialize.action";
 import MediaQuery from "react-responsive";
 
 interface IAppComponentProps {
-  dispatch: (action: unknown) => void;
+  dispatch?: (action: unknown) => void;
 }
 
 /**
