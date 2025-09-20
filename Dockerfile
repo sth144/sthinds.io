@@ -2,6 +2,7 @@
 # Base image with Node.js and build tools
 # ---------------------------
 FROM node:20-bullseye-slim AS base
+ENV NODE_OPTIONS=--openssl-legacy-provider
 
 # Install global packages
 RUN npm install -g typescript@latest react-scripts create-react-app --legacy-peer-deps
@@ -10,6 +11,7 @@ RUN npm install -g typescript@latest react-scripts create-react-app --legacy-pee
 # Build library
 # ---------------------------
 FROM base AS build
+ENV NODE_OPTIONS=--openssl-legacy-provider
 
 COPY ./lib /usr/src/lib
 WORKDIR /usr/src/lib
