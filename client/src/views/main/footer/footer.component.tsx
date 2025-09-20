@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import linkedinIcon from "assets/linkedin-svgrepo-com.svg";
 import "./footer.component.scss";
 import logo from "assets/logo.svg";
 import emailIcon from "assets/email-icon.svg";
@@ -41,6 +42,10 @@ class FooterComponent extends Component {
             <a href="https://github.com/sth144">GitHub</a>
           </div>
           <div>
+            <img
+              style={{ height: "13px", width: "13px" }}
+              src={linkedinIcon}
+            ></img>
             <a href="https://www.linkedin.com/in/sean-hinds-67259ab2/">
               Linkedin
             </a>

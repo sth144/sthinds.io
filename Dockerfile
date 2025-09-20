@@ -23,6 +23,7 @@ RUN npx tsc -p .
 # Build client
 # ---------------------------
 FROM build AS build_client
+ENV NODE_OPTIONS=--openssl-legacy-provider
 
 COPY ./client /usr/src/client
 WORKDIR /usr/src/client
@@ -35,6 +36,7 @@ RUN cp -r build /srv/
 # Build server
 # ---------------------------
 FROM build AS build_server
+ENV NODE_OPTIONS=--openssl-legacy-provider
 
 COPY ./server /usr/src/app
 WORKDIR /usr/src/app
