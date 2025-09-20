@@ -1,0 +1,57 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type ArticleDTO {
+  _id: String
+  title: String!
+  subtitle: String!
+  authorID: String!
+  date: String!
+  text: String!
+}
+
+type UserDTO {
+  _id: String
+  email: String!
+  firstName: String!
+  lastName: String!
+  accessToken: String!
+  thirdPartyID: String!
+  thirdPartyIDProvider: String!
+}
+
+type Query {
+  author: String!
+  articles: [ArticleDTO!]!
+  article(_id: String!): ArticleDTO!
+  users: [UserDTO!]!
+  user(_id: String!): UserDTO!
+  getUserByEmail(email: String!): UserDTO!
+}
+
+type Mutation {
+  createArticle(authorID: String!, title: String!, subtitle: String!, date: String!, text: String!): ArticleDTO!
+  patchArticle(_id: String!, patch: ArticleInput!): ArticleDTO!
+  deleteArticle(_id: String!): ArticleDTO!
+  createUser(email: String!, firstName: String!, lastName: String!, accessToken: String!, thirdPartyID: String!, thirdPartyIDProvider: String!): UserDTO!
+  patchUser(_id: String!, patch: UserInput!): UserDTO!
+  deleteUser(_id: String!): UserDTO!
+}
+
+input ArticleInput {
+  title: String!
+  subtitle: String!
+  authorID: String!
+  date: String!
+  text: String!
+}
+
+input UserInput {
+  email: String!
+  firstName: String!
+  lastName: String!
+  accessToken: String!
+  thirdPartyID: String!
+  thirdPartyIDProvider: String!
+}

@@ -37,6 +37,18 @@ interface ILoginComponentProps {
 @typedConnect(mapStateToProps, mapDispatchToProps)
 export default class LoginComponent extends Component<ILoginComponentProps> {
   // TODO: dispatch loginInitiated action, login failed action
+  localLogin = () => {
+    const mockUser = {
+      _id: "mockUserId",
+      token: "mockToken",
+      email: "test@example.com",
+      firstName: "Test",
+      lastName: "User",
+      isLoggedIn: true,
+    };
+    this.props.dispatch(loginSucceeded(mockUser));
+  };
+
   render() {
     return (
       <div>
@@ -53,16 +65,22 @@ export default class LoginComponent extends Component<ILoginComponentProps> {
             lastName={this.props.authenticationState.lastName}
           />
         ) : (
-          <NotLoggedIn />
+          <NotLoggedIn localLogin={this.localLogin} />
         )}
       </div>
     );
   }
 }
 
-function NotLoggedIn() {
+interface NotLoggedInProps {
+  localLogin: () => void;
+}
+
+function NotLoggedIn({ localLogin }: NotLoggedInProps) {
+  const isDevMode = process.env.NODE_ENV === "development"; // Check if in development mode
+
   return (
-    <a href="/api/google">
+    <a onClick={isDevMode ? localLogin : undefined}>
       <img src={loginIcon} height={30} alt="login"></img>
     </a>
   );

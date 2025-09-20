@@ -12,6 +12,23 @@
 				"<node_internals>/**"
 			],
 			"program": "${file}"
+		},
+		{
+			"type": "pwa-node",
+			"request": "launch",
+			"name": "Launch Nest Server",
+			"skipFiles": [
+				"<node_internals>/**"
+			],
+			"envFile": "${workspaceFolder}/server/.env",
+			"program": "${workspaceFolder}/server/src/main.ts"
+		},
+		{
+			"type": "pwa-chrome",
+			"request": "launch",
+			"name": "Launch React Client",
+			"url": "http://localhost:3000",
+			"webRoot": "${workspaceFolder}/client/src"
 		}
 	]
 }
