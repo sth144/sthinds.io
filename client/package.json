@@ -25,7 +25,6 @@
     "react-responsive": "^9.0.0-beta.10",
     "react-router": "^6.3.0",
     "react-router-dom": "^6.3.0",
-    "react-scripts": "4.0.3",
     "react-syntax-highlighter": "^15.5.0",
     "reflect-metadata": "^0.1.13",
     "sthinds.io-lib": "file:../lib",
@@ -33,10 +32,14 @@
     "web-vitals": "^1.1.2"
   },
   "devDependencies": {
+    "@babel/preset-env": "^7.28.3",
+    "@babel/preset-react": "^7.27.1",
+    "@babel/preset-typescript": "^7.27.1",
     "@types/react-redux": "^7.1.22",
     "@types/react-syntax-highlighter": "^15.5.4",
     "gulp-sass": "^5.1.0",
     "npm-watch": "^0.11.0",
+    "react-scripts": "^5.0.1",
     "sass": "^1.91.0"
   },
   "scripts": {
