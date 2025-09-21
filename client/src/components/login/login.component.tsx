@@ -46,7 +46,6 @@ export default class LoginComponent extends Component<ILoginComponentProps> {
       query: GET_USER_BY_EMAIL,
       variables: { email },
     });
-
     if (data.getUserByEmail) {
       // User exists, dispatch login
       const user = data.getUserByEmail;

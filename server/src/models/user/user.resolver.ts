@@ -24,9 +24,9 @@ export class UserResolver {
   public async getUserByEmail(
     @Args("email") email: string,
   ): Promise<User | null> {
-    let result = await this.userService.findOneByEmail(email);
+    const result = await this.userService.findOneByEmail(email);
     if (!result) {
-      result = null;
+      throw new Error(`User with email ${email} not found`);
     }
     return result;
   }
