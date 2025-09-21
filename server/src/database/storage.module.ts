@@ -29,7 +29,7 @@ const connectionProps = process.env.hasOwnProperty("MONGODB_CONNECTION_STRING")
       ...connectionProps,
       authSource: "admin",
       database:
-        process.env.NODE_ENV === "dev"
+        process.env.NODE_ENV === "development"
           ? "dev"
           : process.env.NODE_ENV === "test"
           ? "test"

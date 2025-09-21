@@ -5,7 +5,7 @@
 	"version": "0.2.0",
 	"configurations": [
 		{
-			"type": "pwa-node",
+			"type": "node",
 			"request": "launch",
 			"name": "Launch Program",
 			"skipFiles": [
@@ -14,7 +14,7 @@
 			"program": "${file}"
 		},
 		{
-			"type": "pwa-node",
+			"type": "node",
 			"request": "launch",
 			"name": "Launch Nest Server",
 			"skipFiles": [
@@ -25,7 +25,7 @@
 			"preLaunchTask": "upsert-user"
 		},
 		{
-			"type": "pwa-chrome",
+			"type": "chrome",
 			"request": "launch",
 			"name": "Launch React Client",
 			"url": "http://localhost:3000",

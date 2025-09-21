@@ -1,11 +1,12 @@
 #!/bin/bash
 
+echo $MONGODB_USERNAME
 # Config
 DB_NAME="${DB_NAME:-dev}"
 COLLECTION="${COLLECTION:-user}"
 MONGO_HOST="${MONGODB_HOST:-localhost}"
 MONGO_PORT="${MONGODB_PORT:-27017}"
-MONGO_USER="${MONGODB_USERNAME:?Please set MONGO_USER}"
+MONGO_USER="${MONGODB_USERNAME:-admin}"
 MONGO_PASS="${MONGODB_PASSWORD:?Please set MONGO_PASS}"
 
 # Construct URI
@@ -24,3 +25,8 @@ db.${COLLECTION}.updateOne(
   },
   { upsert: true }
 )"
+
+# Debugging: Print environment variables
+echo "MONGODB_USERNAME: $MONGODB_USERNAME"
+echo "MONGODB_PASSWORD: $MONGODB_PASSWORD"
+echo "MONGODB_PORT: $MONGODB_PORT"

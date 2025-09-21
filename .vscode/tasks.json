@@ -4,7 +4,15 @@
     {
       "label": "upsert-user",
       "type": "shell",
-      "command": "${workspaceFolder}/util/create_admin_user_dev.sh",
+      "command": "source ${workspaceFolder}/server/.env && ${workspaceFolder}/util/create_admin_user_dev.sh",
+      "options": {
+        "env": {
+          "MONGODB_USERNAME": "${env:MONGODB_USERNAME}",
+          "MONGODB_PASSWORD": "${env:MONGODB_PASSWORD}",
+          "MONGODB_PORT": "${env:MONGODB_PORT}",
+        },
+        "cwd": "${workspaceFolder}/server",
+      },
       "problemMatcher": [],
       "group": {
         "kind": "build",
