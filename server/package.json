@@ -20,7 +20,8 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --detectOpenHandles --config ./test/jest-e2e.json",
-    "redisinsight": "export RIPORT=8002 && /usr/local/bin/redisinsight/redisinsight-linux64-1.11.1"
+    "redisinsight": "export RIPORT=8002 && /usr/local/bin/redisinsight/redisinsight-linux64-1.11.1",
+    "seed-user": "../util/create_admin_user_dev.sh"
   },
   "dependencies": {
     "@nestjs/apollo": "^10.0.2",

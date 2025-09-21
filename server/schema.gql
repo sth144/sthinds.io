@@ -27,7 +27,7 @@ type Query {
   article(_id: String!): ArticleDTO!
   users: [UserDTO!]!
   user(_id: String!): UserDTO!
-  getUserByEmail(email: String!): UserDTO!
+  getUserByEmail(email: String!): UserDTO
 }
 
 type Mutation {
