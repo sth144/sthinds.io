@@ -37,7 +37,7 @@ export class GoogleOAuthStrategy extends PassportStrategy(Strategy, "google") {
       let givenName = profile.name.givenName;
       let familyName = profile.name.familyName;
       if (!familyName) {
-        const splitName = profile.displayName.split(" ");
+        const splitName = profile?.displayName.split(" ");
         givenName = splitName[0];
         familyName = splitName.slice(1).join(" ");
       }
