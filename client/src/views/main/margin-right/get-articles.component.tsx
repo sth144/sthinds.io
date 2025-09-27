@@ -39,10 +39,10 @@ function GetArticles(): JSX.Element {
             to="/article/show"
             onClick={articleSelectedFactory(article)}
           >
-            <div className="two-third-width text-right">
+            <div className="container whole-width text-left">
               <div>
-                <h3>{article.title}</h3>
-                <h6>{article.subtitle}</h6>
+                <h5>{article.title}</h5>
+                <h6 style={{ fontStyle: "italic" }}>{article.subtitle}</h6>
               </div>
             </div>
             <div className="third-width"></div>

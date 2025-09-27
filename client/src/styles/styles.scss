@@ -8,8 +8,20 @@ a:hover {
   color: var(--scheme-dark-charcoal);
 }
 
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
 .whole-width {
   width: 100%;
+}
+.three-quarter-width {
+  width: 75%;
 }
 .half-width {
   width: 50%;
@@ -21,26 +33,20 @@ a:hover {
   width: 66.666%;
 }
 
-@media (min-width: 1224px) { 
-  .whole-height-desktop {
-    height: 100%;
-  }
-}
-
 .whole-height {
   height: 100%;
+}
+.three-quarter-height {
+  height: 75%;
+}
+.two-third-height {
+  height: 66.6666%;
 }
 .half-height {
   height: 50%;
 }
-
-.flex-row {
-  display: flex;
-  flex-direction: row;
-}
-.flex-column {
-  display: flex;
-  flex-direction: column;
+.quarter-height {
+  height: 25%;
 }
 
 .justify-center {
@@ -49,8 +55,23 @@ a:hover {
 .justify-around {
   justify-content: space-around;
 }
+.justify-between {
+  justify-content: space-between;
+}
+.justify-evenly {
+  justify-content: space-evenly;
+}
+.justify-end {
+  justify-content: flex-end;
+}
+.justify-start {
+  justify-content: flex-start;
+}
 .align-center {
-  align-content: center;
+  align-items: center;
+}
+.align-start {
+  align-items: flex-start;
 }
 
 .text-left {
@@ -58,6 +79,16 @@ a:hover {
 }
 .text-right {
   text-align: right;
+}
+.text-center {
+  text-align: center;
+  text-justify: center;
+}
+
+@media (min-width: 1224px) { 
+  .whole-height-desktop {
+    height: 100%;
+  }
 }
 
 @media (min-width: 1224px) {

@@ -9,8 +9,9 @@ class MarginRightComponent extends Component {
       <div style={{ backgroundColor: "black", overflowY: "auto" }}>
         <Col
           md={3}
-          className="flex-column justify-center align-center position-fixed-desktop margin-right-container"
+          className="flex-column whole-height justify-end align-center position-fixed-desktop margin-right-container"
         >
+          <h4 className="whole-width container text-start">Posts</h4>
           <GetArticles></GetArticles>
         </Col>
       </div>

@@ -1,26 +1,29 @@
 export interface IUser {
   _id?: string;
-  email: string | null,
-  firstName: string | null,
-  lastName: string | null,
+  email: string | null;
+  firstName: string | null;
+  lastName: string | null;
   accessToken: string | null;
   thirdPartyID: string | null;
-  thirdPartyIDProvider: OAuthProvider; 
-};
+  thirdPartyIDProvider: OAuthProvider;
+}
 
 export enum OAuthProvider {
-  Google = "Google"
-};
+  Google = "Google",
+}
 
 export interface IAuthenticationState extends IUser {
-  isLoggedIn: boolean,
-} 
+  isLoggedIn: boolean;
+}
 
 export interface IGoogleAuthProfile {
-  id: string,
-  emails: { value: string }[],
+  id: string;
+  displayName: string;
+  emails: {
+    value: string;
+  }[];
   name: {
-    givenName: string,
-    familyName: string
-  }
+    givenName: string;
+    familyName: string;
+  };
 }
