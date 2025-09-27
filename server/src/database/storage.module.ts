@@ -19,25 +19,29 @@ const connectionProps = process.env.hasOwnProperty("MONGODB_CONNECTION_STRING")
       password: process.env.MONGODB_PASSWORD,
     };
 
-/**
- * Module for injecting TypeORM MongoDB connection and Redis cache
- */
+const database =
+  process.env.NODE_ENV === "development"
+    ? "dev"
+    : process.env.NODE_ENV === "test"
+    ? "test"
+    : "prod";
+
+console.log("NODE_ENV:", process.env.NODE_ENV);
+console.log("Database:", database);
+console.log("Connection props:", connectionProps);
+
 @Module({
   imports: [
     TypeOrmModule.forRoot({
       type: "mongodb",
       ...connectionProps,
       authSource: "admin",
-      database:
-        process.env.NODE_ENV === "development"
-          ? "dev"
-          : process.env.NODE_ENV === "test"
-          ? "test"
-          : "prod",
+      database,
       entities: [Article, User],
       synchronize: true,
       loggerLevel: "info",
     }),
+
     RedisCacheModule,
     ArticleModule,
   ],

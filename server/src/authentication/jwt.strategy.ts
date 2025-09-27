@@ -19,22 +19,22 @@ export class JwtStrategy extends PassportStrategy(Strategy, "jwt") {
 
   public async validate(payload, done: Function) {
     try {
-      if (process.env.NODE_ENV === "development") {
-        const user = await this.userService.findOneByEmail(payload.email);
-        if (!user) {
-          // Create a mock user if it doesn't exist
-          const newUser = await this.userResolver.createUser(
-            payload.email,
-            "FirstName", // Replace with actual first name
-            "LastName", // Replace with actual last name
-            "accessToken", // Replace with actual access token
-            "thirdPartyID", // Replace with actual third party ID
-            OAuthProvider.Google, // Replace with actual provider
-          );
-          return done(null, newUser);
-        }
-        return done(null, user);
-      }
+      // if (process.env.NODE_ENV === "development") {
+      //   const user = await this.userService.findOneByEmail(payload.email);
+      //   if (!user) {
+      //     // Create a mock user if it doesn't exist
+      //     const newUser = await this.userResolver.createUser(
+      //       payload.email,
+      //       "FirstName", // Replace with actual first name
+      //       "LastName", // Replace with actual last name
+      //       "accessToken", // Replace with actual access token
+      //       "thirdPartyID", // Replace with actual third party ID
+      //       OAuthProvider.Google, // Replace with actual provider
+      //     );
+      //     return done(null, newUser);
+      //   }
+      //   return done(null, user);
+      // }
 
       done(null, payload);
     } catch (err) {

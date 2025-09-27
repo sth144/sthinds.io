@@ -21,8 +21,7 @@ const mapStateToProps = (state: { authentication: IAuthenticationState }) => {
     },
   };
 };
-
-const mapPropsToDispatch = () => {};
+const mapPropsToDispatch = {};
 
 @TypedConnect(mapStateToProps, mapPropsToDispatch)
 export default class MarginLeftComponent extends Component<IMarginLeftComponentProps> {
@@ -33,6 +32,7 @@ export default class MarginLeftComponent extends Component<IMarginLeftComponentP
   render() {
     // TODO: display project links here (at bottom)
     //        - include old Heroku apps!
+
     return (
       <Col
         md={2}

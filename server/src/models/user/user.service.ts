@@ -47,7 +47,10 @@ export class UserService {
     const userFound = await this.userRepository.findOne(_id);
 
     if (userFound) {
-      await this.cacheManager.set(_id, JSON.stringify(userFound));
+      // make sure to stringify the object and provide TTL
+      await this.cacheManager.set(_id, JSON.stringify(userFound), {
+        ttl: 3600,
+      });
     }
 
     return userFound;
@@ -68,11 +71,16 @@ export class UserService {
   }
 
   public async findOneByEmail(email: string): Promise<User | null> {
+    console.log(`Searching for user with email: ${email}`); // Log the email being searched
     const userFound = await this.userRepository.findOne({
       where: {
         email,
       },
     });
+
+    if (!userFound) {
+      console.log(`No user found with email: ${email}`); // Log if no user is found
+    }
 
     return userFound;
   }

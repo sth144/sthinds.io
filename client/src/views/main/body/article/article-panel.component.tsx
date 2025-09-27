@@ -6,7 +6,14 @@ import EditArticleComponent from "./update/edit-article.component";
 import DeleteArticleComponent from "./delete/delete-article.component";
 import { TypedConnect } from "models/store";
 
-@TypedConnect(() => {}, () => {})
+@TypedConnect(
+  () => {
+    return {};
+  },
+  () => {
+    return {};
+  }
+)
 export default class ArticlePanelComponent extends Component {
   render() {
     /** TODO: auth guards for CreateArticleForm, edit, and delete components */

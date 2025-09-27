@@ -14,7 +14,7 @@ export const serveStaticImport = ServeStaticModule.forRoot({
   rootPath:
     process.env.CLIENT_BUNDLE_DIR !== undefined
       ? process.env.CLIENT_BUNDLE_DIR
-      : join(process.cwd(), "../client/dist/tts-ui-client/"),
+      : join(process.cwd(), "../client/build"),
   exclude: ["/graphql"],
 });
 

@@ -19,11 +19,17 @@ export class GoogleOAuthController {
     //  - https://medium.com/@nielsmeima/auth-in-nest-js-and-angular-463525b6e071
 
     const jwt: string = req.user.jwt;
-    if (jwt)
-      res.redirect(
-        `/login/success/${req.user.email}/${req.user.firstName}/${req.user.lastName}/${jwt}`,
-      );
-    else res.redirect("/login/failure");
+    if (jwt) {
+      if (process.env.NODE_ENV === "development") {
+        res.redirect(
+          `http://localhost:3000/login/success/${req.user.email}/${req.user.firstName}/${req.user.lastName}/${jwt}`,
+        );
+      } else {
+        res.redirect(
+          `/login/success/${req.user.email}/${req.user.firstName}/${req.user.lastName}/${jwt}`,
+        );
+      }
+    } else res.redirect("/login/failure");
   }
 
   // TODO: use JWT to protect graphql API

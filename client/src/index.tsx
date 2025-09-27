@@ -11,6 +11,21 @@ import GraphQLService from "./network/graphql.service";
 import { ApolloProvider } from "@apollo/client";
 import store from "./models/store";
 
+const suppressedWarnings = [
+  "React Router will begin wrapping state updates in `React.startTransition` in v7",
+  "Relative route resolution within Splat routes is changing in v7",
+];
+
+const originalWarn = console.warn;
+console.warn = (...args: any[]) => {
+  if (
+    typeof args[0] === "string" &&
+    suppressedWarnings.some((w) => args[0].includes(w))
+  ) {
+    return; // ignore
+  }
+  originalWarn(...args);
+};
 ReactDOM.render(
   <React.StrictMode>
     <ReduxProvider store={store}>
