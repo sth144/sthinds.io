@@ -126,7 +126,7 @@ function DesktopClient(props: IClientProps): JSX.Element {
     <Container fluid className="App">
       <Row className="whole-height-desktop">
         {/* TODO: make margins collapsible */}
-        <Col md={2} className="whole-height-desktop">
+        <Col md={2}>
           <MarginLeftComponent
             authentication={props.authentication}
             dispatch={props.dispatch}

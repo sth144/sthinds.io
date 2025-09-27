@@ -36,21 +36,29 @@ export default class MarginLeftComponent extends Component<IMarginLeftComponentP
     return (
       <Col
         md={2}
-        style={{ left: 0 }}
-        className="flex-column justify-around align-center whole-height-desktop position-fixed-desktop margin-left-container"
+        style={{ left: 0, maxWidth: "220px" }}
+        className="flex-column justify-start align-center whole-height-desktop position-fixed-desktop margin-left-container"
       >
-        <Link
-          to={this.props.authentication.isLoggedIn ? "/article/create" : "/"}
-          onClick={
-            this.props.authentication.isLoggedIn
-              ? () => {}
-              : () => {
-                  window.location.pathname = "/api/google";
-                }
-          }
-        >
-          <img src={pencilIcon} height={30} alt="pencil"></img>
-        </Link>
+        <div className="quarter-height">
+          <Link to="/" className="home-link">
+            <h1 className="whole-width text-end">Sean Hinds</h1>
+            <h6 className="whole-width text-end">Blog & Portfolio</h6>
+          </Link>
+        </div>
+        <div className="quarter-height">
+          <Link
+            to={this.props.authentication.isLoggedIn ? "/article/create" : "/"}
+            onClick={
+              this.props.authentication.isLoggedIn
+                ? () => {}
+                : () => {
+                    window.location.pathname = "/api/google";
+                  }
+            }
+          >
+            <img src={pencilIcon} height={30} alt="pencil"></img>
+          </Link>
+        </div>
         <LoginComponent
           authenticationState={this.props.authentication}
           dispatch={this.props.dispatch}

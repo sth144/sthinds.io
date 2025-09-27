@@ -4,8 +4,10 @@ import { useMutation } from "@apollo/client";
 import { Button, Form } from "react-bootstrap";
 import { store } from "models/store";
 import { IAuthenticationState } from "sthinds.io-lib";
+import "./create-article.component.scss";
 
 function CreateArticleForm() {
+  const [date, setDate] = useState(new Date().toISOString().split("T")[0]); // Initialize date state
   const [title, setTitle] = useState("");
   const [subtitle, setSubtitle] = useState("");
   const [text, setText] = useState("");
@@ -27,7 +29,7 @@ function CreateArticleForm() {
         authorID: authorID,
         title: title,
         subtitle: subtitle,
-        date: new Date().toDateString(),
+        date: new Date(date).toDateString(), // Use the date state
         text: text,
       },
     });
@@ -73,9 +75,19 @@ function CreateArticleForm() {
             placeholder="Enter Text"
           />
         </Form.Group>
-        <Button variant="primary" type="submit" onClick={addArticle}>
-          Submit
-        </Button>
+        <div className="flex-row whole-width justify-end">
+          <Button variant="primary" type="submit" onClick={addArticle}>
+            Submit
+          </Button>
+        </div>
+        <Form.Group className="mb-3 half-width">
+          <Form.Label>Date</Form.Label> {/* New Date Input */}
+          <Form.Control
+            type="date"
+            value={date}
+            onChange={(e) => setDate(e.target.value)} // Update date state
+          />
+        </Form.Group>
       </Form>
     </div>
   );

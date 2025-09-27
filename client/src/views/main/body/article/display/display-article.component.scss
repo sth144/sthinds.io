@@ -2,6 +2,7 @@
   text-align: left;
   word-wrap: break-word;
   font-size: 0.8em;
+  height: 100%;
 }
 
 .code-block {
@@ -13,3 +14,42 @@
   color: var(--scheme-red)
 }
 
+.code-block,
+pre {
+  background: #1e1e1e; // dark background
+  padding: 1rem;
+  border-radius: 8px;
+  overflow-x: auto; // horizontal scroll
+  font-family: "Fira Code", monospace;
+  font-size: 0.9rem;
+}
+
+.article-title {
+  margin-bottom: 14px;
+}
+.article-subtitle {
+  width: 84%;
+  margin-bottom: 14px;
+}
+
+
+.code-block-wrapper {
+  position: relative;
+
+  .copy-btn {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    z-index: 10;
+    color: #fff; // adjust depending on your theme
+    transition: transform 0.2s;
+    
+    &:hover {
+      transform: scale(1.2);
+    }
+  }
+}

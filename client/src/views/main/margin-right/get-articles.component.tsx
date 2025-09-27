@@ -5,6 +5,7 @@ import { LOAD_ARTICLES } from "models/queries/article.queries";
 import { articleSelected } from "models/actions/article-selected.action";
 import { Link } from "react-router-dom";
 import "./get-articles.component.scss";
+import { formatArticleDate } from "sthinds.io-lib";
 
 // TODO: try react-redux useSelector and useDispatch to manage Redux store from functional component
 
@@ -39,12 +40,19 @@ function GetArticles(): JSX.Element {
             to="/article/show"
             onClick={articleSelectedFactory(article)}
           >
-            <div className="container whole-width text-left">
-              <div>
-                <h5>{article.title}</h5>
-                <h6 style={{ fontStyle: "italic" }}>{article.subtitle}</h6>
-              </div>
-            </div>
+            <ul className="container whole-width text-left article-list">
+              <li>
+                <h5 className="get-articles-article-title">{article.title}</h5>
+
+                <h6 className="get-articles-article-subtitle">
+                  {article.subtitle}
+                </h6>
+                <span className="date-span">
+                  {formatArticleDate(article.date)}
+                </span>
+              </li>
+              <hr></hr>
+            </ul>
             <div className="third-width"></div>
           </Link>
         ))}

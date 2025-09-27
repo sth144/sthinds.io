@@ -1,6 +1,8 @@
 import { useQuery } from "@apollo/client";
 import { GET_AUTHOR_INFO } from "models/queries/author.queries";
 import React from "react";
+import { formatArticleDate } from "sthinds.io-lib";
+import "./display-article.component.scss";
 
 export default function ArticleAuthorDateBanner({
   authorID,
@@ -19,9 +21,13 @@ export default function ArticleAuthorDateBanner({
     return `Error! ${authorQueryResult.error}` as unknown as JSX.Element;
 
   const author = authorQueryResult.data.user;
+
   return (
-    <h4>
-      {author.firstName} {author.lastName}, {articleDate}
-    </h4>
+    <>
+      {" "}
+      <span className="date-span-article-display">
+        {formatArticleDate(new Date(articleDate))}
+      </span>
+    </>
   );
 }

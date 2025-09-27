@@ -1,18 +1,19 @@
 import { gql } from "@apollo/client";
 
 export const LOAD_ARTICLES = gql`
-	query {
-		articles {
+  query {
+    articles {
       _id
-			authorID
-			title
+      authorID
+      title
       subtitle
-		}
-	}
+      date
+    }
+  }
 `;
 
 export const LOAD_ARTICLE = gql`
-  query($articleID: String!) {
+  query ($articleID: String!) {
     article(_id: $articleID) {
       _id
       authorID
@@ -22,4 +23,4 @@ export const LOAD_ARTICLE = gql`
       date
     }
   }
-`
+`;

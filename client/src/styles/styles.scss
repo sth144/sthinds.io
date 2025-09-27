@@ -1,5 +1,8 @@
 @import "./colors.scss";
 
+body {
+  color: var(--scheme-charcoal);
+}
 a {
   text-decoration: none;
   color: var(--scheme-charcoal);
