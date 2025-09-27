@@ -22,7 +22,6 @@ export class GoogleOAuthStrategy extends PassportStrategy(Strategy, "google") {
       scope: ["email", "profile"],
     });
   }
-
   async validate(
     request: Request,
     accessToken: string,
@@ -34,16 +33,30 @@ export class GoogleOAuthStrategy extends PassportStrategy(Strategy, "google") {
       const jwt: string = await this.oauthService.getGoogleOAuthLoginJWT(
         profile,
       );
+
+      let givenName = profile.name.givenName;
+      let familyName = profile.name.familyName;
+      if (!familyName) {
+        const splitName = profile.displayName.split(" ");
+        givenName = splitName[0];
+        familyName = splitName.slice(1).join(" ");
+      }
+
+      // Look up user in MongoDB by email
+      const userFromDb = await this.oauthService.UserServiceRef.findOneByEmail(
+        profile.emails[0].value,
+      );
+
       const user = {
+        _id: userFromDb?._id.toString(), // attach MongoDB _id
         jwt,
         email: profile.emails[0].value,
-        firstName: profile.name.givenName,
-        lastName: profile.name.familyName,
+        firstName: givenName,
+        lastName: familyName,
       };
 
       done(null, user);
     } catch (err) {
-      // console.log(err)
       done(err, false);
     }
   }

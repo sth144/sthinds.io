@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@reduxjs/toolkit": "^2.9.0",
     "browser-sync": "^3.0.4",
     "dotenv": "^17.2.1",
     "gulp": "^5.0.1",

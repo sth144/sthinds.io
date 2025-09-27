@@ -96,8 +96,7 @@ function LoggedIn(props: Partial<IAuthenticationState>) {
 }
 
 function HandleSuccessRedirect(): JSX.Element {
-  const { token, email, firstName, lastName } = useParams();
-
+  const { token, email, firstName, lastName, _id } = useParams();
   console.log("HandleSuccessRedirect params:", {
     token,
     email,
@@ -110,7 +109,7 @@ function HandleSuccessRedirect(): JSX.Element {
     // Dispatch once
     dispatch(
       loginSucceeded({
-        _id: null,
+        _id,
         token,
         email,
         firstName,
@@ -203,7 +202,7 @@ export default class LoginComponent extends Component<ILoginComponentProps> {
       <div>
         <Routes>
           <Route
-            path="/login/success/:email/:firstName/:lastName/:token"
+            path="/login/success/:email/:firstName/:lastName/:token/:_id"
             element={(<HandleSuccessRedirect />) as JSX.Element}
           ></Route>
           <Route

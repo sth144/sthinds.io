@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { CREATE_ARTICLE } from "models/mutations/article.mutations";
 import { useMutation } from "@apollo/client";
 import { Button, Form } from "react-bootstrap";
-import store from "models/store";
+import { store } from "models/store";
 import { IAuthenticationState } from "sthinds.io-lib";
 
 function CreateArticleForm() {
@@ -17,6 +17,10 @@ function CreateArticleForm() {
     const authorID = (
       store.getState() as { authentication: IAuthenticationState }
     )?.authentication._id;
+
+    console.log(
+      `Creating article: ${title}, ${subtitle}, ${text}, ${authorID}`
+    );
 
     createArticle({
       variables: {

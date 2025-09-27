@@ -6,8 +6,6 @@
       "dom.iterable",
       "esnext"
     ],
-    "rootDir": ".",
-    "baseUrl": "./src",
     "incremental": true,
     "allowJs": true,
     "skipLibCheck": true,
@@ -24,10 +22,21 @@
     "jsx": "react",
     "experimentalDecorators": true,
     "skipLibCheck": true,
+    "allowImportingTsExtensions": true,
     "emitDecoratorMetadata": true,
     "types": [
       "reflect-metadata"
-    ]
+    ],
+    "rootDirs": [
+      "src"
+    ],
+    "baseUrl": "src",
+    "outDir": "dist",
+    "paths": {
+      "@base/*": [
+        "./*"
+      ]
+    }
   },
   "include": [
     "src"

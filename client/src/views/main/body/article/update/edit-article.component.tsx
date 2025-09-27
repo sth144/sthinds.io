@@ -5,12 +5,15 @@ import { IArticle } from "sthinds.io-lib";
 import GraphQLService from "network/graphql.service";
 import { PATCH_ARTICLE } from "models/mutations/article.mutations";
 import { TypedConnect } from "models/store";
+import { Navigate } from "react-router-dom";
 
 interface IEditArticleComponentProps {
   dispatch?: (action: unknown) => void;
   articleID?: string;
 }
-interface IEditArticleComponentState extends IArticle {}
+interface IEditArticleComponentState extends IArticle {
+  redirect: boolean;
+}
 
 const mapStateToProps = (state: { article: IArticle }) => {
   return {
@@ -32,6 +35,7 @@ export default class EditArticleComponent extends Component<
     authorID: "",
     date: "",
     text: "",
+    redirect: false,
   };
 
   componentDidMount() {
@@ -73,7 +77,14 @@ export default class EditArticleComponent extends Component<
       });
   };
 
+  handleCancel = () => {
+    this.setState({ redirect: true });
+  };
+
   render() {
+    if (this.state.redirect) {
+      return <Navigate to="/article/show" replace />;
+    }
     return (
       <div>
         <Form>
@@ -118,6 +129,9 @@ export default class EditArticleComponent extends Component<
               value={this.state.text}
             />
           </Form.Group>
+          <Button variant="secondary" type="button" onClick={this.handleCancel}>
+            Cancel
+          </Button>
           <Button variant="primary" type="submit" onClick={this.updateArticle}>
             Submit
           </Button>

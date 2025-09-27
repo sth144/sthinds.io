@@ -5,6 +5,10 @@ import { UserService } from "models/user/user.service";
 
 @Injectable()
 export class GoogleOAuthService {
+  public get UserServiceRef() {
+    return this.userService;
+  }
+
   constructor(private readonly userService: UserService) {}
 
   public async getGoogleOAuthLoginJWT(

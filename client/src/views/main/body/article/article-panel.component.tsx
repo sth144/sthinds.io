@@ -23,7 +23,6 @@ export default class ArticlePanelComponent extends Component {
           <Route path="create" element={<CreateArticleForm />}></Route>
           <Route path="show" element={<DisplayArticleComponent />}></Route>
           <Route path="edit" element={<EditArticleComponent />}></Route>
-          <Route path="delete" element={<DeleteArticleComponent />}></Route>
           {/* TODO: delete */}
         </Routes>
       </div>

@@ -22,7 +22,8 @@
 			],
 			"envFile": "${workspaceFolder}/server/.env",
 			"program": "${workspaceFolder}/server/src/main.ts",
-			"preLaunchTask": "upsert-user"
+			"preLaunchTask": "upsert-user",
+			"console": "integratedTerminal",
 		},
 		{
 			"type": "chrome",

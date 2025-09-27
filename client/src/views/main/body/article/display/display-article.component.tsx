@@ -7,6 +7,7 @@ import { IAuthenticationState } from "sthinds.io-lib";
 import { Link } from "react-router-dom";
 import ArticleAuthorDateBanner from "./article-author-date-banner.component";
 import { TypedConnect } from "models/store";
+import DeleteArticleComponent from "../delete/delete-article.component";
 
 interface IDisplayArticleComponentProps {
   dispatch?: (action: any) => void;
@@ -37,10 +38,12 @@ export default class DisplayArticleComponent extends Component<
 
   render() {
     return (
-      <GetFullArticle
-        articleID={this.props.articleID}
-        authentication={this.props.authentication}
-      ></GetFullArticle>
+      <>
+        <GetFullArticle
+          articleID={this.props.articleID}
+          authentication={this.props.authentication}
+        ></GetFullArticle>
+      </>
     );
   }
 }
@@ -57,6 +60,7 @@ function GetFullArticle({
   articleID,
   authentication,
 }: IDisplayArticleComponentProps): JSX.Element {
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
   const { error, loading, data } = useQuery(LOAD_ARTICLE, {
     variables: {
       articleID,
@@ -98,7 +102,10 @@ function GetFullArticle({
             <Link to="/article/edit">Edit Article</Link>
           </div>
           <div>
-            <Link className="delete-link" to="/article/delete">
+            <Link
+              className="delete-link"
+              onClick={() => setShowDeleteModal(true)}
+            >
               Delete Article
             </Link>
           </div>
@@ -107,6 +114,11 @@ function GetFullArticle({
         ""
       )}
 
+      <DeleteArticleComponent
+        article={article}
+        show={showDeleteModal}
+        onClose={() => setShowDeleteModal(false)}
+      />
       {/* TODO: add comment and like feature */}
     </div>
   );

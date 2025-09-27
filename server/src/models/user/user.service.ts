@@ -26,29 +26,33 @@ export class UserService {
       email: profile.emails[0].value,
       firstName: profile.name.givenName,
       lastName: profile.name.familyName,
-      // TODO: store access token?
       accessToken: null,
       thirdPartyID: profile.id,
       thirdPartyIDProvider: OAuthProvider.Google,
     };
 
     const userCreated: User = await this.userRepository.save(dto);
-
     return userCreated;
   }
 
   public async findAll(): Promise<User[]> {
     const usersFound = await this.userRepository.find();
-
     return usersFound;
   }
 
-  public async findOne(_id: string): Promise<User> {
-    const userFound = await this.userRepository.findOne(_id);
+  public async findOne(_id: string): Promise<User | null> {
+    let userFound = await this.userRepository.findOne(_id);
 
     if (userFound) {
-      // make sure to stringify the object and provide TTL
-      await this.cacheManager.set(_id, JSON.stringify(userFound), {
+      Object.assign(userFound, { _id: userFound._id.toString() }); // Ensure _id is a string
+      userFound = JSON.parse(JSON.stringify(userFound)); // Deep clone to avoid issues
+      console.log("User found:", userFound); // Log the user object before caching
+      console.log(
+        `First Name: ${userFound.firstName}, Last Name: ${userFound.lastName}, ID: ${userFound._id}`,
+      ); // Log names
+      const cacheKey = String(_id);
+
+      await this.cacheManager.set(cacheKey, JSON.stringify(userFound), {
         ttl: 3600,
       });
     }
@@ -85,10 +89,8 @@ export class UserService {
     return userFound;
   }
 
-  // TODO: implement patch user feature
   public async patchUser(_id: string, update: Partial<User>): Promise<User> {
     await this.userRepository.update(_id, update);
-
     return await this.findOne(_id);
   }
 
